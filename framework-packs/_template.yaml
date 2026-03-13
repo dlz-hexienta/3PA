@@ -1,0 +1,127 @@
+# 3PA Framework Pack Template
+# Copy this file and rename to {framework-name}.yaml
+# See methodology/3PA-Framework-Pack-Specification.md for full schema documentation
+
+meta:
+  name: ""                    # Framework name (e.g., "FitSM v3", "ITIL v4")
+  version: "0.1"              # Pack version
+  framework_id: ""            # fitsm | itil-v4 | it4it | siam
+  description: ""             # One-line description
+  source_version: ""          # Version of the source framework (e.g., "3.0.1")
+  last_updated: ""            # YYYY-MM-DD
+  keywords: []                # Matching keywords for P1 auto-detection
+                               # e.g., ["fitsm", "fit-sm", "lightweight", "federated"]
+
+process_model:
+  processes: []
+    # Each process entry:
+    # - id: "PR1"              # Process ID
+    #   name: ""               # Process name
+    #   purpose: ""            # One-line purpose statement
+    #   scope: ""              # What is in/out of scope
+    #   phase: ""              # Interdependency phase: A | B | C | D
+    #   inputs:                # What triggers/feeds the process
+    #     - name: ""
+    #       source: ""         # Source process or external
+    #   outputs:               # What the process produces
+    #     - name: ""
+    #       destination: ""    # Destination process or external
+    #   interfaces:            # Connected processes
+    #     - process_id: ""
+    #       direction: ""      # in | out | bidirectional
+    #       description: ""
+    #   activities:            # Key activities within the process
+    #     - name: ""
+    #       description: ""
+    #   kpis:                  # Suggested KPIs
+    #     - name: ""
+    #       formula: ""
+    #       target: ""
+
+role_model:
+  roles: []
+    # Each role entry:
+    # - id: ""                 # Role ID
+    #   name: ""               # Role name
+    #   description: ""        # Role description
+    #   processes: []          # Process IDs this role participates in
+    #   raci_default: {}       # Default RACI assignments
+    #     # process_id: "R" | "A" | "C" | "I"
+
+general_requirements:
+  requirements: []
+    # Each requirement entry:
+    # - id: ""                 # Requirement ID (e.g., "GR1")
+    #   name: ""               # Requirement name
+    #   description: ""        # What the requirement mandates
+    #   evidence:              # What documents/artifacts satisfy it
+    #     - document_type: ""  # Category ID from taxonomy
+    #       section: ""        # Specific section
+    #   tier_applicability:
+    #     t1: false
+    #     t2: false
+    #     t3: false
+
+compliance_mapping:
+  standards: []
+    # Each standard entry:
+    # - standard: ""           # Standard name (e.g., "ISO/IEC 20000-1:2018")
+    #   clauses:
+    #     - clause: ""         # Clause number (e.g., "8.2.1")
+    #       title: ""          # Clause title
+    #       processes: []      # Process IDs that address this clause
+    #       documents: []      # Document category IDs needed for evidence
+
+intake_questions:
+  questions: []
+    # Each question entry:
+    # - question: ""           # The question text
+    #   rationale: ""          # Why this question matters for this framework
+    #   signal: ""             # What complexity signal it provides
+
+requirement_prompts:
+  prompts: []
+    # Each prompt entry:
+    # - category: ""           # Requirement category (1-8 from Phase Guide)
+    #   prompt: ""             # The prompt text
+    #   framework_context: ""  # Why this matters for this framework
+
+document_section_templates:
+  templates: []
+    # Each template entry:
+    # - document_type: ""      # Category ID from taxonomy
+    #   sections:
+    #     - heading: ""        # Section heading to add
+    #       guidance: ""       # What to write in this section
+    #       tier: ""           # Minimum tier: t1 | t2 | t3
+
+quality_checks:
+  checks: []
+    # Each check entry:
+    # - gate: ""               # Which gate this extends (G1–G8)
+    #   check: ""              # What to check
+    #   pass_criteria: ""      # How to determine pass/fail
+    #   tier: ""               # Minimum tier: t1 | t2 | t3
+
+terminology:
+  terms: []
+    # Each term entry:
+    # - term: ""               # The term
+    #   definition: ""         # Framework-specific definition
+    #   aliases: []            # Alternative names in other frameworks
+    #   context: ""            # When/how to use this term
+
+tooling_recommendations:
+  tools: []
+    # Each tool entry:
+    # - name: ""               # Tool name
+    #   purpose: ""            # What it's used for
+    #   url: ""                # Where to find it (optional)
+    #   integration: ""        # How it integrates with 3PA outputs
+
+best_practices_ref:
+  mapping: []
+    # Each mapping entry:
+    # - framework_concept: ""    # Framework-specific concept (e.g., "ITIL Incident Management")
+    #   best_practice_path: ""   # Path to best practice file (e.g., "best-practices/pr09-isrm/definition.md")
+    #   notes: ""                # How to adapt the best practice for this framework

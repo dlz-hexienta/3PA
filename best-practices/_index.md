@@ -1,7 +1,7 @@
 ---
 title: "3PA Best Practices Library"
 description: "Catalog of reusable, anonymized ITSM best practices organized by process area"
-version: "0.1"
+version: "0.2"
 last_updated: 2026-03-13
 ---
 
@@ -9,7 +9,7 @@ last_updated: 2026-03-13
 
 ## Purpose
 
-This library contains reusable, anonymized best practices for each ITSM process area (PR1–PR14) plus cross-cutting patterns. Best practices are derived from the knowledge library (ITIL v4, FitSM, IT4IT, SIAM) and maintained across engagements.
+This library contains reusable, anonymized best practices for each ITSM process area (PR01–PR24) plus cross-cutting patterns. Best practices are derived from the knowledge library (ITIL v4, FitSM, IT4IT, SIAM) and maintained across engagements.
 
 Best practices are the **fourth architectural layer** of 3PA:
 
@@ -32,17 +32,21 @@ Each best practice file uses this frontmatter:
 
 ```yaml
 ---
-process_id: PR9
-process_name: "Incident & Service Request Management"
+process_id: PR11
+process_name: "Incident Management"
 category: definition
 frameworks:
   - itil-v4
   - fitsm
+  - siam
 maturity:
   essential: true
   intermediate: true
   advanced: true
-sources: []
+tier_minimum: all
+sources:
+  - "ITIL 4: Incident Management"
+  - "FitSM-2: §PR9 ISRM (incident scope)"
 last_updated: YYYY-MM-DD
 status: stub | draft | reviewed
 ---
@@ -70,24 +74,64 @@ Content is organized by template section with maturity annotations:
 
 ## Catalog
 
-### Per-Process Best Practices
+### Governance & Strategy
 
-| Directory | Process | Phase | Files |
-|-----------|---------|:-----:|:-----:|
-| `pr01-spm/` | Service Portfolio Management | A | 5 |
-| `pr02-slm/` | Service Level Management | B | 5 |
-| `pr03-srm/` | Service Reporting Management | D | 5 |
-| `pr04-sacm/` | Service Availability & Continuity Mgmt | D | 5 |
-| `pr05-capm/` | Capacity Management | D | 5 |
-| `pr06-ism/` | Information Security Management | A | 5 |
-| `pr07-crm/` | Customer Relationship Management | B | 5 |
-| `pr08-suppm/` | Supplier Management | B | 5 |
-| `pr09-isrm/` | Incident & Service Request Mgmt | C | 5 |
-| `pr10-pm/` | Problem Management | C | 5 |
-| `pr11-confm/` | Configuration Management | A | 5 |
-| `pr12-chm/` | Change Management | C | 5 |
-| `pr13-rdm/` | Release & Deployment Management | C | 5 |
-| `pr14-csi/` | Continual Service Improvement | D | 5 |
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr01-spm/` | Service Portfolio Management | PR01 | All | 5 |
+| `pr02-slm/` | Service Level Management | PR02 | All | 5 |
+| `pr03-sfm/` | Service Financial Management | PR03 | T3 | 5 |
+
+### Design & Transition
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr04-sdes/` | Service Design | PR04 | T3 | 5 |
+| `pr05-scatm/` | Service Catalogue Management | PR05 | T2+ | 5 |
+| `pr06-am/` | Availability Management | PR06 | All | 5 |
+| `pr07-scm/` | Service Continuity Management | PR07 | T2+ | 5 |
+| `pr08-cpm/` | Capacity & Performance Management | PR08 | All | 5 |
+| `pr09-ism/` | Information Security Management | PR09 | All | 5 |
+
+### Operations
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr10-sdesk/` | Service Desk | PR10 | All | 5 |
+| `pr11-im/` | Incident Management | PR11 | All | 5 |
+| `pr12-srm/` | Service Request Management | PR12 | All | 5 |
+| `pr13-pm/` | Problem Management | PR13 | All | 5 |
+| `pr14-mem/` | Monitoring & Event Management | PR14 | T2+ | 5 |
+
+### Change & Release
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr15-chm/` | Change Management | PR15 | All | 5 |
+| `pr16-rdm/` | Release & Deployment Management | PR16 | T2+ | 5 |
+
+### Asset & Configuration
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr17-scfgm/` | Service Configuration Management | PR17 | All | 5 |
+| `pr18-itam/` | IT Asset Management | PR18 | T2+ | 5 |
+
+### Knowledge & Reporting
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr19-km/` | Knowledge Management | PR19 | T2+ | 5 |
+| `pr20-mr/` | Measurement & Reporting | PR20 | All | 5 |
+
+### Assurance
+
+| Directory | Process | ID | Tier | Files |
+|-----------|---------|:--:|:----:|:-----:|
+| `pr21-rm/` | Risk Management | PR21 | T2+ | 5 |
+| `pr22-relm/` | Relationship Management | PR22 | All | 5 |
+| `pr23-suppm/` | Supplier Management | PR23 | T2+ | 5 |
+| `pr24-ci/` | Continual Improvement | PR24 | All | 5 |
 
 ### Cross-Cutting Best Practices
 
@@ -100,24 +144,63 @@ Content is organized by template section with maturity annotations:
 | `cross-cutting/priority-models.md` | Priority matrix templates |
 | `cross-cutting/maturity-model.md` | Maturity assessment criteria |
 
-**Total: 76 content files**
+**Total: 126 content files** (24 processes × 5 + 6 cross-cutting)
+
+## Cross-Framework Mapping
+
+| ID | Process | FitSM | ITIL v4 | IT4IT | SIAM |
+|:--:|---------|:-----:|:-------:|:-----:|:----:|
+| PR01 | Service Portfolio Management | PR1 SPM | Portfolio Mgmt | S2P | — |
+| PR02 | Service Level Management | PR2 SLM | Service Level Mgmt | R2F | Yes |
+| PR03 | Service Financial Management | — | Service Financial Mgmt | S2P | — |
+| PR04 | Service Design | — | Service Design | R2D | — |
+| PR05 | Service Catalogue Management | PR1 SPM (part) | Service Catalogue Mgmt | R2F | — |
+| PR06 | Availability Management | PR4 SACM (part) | Availability Mgmt | R2D | — |
+| PR07 | Service Continuity Management | PR4 SACM (part) | Service Continuity Mgmt | D2C | — |
+| PR08 | Capacity & Performance Mgmt | PR5 CAPM | Capacity & Performance | R2D | — |
+| PR09 | Information Security Mgmt | PR6 ISM | Information Security Mgmt | X-cut | — |
+| PR10 | Service Desk | — | Service Desk | R2F | Yes |
+| PR11 | Incident Management | PR9 ISRM (part) | Incident Mgmt | D2C | Yes |
+| PR12 | Service Request Management | PR9 ISRM (part) | Service Request Mgmt | R2F | — |
+| PR13 | Problem Management | PR10 PM | Problem Mgmt | D2C | Yes |
+| PR14 | Monitoring & Event Mgmt | — | Monitoring & Event Mgmt | D2C | — |
+| PR15 | Change Management | PR12 CHM | Change Enablement | R2D | Yes |
+| PR16 | Release & Deployment Mgmt | PR13 RDM | Release + Deployment | R2D | — |
+| PR17 | Service Configuration Mgmt | PR11 CONFM | Service Config Mgmt | X-cut | Yes |
+| PR18 | IT Asset Management | — | IT Asset Mgmt | X-cut | — |
+| PR19 | Knowledge Management | — | Knowledge Mgmt | X-cut | — |
+| PR20 | Measurement & Reporting | PR3 SRM | Measurement & Reporting | X-cut | — |
+| PR21 | Risk Management | — | Risk Mgmt | S2P | — |
+| PR22 | Relationship Management | PR7 CRM | Relationship Mgmt | S2P | Yes |
+| PR23 | Supplier Management | PR8 SUPPM | Supplier Mgmt | S2P | Yes |
+| PR24 | Continual Improvement | PR14 CSI | Continual Improvement | X-cut | — |
 
 ## Knowledge Crawl Status
 
-| Process | Status | Last Crawled |
-|---------|:------:|-------------|
-| PR1 SPM | stub | — |
-| PR2 SLM | stub | — |
-| PR3 SRM | stub | — |
-| PR4 SACM | stub | — |
-| PR5 CAPM | stub | — |
-| PR6 ISM | stub | — |
-| PR7 CRM | stub | — |
-| PR8 SUPPM | stub | — |
-| PR9 ISRM | stub | — |
-| PR10 PM | stub | — |
-| PR11 CONFM | stub | — |
-| PR12 CHM | stub | — |
-| PR13 RDM | stub | — |
-| PR14 CSI | stub | — |
-| Cross-cutting | stub | — |
+| ID | Process | Status | Last Crawled |
+|:--:|---------|:------:|-------------|
+| PR01 | Service Portfolio Management | stub | — |
+| PR02 | Service Level Management | stub | — |
+| PR03 | Service Financial Management | stub | — |
+| PR04 | Service Design | stub | — |
+| PR05 | Service Catalogue Management | stub | — |
+| PR06 | Availability Management | stub | — |
+| PR07 | Service Continuity Management | stub | — |
+| PR08 | Capacity & Performance Mgmt | stub | — |
+| PR09 | Information Security Mgmt | stub | — |
+| PR10 | Service Desk | stub | — |
+| PR11 | Incident Management | stub | — |
+| PR12 | Service Request Management | stub | — |
+| PR13 | Problem Management | stub | — |
+| PR14 | Monitoring & Event Mgmt | stub | — |
+| PR15 | Change Management | stub | — |
+| PR16 | Release & Deployment Mgmt | stub | — |
+| PR17 | Service Configuration Mgmt | stub | — |
+| PR18 | IT Asset Management | stub | — |
+| PR19 | Knowledge Management | stub | — |
+| PR20 | Measurement & Reporting | stub | — |
+| PR21 | Risk Management | stub | — |
+| PR22 | Relationship Management | stub | — |
+| PR23 | Supplier Management | stub | — |
+| PR24 | Continual Improvement | stub | — |
+| — | Cross-cutting | stub | — |

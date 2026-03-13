@@ -118,7 +118,7 @@ Apply the complexity signal table from `3PA-Overview.md` §4. Count the number o
 ### P1.4 Scope Boundaries
 
 Define what is in-scope and out-of-scope:
-- Process IDs in scope (from PR1–PR14 or custom)
+- Process IDs in scope (from PR01–PR24 or custom)
 - Organizational boundaries
 - Service scope
 - Framework alignment
@@ -132,11 +132,11 @@ For T2 and T3, identify:
 
 ### P1.6 Process Decomposition (T3)
 
-For T3 (Full SMS), decompose the 14 processes into interdependency phases:
-- Phase A (Foundation): SPM, CONFM, ISM
-- Phase B (Agreements): SLM, CRM, SUPPM
-- Phase C (Operations): ISRM, PM, CHM, RDM
-- Phase D (Assurance): SACM, CAPM, SRM, CSI
+For T3 (Full SMS), decompose the 24 processes into interdependency phases:
+- Phase A (Foundation): SPM, ISM, SCFGM, SFM
+- Phase B (Agreements): SLM, SDES, SCATM, RELM, SUPPM
+- Phase C (Operations): SDESK, IM, SRM, PM, MEM, CHM, RDM
+- Phase D (Assurance): AM, SCM, CPM, ITAM, KM, MR, RM, CI
 
 ### P1.7 Exit Gate
 
@@ -244,7 +244,7 @@ Decisions use `D-{number}` IDs with:
 2. {Option B} — {pros/cons}
 
 **Decision:** {Chosen option with reasoning}
-**Applies To:** {Process IDs affected, e.g., PR1, PR3, PR9}
+**Applies To:** {Process IDs affected, e.g., PR01, PR11, PR15}
 **Distribute To:** {Target documents that must reflect this decision}
 **Version Gate:** v1.0 | future | out-of-scope
 ```
@@ -312,12 +312,12 @@ A document at Layer N must reach draft status before any Layer N+1 document begi
 
 When authoring multiple process definitions (T2/T3), follow the interdependency phases:
 
-- **Phase A (Foundation):** PR1 SPM, PR11 CONFM, PR6 ISM
-- **Phase B (Agreements):** PR2 SLM, PR7 CRM, PR8 SUPPM
-- **Phase C (Operations):** PR9 ISRM, PR10 PM, PR12 CHM, PR13 RDM
-- **Phase D (Assurance):** PR4 SACM, PR5 CAPM, PR3 SRM, PR14 CSI
+- **Phase A (Foundation):** PR01 SPM, PR09 ISM, PR17 SCFGM, PR03 SFM (T3)
+- **Phase B (Agreements):** PR02 SLM, PR04 SDES (T3), PR05 SCATM (T2+), PR22 RELM, PR23 SUPPM (T2+)
+- **Phase C (Operations):** PR10 SDESK, PR11 IM, PR12 SRM, PR13 PM, PR14 MEM (T2+), PR15 CHM, PR16 RDM (T2+)
+- **Phase D (Assurance):** PR06 AM, PR07 SCM (T2+), PR08 CPM, PR18 ITAM (T2+), PR19 KM (T2+), PR20 MR, PR21 RM (T2+), PR24 CI
 
-T1 authors one process only. T2 authors the group in dependency order. T3 authors all in A→B→C→D.
+T1 authors one process only. T2 authors the group in dependency order (includes T2+ processes). T3 authors all 24 in A→B→C→D.
 
 ### P3.3 Template Scaffolding
 

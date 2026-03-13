@@ -65,43 +65,53 @@ When multiple process definitions are authored (T2/T3), they must follow the int
 
 ### Phase A — Foundation
 
-| Process ID | Process Name | Rationale |
-|-----------|-------------|-----------|
-| PR1 | Service Portfolio Management (SPM) | Defines the service landscape; all other processes reference it |
-| PR11 | Configuration Management (CONFM) | Establishes the CI model; change, incident, problem depend on it |
-| PR6 | Information Security Management (ISM) | Security policies constrain all other processes |
+| Process ID | Process Name | Tier | Rationale |
+|:----------:|-------------|:----:|-----------|
+| PR01 | Service Portfolio Management (SPM) | All | Defines the service landscape; all other processes reference it |
+| PR09 | Information Security Management (ISM) | All | Security policies constrain all other processes |
+| PR17 | Service Configuration Management (SCFGM) | All | Establishes the CI model; change, incident, problem depend on it |
+| PR03 | Service Financial Management (SFM) | T3 | Financial governance constrains service decisions |
 
 ### Phase B — Agreements
 
-| Process ID | Process Name | Rationale |
-|-----------|-------------|-----------|
-| PR2 | Service Level Management (SLM) | Defines SLA/OLA framework; operations processes measure against it |
-| PR7 | Customer Relationship Management (CRM) | Customer interface; feeds SLM and complaint handling |
-| PR8 | Supplier Management (SUPPM) | Supplier agreements; feeds OLA and underpinning contracts |
+| Process ID | Process Name | Tier | Rationale |
+|:----------:|-------------|:----:|-----------|
+| PR02 | Service Level Management (SLM) | All | Defines SLA/OLA framework; operations processes measure against it |
+| PR04 | Service Design (SDES) | T3 | Design packages for new/changed services |
+| PR05 | Service Catalogue Management (SCATM) | T2+ | Published service list; feeds SLM and reporting |
+| PR22 | Relationship Management (RELM) | All | Customer/stakeholder interface; feeds SLM and complaint handling |
+| PR23 | Supplier Management (SUPPM) | T2+ | Supplier agreements; feeds OLA and underpinning contracts |
 
 ### Phase C — Operations
 
-| Process ID | Process Name | Rationale |
-|-----------|-------------|-----------|
-| PR9 | Incident & Service Request Management (ISRM) | Core operations; depends on CONFM, SLM, ISM |
-| PR10 | Problem Management (PM) | Root cause analysis; depends on ISRM, CONFM |
-| PR12 | Change Management (CHM) | Controlled changes; depends on CONFM, SLM |
-| PR13 | Release & Deployment Management (RDM) | Release lifecycle; depends on CHM, CONFM |
+| Process ID | Process Name | Tier | Rationale |
+|:----------:|-------------|:----:|-----------|
+| PR10 | Service Desk (SDESK) | All | Primary user entry point; depends on SLM, ISM |
+| PR11 | Incident Management (IM) | All | Disruption handling; depends on SCFGM, SLM, ISM |
+| PR12 | Service Request Management (SRM) | All | Standard request fulfilment; depends on SCATM, SLM |
+| PR13 | Problem Management (PM) | All | Root cause analysis; depends on IM, SCFGM |
+| PR14 | Monitoring & Event Management (MEM) | T2+ | Observes services; triggers incidents and changes |
+| PR15 | Change Management (CHM) | All | Controlled changes; depends on SCFGM, SLM |
+| PR16 | Release & Deployment Management (RDM) | T2+ | Release lifecycle; depends on CHM, SCFGM |
 
 ### Phase D — Assurance
 
-| Process ID | Process Name | Rationale |
-|-----------|-------------|-----------|
-| PR4 | Service Availability & Continuity Management (SACM) | Availability targets; depends on SLM, CONFM |
-| PR5 | Capacity Management (CAPM) | Capacity planning; depends on SLM, monitoring |
-| PR3 | Service Reporting Management (SRM) | Reporting; depends on KPIs from all processes |
-| PR14 | Continual Service Improvement (CSI) | Improvement; depends on reporting, all process outputs |
+| Process ID | Process Name | Tier | Rationale |
+|:----------:|-------------|:----:|-----------|
+| PR06 | Availability Management (AM) | All | Availability targets; depends on SLM, SCFGM |
+| PR07 | Service Continuity Management (SCM) | T2+ | Disaster recovery; depends on SLM, risk assessment |
+| PR08 | Capacity & Performance Management (CPM) | All | Capacity planning; depends on SLM, monitoring |
+| PR18 | IT Asset Management (ITAM) | T2+ | Asset lifecycle; complements SCFGM |
+| PR19 | Knowledge Management (KM) | T2+ | Knowledge base; supports incident, problem, service desk |
+| PR20 | Measurement & Reporting (MR) | All | Reporting; depends on KPIs from all processes |
+| PR21 | Risk Management (RM) | T2+ | Risk registers and assessments; feeds continuity and security |
+| PR24 | Continual Improvement (CI) | All | Improvement; depends on reporting, all process outputs |
 
 ### Tier Application
 
 - **T1:** Authors one process only — no interdependency ordering needed
-- **T2:** Authors the process group in dependency order within Phase A→D
-- **T3:** Authors all 14 processes in strict A→B→C→D order
+- **T2:** Authors the process group in dependency order within Phase A→D (includes T2+ processes)
+- **T3:** Authors all 24 processes in strict A→B→C→D order
 
 ## 4. YAML Frontmatter Standard
 
@@ -111,9 +121,9 @@ All documents use this frontmatter schema:
 ---
 title: string                # Document title
 organization: string         # Organization name
-scope: string                # Process IDs (e.g., "PR1, PR9") or "SMS"
+scope: string                # Process IDs (e.g., "PR01, PR11") or "SMS"
 category: enum               # One of the 17 category IDs listed in §1
-process_id: string | ~       # PR1–PR14 or ~ for cross-cutting documents
+process_id: string | ~       # PR01–PR24 or ~ for cross-cutting documents
 status: draft | review | approved
 version: "x.y"
 date: YYYY-MM-DD
@@ -150,8 +160,8 @@ tags: []                     # Free-form tags
 
 Examples:
 - `acme-sms-policy.md`
-- `acme-pr9-process-definition.md`
-- `acme-pr9-incident-procedure.md`
+- `acme-pr11-process-definition.md`
+- `acme-pr11-incident-procedure.md`
 - `acme-raci-matrix.md`
 - `scoping-brief.md` (shared artifacts use plain names)
 - `decision-log.md`
@@ -162,7 +172,7 @@ Examples:
 |------|:---------:|:--------:|:------------:|:-----:|:----------:|:----:|:-------:|:-----------:|
 | T1 | 1 | 1 | 1 | 1 | 1–2 | 0–1 | 0–1 | 4–7 |
 | T2 | 2–5 | 2–6 | 2–5 | 2–5 | 2–10 | 1–5 | 1–4 | 15–30 |
-| T3 | 6–14 | 7–15 | 6–14 | 6–14 | 6–28 | 6–14 | 5–10 | 50–80+ |
+| T3 | 6–24 | 7–25 | 6–24 | 6–24 | 6–48 | 6–24 | 5–10 | 50–120+ |
 
 ## 7. Cross-References
 

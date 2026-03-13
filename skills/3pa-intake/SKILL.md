@@ -96,7 +96,7 @@ Present the scoping brief summary (and gap analysis report, if revision mode) to
 - [ ] All 21 intake questions are addressed (or marked TBD with justification)
 - [ ] Organization profile is complete (people, tools, existing processes)
 - [ ] Complexity tier is assigned with signal justification
-- [ ] Processes in scope are listed by ID (PR1–PR14)
+- [ ] Processes in scope are listed by ID (PR01–PR24)
 - [ ] Framework pack is selected or "agnostic" is noted
 - [ ] Stakeholders are identified (T2+)
 - [ ] Process decomposition is complete (T3)

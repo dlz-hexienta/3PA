@@ -71,10 +71,10 @@ flowchart TD
 ````markdown
 ```mermaid
 flowchart LR
-    ISRM[Incident Mgmt] -->|Known Error| PM[Problem Mgmt]
+    IM[Incident Mgmt] -->|Known Error| PM[Problem Mgmt]
     PM -->|RFC| CHM[Change Mgmt]
-    CHM -->|CI Update| CONFM[Config Mgmt]
-    CONFM -->|CI Data| ISRM
+    CHM -->|CI Update| SCFGM[Config Mgmt]
+    SCFGM -->|CI Data| IM
 ```
 ````
 
@@ -177,7 +177,7 @@ git commit -m "Initial ITSM documentation pack"
 
 - Use `git diff` to track changes between versions
 - Increment document `version` field in frontmatter on significant changes
-- Use conventional commit messages: `docs(itsm): update PR9 incident procedure`
+- Use conventional commit messages: `docs(itsm): update PR11 incident procedure`
 
 ## 6. Quality Assurance Tools
 

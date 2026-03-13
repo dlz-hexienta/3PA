@@ -1,55 +1,23 @@
 ---
-process_id: PR2
+process_id: PR02
 process_name: "Service Level Management"
 category: definition
 frameworks:
   - itil-v4
   - fitsm
+  - it4it
+  - siam
 maturity:
   essential: true
   intermediate: true
   advanced: true
+tier_minimum: all
 sources:
-  - "ITIL 4: Service level mgmt"
-  - "FitSM-2 §PR2"
+  - "ITIL 4: Service Level Management"
+  - "FitSM-2: §PR2 SLM"
+  - "IT4IT: R2F Value Stream"
 last_updated: 2026-03-13
 status: stub
 ---
 
 # Service Level Management — Best Practice Process Definition
-
-> Stub: awaiting knowledge crawl. See `best-practices/_index.md` for format specification.
-
-## 1. Purpose
-<!-- essential -->
-
-## 2. Scope
-<!-- essential -->
-
-## 3. Triggers & Inputs
-<!-- essential -->
-
-## 4. Activities
-<!-- essential / intermediate / advanced sections -->
-
-## 5. Outputs
-<!-- essential -->
-
-## 6. Roles & Responsibilities
-<!-- essential -->
-
-## 7. Process Interfaces
-<!-- intermediate -->
-
-## 8. KPIs & Metrics
-<!-- essential -->
-
-## 9. Tools & Systems
-<!-- intermediate -->
-
-## 10. Process Flow
-<!-- essential: basic flowchart -->
-<!-- advanced: detailed swimlane diagram -->
-
-## 11. Exceptions & Escalations
-<!-- intermediate -->

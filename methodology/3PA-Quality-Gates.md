@@ -32,7 +32,7 @@
 | 1.4 | Status valid | `status` is one of: `draft`, `review`, `approved` |
 | 1.5 | Version format | `version` matches pattern `x.y` |
 | 1.6 | Date format | `date` matches `YYYY-MM-DD` |
-| 1.7 | Process ID valid | `process_id` is `PR1`–`PR14` or `~` |
+| 1.7 | Process ID valid | `process_id` is `PR01`–`PR24` or `~` |
 | 1.8 | Framework valid | `framework` is one of: `fitsm`, `itil-v4`, `it4it`, `siam`, or `~` |
 
 ### Failure Action
@@ -164,7 +164,7 @@ Fix the RACI matrix. Common fixes: add missing A assignments, resolve duplicate 
 | 7.2 | Interface naming | Interface names match across connected processes |
 | 7.3 | Trigger consistency | Triggers in one process match outputs in the triggering process |
 | 7.4 | Data flow consistency | Data objects passed between processes are described consistently |
-| 7.5 | Completeness (T3) | All 14 processes have their interfaces fully mapped |
+| 7.5 | Completeness (T3) | All 24 processes have their interfaces fully mapped |
 
 ### Failure Action
 

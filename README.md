@@ -108,7 +108,7 @@ Findings are fixed iteratively. Produces a **Completeness Report**.
 3PA can align documentation to specific ITSM frameworks:
 
 - **ITIL v4** — Industry-standard, 34 practices
-- **FitSM** — Lightweight, 14 processes (PR1–PR14)
+- **FitSM** — Lightweight, 14 processes (maps to 3PA's unified PR01–PR24 model)
 - **IT4IT** — IT management reference architecture
 - **SIAM** — Service Integration and Management
 
@@ -132,7 +132,7 @@ The two ITSM-specific gates:
 
 ## Best Practices Library
 
-3PA includes a library of anonymized best practices for each ITSM process area (PR1–PR14), derived from ITIL v4, FitSM, IT4IT, and SIAM. During P3 (Document Authoring), best practices are loaded as starting content and customized for your organization.
+3PA includes a library of anonymized best practices for each ITSM process area (PR01–PR24), derived from ITIL v4, FitSM, IT4IT, and SIAM. During P3 (Document Authoring), best practices are loaded as starting content and customized for your organization.
 
 Best practices are graduated by maturity level:
 - **Essential:** Included at all tiers — the minimum viable process

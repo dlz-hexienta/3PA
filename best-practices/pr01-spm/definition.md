@@ -1,55 +1,22 @@
 ---
-process_id: PR1
+process_id: PR01
 process_name: "Service Portfolio Management"
 category: definition
 frameworks:
   - itil-v4
   - fitsm
+  - it4it
 maturity:
   essential: true
   intermediate: true
   advanced: true
+tier_minimum: all
 sources:
-  - "ITIL 4: Service catalogue mgmt, Service financial mgmt, Service design"
-  - "FitSM-2 §PR1"
+  - "ITIL 4: Portfolio Management"
+  - "FitSM-2: §PR1 SPM"
+  - "IT4IT: S2P Value Stream"
 last_updated: 2026-03-13
 status: stub
 ---
 
 # Service Portfolio Management — Best Practice Process Definition
-
-> Stub: awaiting knowledge crawl. See `best-practices/_index.md` for format specification.
-
-## 1. Purpose
-<!-- essential -->
-
-## 2. Scope
-<!-- essential -->
-
-## 3. Triggers & Inputs
-<!-- essential -->
-
-## 4. Activities
-<!-- essential / intermediate / advanced sections -->
-
-## 5. Outputs
-<!-- essential -->
-
-## 6. Roles & Responsibilities
-<!-- essential -->
-
-## 7. Process Interfaces
-<!-- intermediate -->
-
-## 8. KPIs & Metrics
-<!-- essential -->
-
-## 9. Tools & Systems
-<!-- intermediate -->
-
-## 10. Process Flow
-<!-- essential: basic flowchart -->
-<!-- advanced: detailed swimlane diagram -->
-
-## 11. Exceptions & Escalations
-<!-- intermediate -->

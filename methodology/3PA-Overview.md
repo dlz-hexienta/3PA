@@ -29,7 +29,7 @@
 1. **Methodology** (`methodology/`) — Source of truth. Markdown documents defining phases, document taxonomy, quality gates, and tier system. Skills reference these; never the reverse.
 2. **Engine** (`skills/`) — Five Claude Code skills that automate each phase. Each skill reads methodology docs, scaffolds from templates, loads framework packs, and enforces exit gates.
 3. **Framework Packs** (`framework-packs/`) — YAML files encoding framework-specific knowledge (ITIL v4, FitSM, IT4IT, SIAM). Loaded at P1, injected throughout P1–P5, harvested at P5.
-4. **Best Practices** (`best-practices/`) — Anonymized, framework-annotated, maturity-graduated content for each process area (PR1–PR14) plus cross-cutting patterns. Derived from the knowledge library. Loaded during P3 as starting content, harvested at P5.
+4. **Best Practices** (`best-practices/`) — Anonymized, framework-annotated, maturity-graduated content for each process area (PR01–PR24) plus cross-cutting patterns. Derived from the knowledge library. Loaded during P3 as starting content, harvested at P5.
 
 ## 3. Five-Phase Lifecycle
 
@@ -46,7 +46,7 @@ There is no P6 (Execution) phase — unlike software, ITSM documentation does no
 
 | Signal | T1 (Single Process) | T2 (Process Group) | T3 (Full SMS) |
 |--------|:---:|:---:|:---:|
-| Processes in scope | 1 | 2–5 | 6–14 |
+| Processes in scope | 1 | 2–5 | 6–24 |
 | Organizational roles | 1–5 | 6–15 | 16+ |
 | Supplier/vendor count | 0–1 | 2–3 | 4+ |
 | Services in catalogue | 1–5 | 6–20 | 21+ |
@@ -76,7 +76,7 @@ The mode affects every phase. See `3PA-Phase-Guide.md` §P1.0 for details.
 3PA operates exclusively in the IT Service Management domain. The framework draws on four established ITSM frameworks:
 
 - **ITIL v4** — Industry-standard service management framework with 34 practices
-- **FitSM** — Lightweight, standards-compatible ITSM framework with 14 processes (PR1–PR14)
+- **FitSM** — Lightweight, standards-compatible ITSM framework with 14 processes (maps to 3PA's unified PR01–PR24 process model)
 - **IT4IT** — IT management reference architecture from The Open Group
 - **SIAM** — Service Integration and Management for multi-supplier environments
 

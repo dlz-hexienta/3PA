@@ -23,7 +23,7 @@ meta:
 
 process_model:
   processes: []              # List of process definitions
-    # - id: string           # Process ID (e.g., PR1, PR9)
+    # - id: string           # Process ID (e.g., PR01, PR11)
     #   name: string         # Process name
     #   purpose: string      # One-line purpose
     #   scope: string        # What's in/out of scope

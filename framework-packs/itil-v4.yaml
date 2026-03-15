@@ -1,0 +1,3117 @@
+# 3PA Framework Pack — ITIL v4
+# Comprehensive IT service management framework based on the Service Value System
+# Covers all 24 3PA processes (PR01–PR24)
+
+meta:
+  name: "ITIL v4"
+  version: "0.1"
+  framework_id: itil-v4
+  description: "Comprehensive IT service management framework based on the Service Value System"
+  source_version: "4.0"
+  last_updated: "2026-03-15"
+  keywords: [itil, itil4, itil-v4, "itil v4", axelos, "service value system", svs]
+
+process_model:
+  processes:
+    # ── Phase A — Foundation ──────────────────────────────────────────
+
+    - id: PR01
+      name: "Service Portfolio Management"
+      framework_practice_name: "Portfolio Management"
+      purpose: "Ensure the organization maintains the right mix of services to execute its strategy within funding and resource constraints"
+      scope: "Service portfolio lifecycle from demand through retirement, including pipeline, catalogue, and retired segments"
+      phase: A
+      inputs:
+        - name: "Service performance data"
+          source: "PR02 Service Level Management"
+        - name: "Financial data and budgets"
+          source: "PR03 Service Financial Management"
+        - name: "Customer demand signals"
+          source: "PR22 Relationship Management"
+        - name: "Improvement initiatives"
+          source: "PR24 Continual Improvement"
+      outputs:
+        - name: "Portfolio decisions and approved services"
+          destination: "PR02 Service Level Management"
+        - name: "Investment decisions and funding allocations"
+          destination: "PR03 Service Financial Management"
+        - name: "Design mandates for approved proposals"
+          destination: "PR04 Service Design"
+        - name: "Catalogue updates for lifecycle transitions"
+          destination: "PR05 Service Catalogue Management"
+      interfaces:
+        - process_id: PR02
+          direction: bidirectional
+          description: "Service level targets inform portfolio; portfolio decisions set SLA scope"
+        - process_id: PR03
+          direction: bidirectional
+          description: "Financial data informs portfolio; portfolio drives budget allocation"
+        - process_id: PR05
+          direction: out
+          description: "Services transitioning to production or retirement update catalogue"
+        - process_id: PR15
+          direction: in
+          description: "Significant change proposals affect portfolio composition"
+        - process_id: PR22
+          direction: in
+          description: "Customer demand and requirements feed portfolio pipeline"
+        - process_id: PR24
+          direction: bidirectional
+          description: "Improvement proposals may affect portfolio; review findings drive improvement"
+      activities:
+        - name: "Define portfolio management approach"
+          description: "Establish governance model, assessment criteria, service specification templates, and decision thresholds"
+        - name: "Establish initial service portfolio"
+          description: "Inventory all existing services with key attributes, map delivery parties, identify contacts"
+        - name: "Manage demand and service proposals"
+          description: "Capture demand signals, create standardized proposals, evaluate against criteria"
+        - name: "Maintain the service portfolio"
+          description: "Add approved services, update records through lifecycle transitions, manage retirements"
+        - name: "Monitor portfolio performance"
+          description: "Track value realization, measure against planned criteria, report portfolio health"
+        - name: "Conduct periodic portfolio assessments"
+          description: "Merge monitoring data with business indicators, assess investment balance, formulate recommendations"
+        - name: "Conduct portfolio reviews"
+          description: "Hold governance meetings, approve investments, divest underperformers, reprioritize backlog"
+        - name: "Align portfolio to enterprise architecture"
+          description: "Map services to architecture blueprints and value streams, validate roadmap alignment"
+      kpis:
+        - name: "Portfolio Completeness"
+          formula: "(Services in portfolio register / Total known live services) x 100"
+          target: "100%"
+        - name: "Proposal Evaluation Rate"
+          formula: "(Proposals evaluated within SLA / Total proposals submitted) x 100"
+          target: ">= 90%"
+        - name: "Portfolio Review Adherence"
+          formula: "(Reviews conducted on schedule with quorum / Total scheduled reviews) x 100"
+          target: "100%"
+
+    - id: PR03
+      name: "Service Financial Management"
+      framework_practice_name: "Service Financial Management"
+      purpose: "Ensure financial resources and investments are used effectively to support service management strategies and plans"
+      scope: "Budgeting, costing, accounting, and charging for products and services throughout their lifecycle"
+      phase: A
+      inputs:
+        - name: "Organizational architectures and portfolios"
+          source: "PR01 Service Portfolio Management"
+        - name: "Service configuration data"
+          source: "PR17 Service Configuration Management"
+        - name: "IT asset data"
+          source: "PR18 IT Asset Management"
+        - name: "Contracts and agreements"
+          source: "PR23 Supplier Management"
+      outputs:
+        - name: "Cost models and budget models"
+          destination: "All practices"
+        - name: "Compiled and approved budgets"
+          destination: "Executive management, product/service owners"
+        - name: "Spending decisions and approvals"
+          destination: "PR15 Change Management"
+        - name: "Service financial reports"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: PR01
+          direction: bidirectional
+          description: "Financial data informs portfolio decisions; portfolio prioritizes funding"
+        - process_id: PR02
+          direction: bidirectional
+          description: "Financial data supports SLA negotiations and cost-benefit analysis"
+        - process_id: PR17
+          direction: in
+          description: "Configuration data enables accurate cost allocation across services"
+        - process_id: PR18
+          direction: in
+          description: "Asset data provides cost information, depreciation, lifecycle costs"
+        - process_id: PR15
+          direction: out
+          description: "Financial assessment feeds change evaluation; budget-affecting changes need approval"
+        - process_id: PR24
+          direction: out
+          description: "Financial analysis identifies cost optimization opportunities"
+      activities:
+        - name: "Analyse stakeholder requirements"
+          description: "Identify stakeholders needing financial information, gather requirements for data scope and detail"
+        - name: "Define service financial management approach"
+          description: "Agree cost models, budget models, policies, procedures, data structures, roles and responsibilities"
+        - name: "Communicate and integrate the approach"
+          description: "Communicate approach to stakeholders, implement in conjunction with related practices"
+        - name: "Estimate costs and income"
+          description: "Based on plans and performance, estimate costs and income for planned initiatives or periods"
+        - name: "Compile and agree budgets"
+          description: "Aggregate estimates into budgets, submit for approval, communicate for execution"
+        - name: "Monitor and control costs and income"
+          description: "Monitor budget execution, authorize spending, adjust within tolerances, escalate risks"
+        - name: "Perform cost allocation"
+          description: "Select cost model, perform categorization and allocation, manage exceptions"
+        - name: "Provide financial reports"
+          description: "Present financial information as dashboards, operational reports, or analytical reports"
+      kpis:
+        - name: "Budget Accuracy"
+          formula: "(1 - |Actual costs - Budgeted costs| / Budgeted costs) x 100"
+          target: ">= 90%"
+        - name: "Cost Model Coverage"
+          formula: "(Products and services with documented cost models / Total products and services) x 100"
+          target: ">= 80%"
+        - name: "Financial Reporting Timeliness"
+          formula: "(Financial reports delivered on time / Total financial reports due) x 100"
+          target: ">= 95%"
+
+    - id: PR09
+      name: "Information Security Management"
+      framework_practice_name: "Information Security Management"
+      purpose: "Protect the information needed to conduct business by managing risks to confidentiality, integrity, and availability"
+      scope: "Security governance across IT systems, software, endpoints, IoT, processes, people, partners, and data"
+      phase: A
+      inputs:
+        - name: "Service level requirements with security targets"
+          source: "PR02 Service Level Management"
+        - name: "Configuration data for security scope"
+          source: "PR17 Service Configuration Management"
+        - name: "Risk assessments and risk register"
+          source: "PR21 Risk Management"
+        - name: "Monitoring events and security alerts"
+          source: "PR14 Monitoring & Event Management"
+      outputs:
+        - name: "Information security policy and controls"
+          destination: "All practices"
+        - name: "Security requirements for SLAs"
+          destination: "PR02 Service Level Management"
+        - name: "Security incident reports"
+          destination: "PR11 Incident Management"
+        - name: "Security risk assessments"
+          destination: "PR21 Risk Management"
+      interfaces:
+        - process_id: PR02
+          direction: bidirectional
+          description: "Security requirements feed SLAs; SLA security targets drive controls"
+        - process_id: PR11
+          direction: bidirectional
+          description: "Security incidents trigger incident management; incident data informs security"
+        - process_id: PR15
+          direction: out
+          description: "Security assessment feeds change evaluation for security impact"
+        - process_id: PR17
+          direction: in
+          description: "CI data enables security scope identification and impact analysis"
+        - process_id: PR21
+          direction: bidirectional
+          description: "Security risks feed risk register; risk appetite governs security controls"
+      activities:
+        - name: "Develop and maintain information security policy"
+          description: "Define security objectives, principles, and governance aligned with business needs"
+        - name: "Conduct security risk assessments"
+          description: "Identify threats and vulnerabilities, assess likelihood and impact, determine risk treatment"
+        - name: "Implement and manage security controls"
+          description: "Deploy preventive, detective, and corrective controls across all dimensions"
+        - name: "Manage security incidents"
+          description: "Detect, respond to, and recover from security events and breaches"
+        - name: "Conduct security awareness training"
+          description: "Educate staff on security policies, threats, and behaviours"
+        - name: "Monitor security posture"
+          description: "Continuously monitor for threats, vulnerabilities, and compliance gaps"
+        - name: "Perform security audits and compliance checks"
+          description: "Verify controls effectiveness, assess regulatory compliance, report findings"
+        - name: "Review and improve security approach"
+          description: "Evaluate security effectiveness, adapt to emerging threats, update policies and controls"
+      kpis:
+        - name: "Security Policy Coverage"
+          formula: "(Services with documented security controls / Total services) x 100"
+          target: "100%"
+        - name: "Security Incident Rate"
+          formula: "Count of security incidents per reporting period"
+          target: "Trending downward"
+        - name: "Security Awareness Compliance"
+          formula: "(Staff completing security training / Total staff) x 100"
+          target: ">= 95%"
+
+    - id: PR17
+      name: "Service Configuration Management"
+      framework_practice_name: "Service Configuration Management"
+      purpose: "Ensure accurate, reliable information about service configurations and supporting CIs is available when needed"
+      scope: "Configuration items across all four dimensions — technology, suppliers, people, and processes"
+      phase: A
+      inputs:
+        - name: "Change records and implementation details"
+          source: "PR15 Change Management"
+        - name: "Release and deployment records"
+          source: "PR16 Release & Deployment Management"
+        - name: "IT asset register data"
+          source: "PR18 IT Asset Management"
+        - name: "Service design packages"
+          source: "PR04 Service Design"
+      outputs:
+        - name: "Configuration models and CI data"
+          destination: "All practices"
+        - name: "Impact analysis for change assessment"
+          destination: "PR15 Change Management"
+        - name: "Service dependency maps"
+          destination: "PR06 Availability Management"
+        - name: "CI-to-service mapping for cost allocation"
+          destination: "PR03 Service Financial Management"
+      interfaces:
+        - process_id: PR11
+          direction: out
+          description: "CI data supports incident diagnosis and impact assessment"
+        - process_id: PR13
+          direction: out
+          description: "Configuration models support root cause analysis"
+        - process_id: PR15
+          direction: bidirectional
+          description: "CI data informs change impact; changes trigger CMDB updates"
+        - process_id: PR18
+          direction: bidirectional
+          description: "Asset register and CMDB are complementary; data shared between them"
+        - process_id: PR05
+          direction: out
+          description: "Service models and CI relationships enrich catalogue views"
+      activities:
+        - name: "Define configuration management approach"
+          description: "Establish CI scope, naming conventions, attribute standards, and governance model"
+        - name: "Identify and register configuration items"
+          description: "Determine which components are CIs, define attributes, record in CMDB"
+        - name: "Maintain CI records and relationships"
+          description: "Update CI attributes and relationships as changes occur across the lifecycle"
+        - name: "Produce configuration models"
+          description: "Create service models showing CI relationships for impact and root cause analysis"
+        - name: "Verify configuration data accuracy"
+          description: "Conduct audits comparing CMDB records against actual infrastructure state"
+        - name: "Provide configuration information to stakeholders"
+          description: "Deliver CI data, service models, and impact analysis to consuming processes"
+      kpis:
+        - name: "CMDB Accuracy"
+          formula: "(CIs verified as accurate / Total CIs audited) x 100"
+          target: ">= 95%"
+        - name: "CI Coverage"
+          formula: "(CIs recorded in CMDB / Total in-scope components) x 100"
+          target: "100%"
+        - name: "Configuration Audit Compliance"
+          formula: "(Audits completed on schedule / Total scheduled audits) x 100"
+          target: "100%"
+
+    # ── Phase B — Agreements ──────────────────────────────────────────
+
+    - id: PR02
+      name: "Service Level Management"
+      framework_practice_name: "Service Level Management"
+      purpose: "Establish clear, business-relevant service quality targets, agree them with customers, and monitor fulfilment"
+      scope: "Service catalogues, SLA/OLA/UA lifecycle, service quality monitoring, service reviews, and reporting"
+      phase: B
+      inputs:
+        - name: "Service portfolio and specifications"
+          source: "PR01 Service Portfolio Management"
+        - name: "Availability data and targets"
+          source: "PR06 Availability Management"
+        - name: "Monitoring data"
+          source: "PR14 Monitoring & Event Management"
+        - name: "Customer requirements and feedback"
+          source: "PR22 Relationship Management"
+      outputs:
+        - name: "SLA targets and evaluation data"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Availability targets from SLAs"
+          destination: "PR06 Availability Management"
+        - name: "Service catalogue and SLAs"
+          destination: "PR22 Relationship Management"
+        - name: "Improvement opportunities"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR01
+          direction: bidirectional
+          description: "Portfolio provides service specs; SLM returns performance data"
+        - process_id: PR06
+          direction: bidirectional
+          description: "Availability data informs SLAs; SLA targets drive availability planning"
+        - process_id: PR08
+          direction: bidirectional
+          description: "Performance data informs SLAs; SLA targets drive capacity planning"
+        - process_id: PR11
+          direction: in
+          description: "Incident records provide volumes, resolution times for SLA evaluation"
+        - process_id: PR22
+          direction: bidirectional
+          description: "Customer requirements drive SLAs; SLAs support customer communication"
+        - process_id: PR23
+          direction: bidirectional
+          description: "Supplier capabilities inform UAs; performance reports feed supplier evaluation"
+      activities:
+        - name: "Define SLM approach and templates"
+          description: "Create SLA, OLA, UA templates; establish default SLA; define violation notification methods"
+        - name: "Establish the service catalogue"
+          description: "Create catalogue from portfolio, populate entries, identify supporting components"
+        - name: "Define and negotiate service level agreements"
+          description: "Gather requirements, assess viability, draft and negotiate SLAs with customers"
+        - name: "Evaluate agreement fulfilment"
+          description: "Collect performance data, compare against targets, identify breaches and near-misses"
+        - name: "Manage supporting agreements"
+          description: "Define and negotiate OLAs and UAs, evaluate fulfilment, review and update"
+        - name: "Conduct service reviews"
+          description: "Periodic and event-based reviews covering achieved levels, satisfaction, and improvements"
+        - name: "Monitor service quality continuously"
+          description: "Collect ongoing data from monitoring, user feedback, and satisfaction surveys"
+        - name: "Produce service quality reports"
+          description: "Generate reports demonstrating achieved levels, satisfaction scores, and improvement progress"
+      kpis:
+        - name: "SLA Compliance Rate"
+          formula: "(SLA targets met / Total SLA targets evaluated) x 100"
+          target: ">= 95%"
+        - name: "SLA Coverage"
+          formula: "(Services with active SLA / Total customer-facing services) x 100"
+          target: "100%"
+        - name: "Customer Satisfaction Score"
+          formula: "Average of customer satisfaction survey scores (scale 1-5)"
+          target: ">= 3.5 / 5"
+
+    - id: PR04
+      name: "Service Design"
+      framework_practice_name: "Service Design"
+      purpose: "Design products and services that are fit for purpose and fit for use, deliverable by the organization and its ecosystem"
+      scope: "Holistic design across all four dimensions, service design packages, design thinking, risk modelling"
+      phase: B
+      inputs:
+        - name: "Organization strategy and portfolio"
+          source: "PR01 Service Portfolio Management"
+        - name: "Architectural patterns and principles"
+          source: "Architecture Management"
+        - name: "Customer and user feedback"
+          source: "PR22 Relationship Management"
+        - name: "Security, continuity, and capacity policies"
+          source: "PR09, PR07, PR08"
+      outputs:
+        - name: "Service design packages and templates"
+          destination: "PR15 Change Management, PR16 Release Management"
+        - name: "Service design review reports"
+          destination: "PR24 Continual Improvement"
+        - name: "Updated knowledge articles"
+          destination: "PR19 Knowledge Management"
+        - name: "Service portfolio updates"
+          destination: "PR01 Service Portfolio Management"
+      interfaces:
+        - process_id: PR01
+          direction: bidirectional
+          description: "Portfolio decisions drive design demand; design outcomes update portfolio"
+        - process_id: PR02
+          direction: in
+          description: "SLAs define service requirements that must be designed for"
+        - process_id: PR09
+          direction: in
+          description: "Security controls and compliance needs are design inputs"
+        - process_id: PR15
+          direction: out
+          description: "Design outputs feed change evaluation"
+        - process_id: PR16
+          direction: out
+          description: "Design packages support release planning"
+        - process_id: PR22
+          direction: in
+          description: "Customer and user feedback informs design requirements"
+      activities:
+        - name: "Analyse service environment and requirements"
+          description: "Assess conditions affecting design including architecture, feedback, risk, and compliance"
+        - name: "Review and develop service design approach"
+          description: "Agree design philosophy, methods, techniques, and integration points"
+        - name: "Review and develop service design models"
+          description: "Define procedures, controls, SDP templates, schedule and communications templates"
+        - name: "Plan service design instances"
+          description: "Plan requirements tracking, communications, partner interactions, and resources"
+        - name: "Orchestrate and coordinate design execution"
+          description: "Manage teams, requirements tracking, communications, and holistic design view"
+        - name: "Review service design outcomes"
+          description: "Assess compliance with standards, verify SDP completeness, log lessons learned"
+        - name: "Model and manage service risk tiers"
+          description: "Develop risk questionnaires, profile services, assign risk-aligned tiers and SDPs"
+        - name: "Optimize the service design practice"
+          description: "Evaluate adherence, assess fitness for purpose, measure stakeholder satisfaction"
+      kpis:
+        - name: "SDP Completeness"
+          formula: "(Services with complete SDPs / Total new or changed services) x 100"
+          target: ">= 90%"
+        - name: "Fitness for Purpose Rate"
+          formula: "(Products meeting utility requirements / Total assessed) x 100"
+          target: ">= 95%"
+        - name: "Design-Attributable Defect Rate"
+          formula: "Count of design-attributable defects per period by severity"
+          target: "Trending downward; zero critical"
+
+    - id: PR05
+      name: "Service Catalogue Management"
+      framework_practice_name: "Service Catalogue Management"
+      purpose: "Provide a single source of consistent information on all services and service offerings for relevant audiences"
+      scope: "Catalogue data structure, views for users/customers/providers, data integration, quality assurance"
+      phase: B
+      inputs:
+        - name: "Service portfolio"
+          source: "PR01 Service Portfolio Management"
+        - name: "Service configuration data"
+          source: "PR17 Service Configuration Management"
+        - name: "Contracts and agreements"
+          source: "PR02 Service Level Management"
+        - name: "Financial data"
+          source: "PR03 Service Financial Management"
+      outputs:
+        - name: "Published service catalogue data"
+          destination: "Users, customers, internal teams"
+        - name: "Request catalogue for service requests"
+          destination: "PR12 Service Request Management"
+        - name: "Data integration requirements"
+          destination: "Technical teams, suppliers"
+        - name: "Catalogue feedback data"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR01
+          direction: in
+          description: "Portfolio lifecycle decisions trigger catalogue updates"
+        - process_id: PR02
+          direction: bidirectional
+          description: "SLA information enriches views; catalogue is basis for SLA negotiation"
+        - process_id: PR10
+          direction: out
+          description: "Catalogue is primary tool for service desk; errors are treated as incidents"
+        - process_id: PR12
+          direction: out
+          description: "Request catalogue enables users to identify and submit requests"
+        - process_id: PR17
+          direction: in
+          description: "CI data and service models enrich catalogue views"
+      activities:
+        - name: "Analyse stakeholder requirements for the catalogue"
+          description: "Identify stakeholder groups, discover requirements for scope, granularity, and access"
+        - name: "Define catalogue data structure"
+          description: "Define core service data, view-specific data, technical approach, automation needs"
+        - name: "Define standard catalogue views"
+          description: "Create user, customer, and provider views from single data repository"
+        - name: "Collect and maintain catalogue data"
+          description: "Enter data, establish update procedures, work with external data owners"
+        - name: "Monitor and maintain data quality"
+          description: "Ensure correctness, completeness, currency; treat catalogue errors as incidents"
+        - name: "Gather and process user feedback"
+          description: "Collect feedback on scheduled basis, monitor user experience patterns"
+      kpis:
+        - name: "Catalogue Completeness"
+          formula: "(Services in catalogue / Total services managed) x 100"
+          target: "100%"
+        - name: "Core Data Completeness"
+          formula: "(Entries with all core attributes / Total entries) x 100"
+          target: "100%"
+        - name: "Stakeholder Satisfaction with Catalogue"
+          formula: "Average satisfaction score by stakeholder group (scale 1-5)"
+          target: ">= 4.0 / 5"
+
+    - id: PR22
+      name: "Relationship Management"
+      framework_practice_name: "Relationship Management"
+      purpose: "Establish and nurture effective links between the organization and its stakeholders at all levels"
+      scope: "Stakeholder identification, relationship monitoring, satisfaction measurement, complaint handling, conflict prevention"
+      phase: B
+      inputs:
+        - name: "Service performance data"
+          source: "PR02 Service Level Management"
+        - name: "Incident and request feedback"
+          source: "PR10 Service Desk"
+        - name: "Portfolio roadmap"
+          source: "PR01 Service Portfolio Management"
+      outputs:
+        - name: "Customer demand and requirements"
+          destination: "PR01 Service Portfolio Management"
+        - name: "Customer service level requirements"
+          destination: "PR02 Service Level Management"
+        - name: "Satisfaction survey results"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Complaint records and escalations"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR01
+          direction: bidirectional
+          description: "Demand signals feed portfolio; portfolio roadmap communicated to customers"
+        - process_id: PR02
+          direction: bidirectional
+          description: "Customer requirements drive SLAs; SLA performance supports relationship"
+        - process_id: PR10
+          direction: in
+          description: "User feedback and sentiment from service desk contacts"
+        - process_id: PR23
+          direction: bidirectional
+          description: "Supplier relationships complement customer relationships"
+        - process_id: PR24
+          direction: out
+          description: "Relationship insights feed improvement register"
+      activities:
+        - name: "Develop relationship management approach"
+          description: "Define organization-wide approach to relationships and integrate into culture"
+        - name: "Identify and analyse stakeholders"
+          description: "Map stakeholder interests, influence, and engagement needs"
+        - name: "Establish and maintain customer relationships"
+          description: "Build trust through regular engagement, transparent communication, and responsiveness"
+        - name: "Monitor stakeholder satisfaction"
+          description: "Conduct satisfaction surveys, gather feedback, analyse trends"
+        - name: "Handle complaints and conflicts"
+          description: "Receive complaints, investigate root causes, resolve issues, prevent recurrence"
+        - name: "Conduct relationship reviews"
+          description: "Periodic assessment of relationship health, identification of improvement areas"
+      kpis:
+        - name: "Stakeholder Satisfaction Index"
+          formula: "Average satisfaction score across stakeholder groups (scale 1-5)"
+          target: ">= 4.0 / 5"
+        - name: "Complaint Resolution Rate"
+          formula: "(Complaints resolved within SLA / Total complaints) x 100"
+          target: ">= 90%"
+        - name: "Relationship Review Adherence"
+          formula: "(Reviews conducted on schedule / Total scheduled reviews) x 100"
+          target: "100%"
+
+    - id: PR23
+      name: "Supplier Management"
+      framework_practice_name: "Supplier Management"
+      purpose: "Ensure suppliers and their performance are managed to support seamless provision of quality products and services"
+      scope: "Sourcing strategy, supplier evaluation and selection, contract lifecycle, performance management"
+      phase: B
+      inputs:
+        - name: "Service requirements and SLA targets"
+          source: "PR02 Service Level Management"
+        - name: "Portfolio investment decisions"
+          source: "PR01 Service Portfolio Management"
+        - name: "Security requirements for suppliers"
+          source: "PR09 Information Security Management"
+      outputs:
+        - name: "Supplier capabilities and contract terms"
+          destination: "PR02 Service Level Management"
+        - name: "Supplier performance reports"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Supplier cost data"
+          destination: "PR03 Service Financial Management"
+        - name: "Supplier service components"
+          destination: "PR17 Service Configuration Management"
+      interfaces:
+        - process_id: PR02
+          direction: bidirectional
+          description: "SLA requirements drive supplier targets; supplier capabilities inform UAs"
+        - process_id: PR03
+          direction: out
+          description: "Supplier contracts and pricing affect service costs"
+        - process_id: PR09
+          direction: in
+          description: "Security requirements apply to supplier engagements"
+        - process_id: PR15
+          direction: bidirectional
+          description: "Supplier changes may require change management; changes may affect suppliers"
+        - process_id: PR22
+          direction: bidirectional
+          description: "Supplier relationships complement customer relationship management"
+      activities:
+        - name: "Define sourcing strategy"
+          description: "Establish approach to make-vs-buy decisions, supplier categorization, and market analysis"
+        - name: "Evaluate and select suppliers"
+          description: "Assess supplier capabilities against requirements, conduct due diligence, select providers"
+        - name: "Negotiate and agree contracts"
+          description: "Define terms, negotiate agreements, establish SLAs and performance targets"
+        - name: "Onboard suppliers"
+          description: "Integrate suppliers into operational processes, establish communication channels"
+        - name: "Monitor supplier performance"
+          description: "Track delivery against targets, conduct reviews, manage reward and penalty mechanisms"
+        - name: "Manage contract lifecycle"
+          description: "Handle amendments, renewals, and terminations; maintain contract register"
+        - name: "Manage supplier relationships"
+          description: "Build collaborative partnerships with strategic suppliers, resolve conflicts"
+        - name: "Offboard suppliers"
+          description: "Manage orderly transition when contracts end, ensure knowledge transfer"
+      kpis:
+        - name: "Supplier Performance Compliance"
+          formula: "(Supplier targets met / Total supplier targets evaluated) x 100"
+          target: ">= 95%"
+        - name: "Contract Coverage"
+          formula: "(Suppliers with active contracts / Total active suppliers) x 100"
+          target: "100%"
+        - name: "Supplier Review Adherence"
+          formula: "(Reviews conducted on schedule / Total scheduled reviews) x 100"
+          target: "100%"
+
+    # ── Phase C — Operations ──────────────────────────────────────────
+
+    - id: PR10
+      name: "Service Desk"
+      framework_practice_name: "Service Desk"
+      purpose: "Capture demand for incident resolution and service requests, acting as single point of contact for users"
+      scope: "Communication channels, user contact handling, logging, tracking, omnichannel integration"
+      phase: C
+      inputs:
+        - name: "Service catalogue and request catalogue"
+          source: "PR05 Service Catalogue Management"
+        - name: "Known errors and workarounds"
+          source: "PR13 Problem Management"
+        - name: "Knowledge articles"
+          source: "PR19 Knowledge Management"
+      outputs:
+        - name: "Logged incidents"
+          destination: "PR11 Incident Management"
+        - name: "Logged service requests"
+          destination: "PR12 Service Request Management"
+        - name: "User feedback and sentiment"
+          destination: "PR22 Relationship Management"
+        - name: "User-reported issues and ideas"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR11
+          direction: out
+          description: "Service desk logs and routes incidents to incident management"
+        - process_id: PR12
+          direction: out
+          description: "Service desk logs and routes service requests"
+        - process_id: PR05
+          direction: in
+          description: "Catalogue provides service information for user interactions"
+        - process_id: PR13
+          direction: in
+          description: "Known errors and workarounds enable faster first-line resolution"
+        - process_id: PR19
+          direction: bidirectional
+          description: "Knowledge base supports resolution; desk contributes new articles"
+      activities:
+        - name: "Establish communication channels"
+          description: "Define and implement channels meeting accessibility, availability, and usability requirements"
+        - name: "Enable omnichannel communications"
+          description: "Integrate channels for seamless user experience across phone, chat, email, portal"
+        - name: "Log and track user contacts"
+          description: "Register all contacts, categorize, and route to appropriate processes"
+        - name: "Provide first-line resolution"
+          description: "Resolve incidents and fulfil requests using knowledge base and incident models"
+        - name: "Manage user communication throughout"
+          description: "Keep users informed of progress, manage expectations, provide empathetic service"
+        - name: "Monitor and improve channel effectiveness"
+          description: "Analyse channel usage patterns, satisfaction, and resolution rates to optimize"
+      kpis:
+        - name: "First Contact Resolution Rate"
+          formula: "(Contacts resolved at first contact / Total contacts) x 100"
+          target: ">= 70%"
+        - name: "User Satisfaction Score"
+          formula: "Average post-contact satisfaction rating (scale 1-5)"
+          target: ">= 4.0 / 5"
+        - name: "Channel Availability"
+          formula: "(Actual channel availability hours / Agreed availability hours) x 100"
+          target: ">= 99%"
+
+    - id: PR11
+      name: "Incident Management"
+      framework_practice_name: "Incident Management"
+      purpose: "Minimize negative impact of incidents by restoring normal service operation as quickly as possible"
+      scope: "Incident detection, registration, classification, prioritization, investigation, resolution, and closure"
+      phase: C
+      inputs:
+        - name: "User-reported incidents"
+          source: "PR10 Service Desk"
+        - name: "Monitoring events and alerts"
+          source: "PR14 Monitoring & Event Management"
+        - name: "Known errors and workarounds"
+          source: "PR13 Problem Management"
+        - name: "CI and service dependency data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Incident records and resolution data"
+          destination: "PR13 Problem Management"
+        - name: "SLA performance data"
+          destination: "PR02 Service Level Management"
+        - name: "Emergency change requests"
+          destination: "PR15 Change Management"
+        - name: "Post-incident review findings"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR10
+          direction: in
+          description: "Service desk logs and routes incidents"
+        - process_id: PR13
+          direction: bidirectional
+          description: "Incident data feeds problem identification; known errors accelerate resolution"
+        - process_id: PR14
+          direction: in
+          description: "Events trigger automated incident creation"
+        - process_id: PR15
+          direction: out
+          description: "Emergency changes may be needed to restore service"
+        - process_id: PR17
+          direction: in
+          description: "CI data supports impact assessment and diagnosis"
+      activities:
+        - name: "Detect and register incidents"
+          description: "Identify incidents from user reports, monitoring, or staff observation; create records"
+        - name: "Classify and prioritize"
+          description: "Categorize by type, assign priority based on impact and urgency matrix"
+        - name: "Investigate and diagnose"
+          description: "Identify root cause or apply known workarounds from KEDB"
+        - name: "Resolve and recover"
+          description: "Apply resolution, verify service restoration, confirm with affected users"
+        - name: "Close incidents"
+          description: "Verify resolution, update records, collect user satisfaction feedback"
+        - name: "Manage major incidents"
+          description: "Invoke dedicated procedure with coordinator, elevated priority, and stakeholder communication"
+        - name: "Conduct post-incident reviews"
+          description: "Analyse major incidents for lessons learned and improvement opportunities"
+        - name: "Maintain incident models"
+          description: "Create and update pre-defined resolution paths for known incident types"
+      kpis:
+        - name: "Mean Time to Restore Service"
+          formula: "Average elapsed time from incident detection to service restoration"
+          target: "Within SLA targets by priority"
+        - name: "Incident Resolution within SLA"
+          formula: "(Incidents resolved within SLA / Total incidents) x 100"
+          target: ">= 90%"
+        - name: "Major Incident Review Completion"
+          formula: "(Major incidents with completed PIR / Total major incidents) x 100"
+          target: "100%"
+
+    - id: PR12
+      name: "Service Request Management"
+      framework_practice_name: "Service Request Management"
+      purpose: "Handle all predefined, user-initiated service requests in an effective and user-friendly manner"
+      scope: "Request model management, request processing and fulfilment, performance review and improvement"
+      phase: C
+      inputs:
+        - name: "Service requests from users"
+          source: "PR10 Service Desk"
+        - name: "Request catalogue"
+          source: "PR05 Service Catalogue Management"
+        - name: "Request fulfilment models"
+          source: "PR04 Service Design"
+      outputs:
+        - name: "Fulfilled service requests"
+          destination: "Users"
+        - name: "Request fulfilment data"
+          destination: "PR02 Service Level Management"
+        - name: "Improvement opportunities"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR10
+          direction: in
+          description: "Service desk logs and routes service requests"
+        - process_id: PR05
+          direction: in
+          description: "Request catalogue defines available requests and fulfilment information"
+        - process_id: PR15
+          direction: bidirectional
+          description: "Some requests may trigger standard changes; request models are pre-authorized"
+        - process_id: PR09
+          direction: in
+          description: "Access requests require security validation"
+      activities:
+        - name: "Manage service request models"
+          description: "Create, test, deploy, and maintain fulfilment procedures for each request type"
+        - name: "Receive and validate requests"
+          description: "Accept requests, validate entitlement and completeness, apply request model"
+        - name: "Manage approvals"
+          description: "Route requests through approval workflows as defined in the model"
+        - name: "Coordinate fulfilment"
+          description: "Execute fulfilment steps, coordinate multi-team activities, track progress"
+        - name: "Verify and close requests"
+          description: "Confirm fulfilment with requestor, collect feedback, close record"
+        - name: "Review and improve fulfilment performance"
+          description: "Analyse fulfilment metrics, identify bottlenecks, optimize models"
+      kpis:
+        - name: "Request Fulfilment within SLA"
+          formula: "(Requests fulfilled within agreed timeframe / Total requests) x 100"
+          target: ">= 95%"
+        - name: "Request Fulfilment Satisfaction"
+          formula: "Average post-fulfilment satisfaction rating (scale 1-5)"
+          target: ">= 4.0 / 5"
+        - name: "Request Model Coverage"
+          formula: "(Request types with documented models / Total request types) x 100"
+          target: ">= 90%"
+
+    - id: PR13
+      name: "Problem Management"
+      framework_practice_name: "Problem Management"
+      purpose: "Reduce likelihood and impact of incidents by identifying actual and potential causes and managing workarounds"
+      scope: "Reactive and proactive problem identification, root cause analysis, known error management, KEDB"
+      phase: C
+      inputs:
+        - name: "Incident records and trend data"
+          source: "PR11 Incident Management"
+        - name: "Monitoring event patterns"
+          source: "PR14 Monitoring & Event Management"
+        - name: "Configuration and dependency data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Known errors and workarounds"
+          destination: "PR11 Incident Management"
+        - name: "Change requests for permanent fixes"
+          destination: "PR15 Change Management"
+        - name: "Root cause analysis reports"
+          destination: "PR24 Continual Improvement"
+        - name: "Knowledge articles"
+          destination: "PR19 Knowledge Management"
+      interfaces:
+        - process_id: PR11
+          direction: bidirectional
+          description: "Incident data triggers problem identification; known errors accelerate incident resolution"
+        - process_id: PR14
+          direction: in
+          description: "Event patterns and trends support proactive problem identification"
+        - process_id: PR15
+          direction: out
+          description: "Permanent resolutions require changes through change management"
+        - process_id: PR17
+          direction: in
+          description: "CI relationships support root cause analysis"
+        - process_id: PR19
+          direction: out
+          description: "Known errors and workarounds published as knowledge articles"
+      activities:
+        - name: "Identify problems reactively"
+          description: "Analyse incident data to identify recurring incidents, trends, and patterns"
+        - name: "Identify problems proactively"
+          description: "Analyse monitoring data, capacity trends, and supplier intelligence for potential causes"
+        - name: "Register and classify problems"
+          description: "Create problem records, categorize, assess impact, assign priority"
+        - name: "Investigate and diagnose root causes"
+          description: "Apply structured analysis techniques to determine underlying cause"
+        - name: "Develop and document workarounds"
+          description: "Create tested workarounds, document in KEDB with application instructions"
+        - name: "Manage known errors"
+          description: "Maintain KEDB, track known error lifecycle, decide on permanent resolution"
+        - name: "Initiate permanent resolutions"
+          description: "Raise RFCs for permanent fixes, track through change management"
+        - name: "Conduct problem reviews"
+          description: "Review problem resolution effectiveness, update processes, share lessons"
+      kpis:
+        - name: "Known Error Documentation Rate"
+          formula: "(Problems with documented known errors / Total diagnosed problems) x 100"
+          target: ">= 80%"
+        - name: "Problem Resolution Rate"
+          formula: "(Problems permanently resolved / Total problems identified) x 100"
+          target: "Trending upward"
+        - name: "Incident Recurrence Reduction"
+          formula: "Reduction in recurring incidents attributable to solved problems"
+          target: "Trending downward"
+
+    - id: PR14
+      name: "Monitoring & Event Management"
+      framework_practice_name: "Monitoring and Event Management"
+      purpose: "Systematically observe services and components, detect events, and initiate appropriate responses"
+      scope: "Monitoring scope definition, active and passive monitoring, event categorization, response automation"
+      phase: C
+      inputs:
+        - name: "Service level targets and thresholds"
+          source: "PR02 Service Level Management"
+        - name: "Security monitoring requirements"
+          source: "PR09 Information Security Management"
+        - name: "CI and service dependency data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Detected events and alerts"
+          destination: "PR11 Incident Management"
+        - name: "Performance and availability data"
+          destination: "PR06 Availability Management, PR08 Capacity & Performance Management"
+        - name: "Event trends and patterns"
+          destination: "PR13 Problem Management"
+        - name: "Monitoring reports"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: PR02
+          direction: in
+          description: "SLA targets define monitoring thresholds"
+        - process_id: PR06
+          direction: out
+          description: "Availability monitoring data feeds availability management"
+        - process_id: PR08
+          direction: out
+          description: "Performance monitoring data feeds capacity management"
+        - process_id: PR09
+          direction: bidirectional
+          description: "Security events trigger security incident handling; security defines monitoring scope"
+        - process_id: PR11
+          direction: out
+          description: "Events trigger automated incident creation"
+        - process_id: PR13
+          direction: out
+          description: "Event patterns support proactive problem identification"
+      activities:
+        - name: "Define monitoring scope and strategy"
+          description: "Determine what to monitor, at what depth, using which techniques"
+        - name: "Implement monitoring instrumentation"
+          description: "Deploy active and passive monitoring across infrastructure, applications, services"
+        - name: "Establish event rules and thresholds"
+          description: "Define event classification, correlation rules, and automated responses"
+        - name: "Process events"
+          description: "Detect, categorize, correlate, and respond to events according to rules"
+        - name: "Provide monitoring data to stakeholders"
+          description: "Deliver current and historical state information in agreed formats"
+        - name: "Optimize monitoring scope and effectiveness"
+          description: "Review event rules, tune thresholds, reduce noise, improve detection accuracy"
+      kpis:
+        - name: "Monitoring Coverage"
+          formula: "(Monitored CIs / Total in-scope CIs) x 100"
+          target: ">= 95%"
+        - name: "Event Processing Timeliness"
+          formula: "(Events processed within target time / Total events) x 100"
+          target: ">= 99%"
+        - name: "False Positive Rate"
+          formula: "(False positive events / Total events) x 100"
+          target: "< 5%"
+
+    - id: PR15
+      name: "Change Management"
+      framework_practice_name: "Change Enablement"
+      purpose: "Maximize successful service and product changes by ensuring risks are assessed and changes are authorized"
+      scope: "Change lifecycle from registration through assessment, authorization, realization control, review, and closure"
+      phase: C
+      inputs:
+        - name: "Requests for change"
+          source: "All practices"
+        - name: "CI impact analysis"
+          source: "PR17 Service Configuration Management"
+        - name: "Risk assessments"
+          source: "PR21 Risk Management"
+        - name: "Release schedules"
+          source: "PR16 Release & Deployment Management"
+      outputs:
+        - name: "Authorized changes"
+          destination: "PR16 Release & Deployment Management"
+        - name: "Change schedule"
+          destination: "All practices"
+        - name: "CMDB update triggers"
+          destination: "PR17 Service Configuration Management"
+        - name: "Change review findings"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR11
+          direction: in
+          description: "Emergency changes may be needed to restore service after incidents"
+        - process_id: PR13
+          direction: in
+          description: "Problem resolutions require changes for permanent fixes"
+        - process_id: PR16
+          direction: bidirectional
+          description: "Authorized changes are bundled into releases; release outcomes feed change review"
+        - process_id: PR17
+          direction: bidirectional
+          description: "CI data informs impact assessment; implemented changes trigger CMDB updates"
+        - process_id: PR21
+          direction: in
+          description: "Risk assessment informs change authorization decisions"
+      activities:
+        - name: "Register and classify changes"
+          description: "Accept RFCs, classify as standard, normal, or emergency; assign change model"
+        - name: "Assess change risk and impact"
+          description: "Evaluate risk, impact, resource needs, and scheduling using CI data and risk models"
+        - name: "Authorize changes"
+          description: "Route to appropriate change authority based on risk level and change model"
+        - name: "Plan and schedule changes"
+          description: "Coordinate implementation timing, manage change calendar, avoid conflicts"
+        - name: "Control change realization"
+          description: "Monitor implementation progress, manage exceptions, ensure rollback readiness"
+        - name: "Review and close changes"
+          description: "Verify outcomes, conduct post-implementation review, update records"
+        - name: "Manage standard changes"
+          description: "Identify candidates, document procedures, pre-authorize, monitor compliance"
+        - name: "Manage emergency changes"
+          description: "Apply expedited assessment and authorization, ensure retrospective review"
+      kpis:
+        - name: "Change Success Rate"
+          formula: "(Successful changes / Total changes implemented) x 100"
+          target: ">= 95%"
+        - name: "Emergency Change Ratio"
+          formula: "(Emergency changes / Total changes) x 100"
+          target: "< 10%"
+        - name: "Change Lead Time"
+          formula: "Average elapsed time from RFC to implementation by change type"
+          target: "Within agreed targets per type"
+
+    - id: PR16
+      name: "Release & Deployment Management"
+      framework_practice_name: "Release Management"
+      purpose: "Make new and changed services available by moving them to target environments and enabling user access"
+      scope: "Release planning, build, test, deployment, verification, and review across all environment stages"
+      phase: C
+      inputs:
+        - name: "Authorized changes"
+          source: "PR15 Change Management"
+        - name: "Service design packages"
+          source: "PR04 Service Design"
+        - name: "Configuration baselines"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Deployed releases in production"
+          destination: "Operations"
+        - name: "Release records and deployment results"
+          destination: "PR17 Service Configuration Management"
+        - name: "Release review findings"
+          destination: "PR24 Continual Improvement"
+        - name: "Updated service catalogue entries"
+          destination: "PR05 Service Catalogue Management"
+      interfaces:
+        - process_id: PR04
+          direction: in
+          description: "Design packages define what needs to be released"
+        - process_id: PR15
+          direction: bidirectional
+          description: "Authorized changes are bundled into releases; release outcomes feed change review"
+        - process_id: PR17
+          direction: bidirectional
+          description: "Configuration baselines inform release planning; deployments trigger CMDB updates"
+        - process_id: PR05
+          direction: out
+          description: "Deployed services update catalogue entries"
+      activities:
+        - name: "Define release and deployment approach"
+          description: "Establish release types, models, strategies, and procedures"
+        - name: "Plan releases"
+          description: "Bundle approved changes, plan build, test, and deployment activities"
+        - name: "Build and test releases"
+          description: "Construct release package, conduct testing in staging environments"
+        - name: "Deploy to target environments"
+          description: "Move release components to production, manage deployment execution"
+        - name: "Enable release for users"
+          description: "Make deployed components available, communicate changes, provide support"
+        - name: "Verify release outcomes"
+          description: "Confirm deployment success, verify acceptance criteria, monitor early life"
+        - name: "Review and close releases"
+          description: "Document lessons learned, update records, close release record"
+      kpis:
+        - name: "Release Success Rate"
+          formula: "(Releases meeting acceptance criteria / Total releases) x 100"
+          target: ">= 95%"
+        - name: "Deployment Failure Rate"
+          formula: "(Failed deployments requiring rollback / Total deployments) x 100"
+          target: "< 5%"
+        - name: "Release Lead Time"
+          formula: "Average elapsed time from release planning to production deployment"
+          target: "Trending downward"
+
+    # ── Phase D — Assurance ───────────────────────────────────────────
+
+    - id: PR06
+      name: "Availability Management"
+      framework_practice_name: "Availability Management"
+      purpose: "Ensure services deliver agreed levels of availability to meet customer and user needs"
+      scope: "Availability requirements, monitoring, reporting, risk identification, and control design"
+      phase: D
+      inputs:
+        - name: "SLA availability targets"
+          source: "PR02 Service Level Management"
+        - name: "Monitoring and availability data"
+          source: "PR14 Monitoring & Event Management"
+        - name: "CI dependency maps"
+          source: "PR17 Service Configuration Management"
+        - name: "Incident data on service outages"
+          source: "PR11 Incident Management"
+      outputs:
+        - name: "Availability data and targets"
+          destination: "PR02 Service Level Management"
+        - name: "Availability design requirements"
+          destination: "PR04 Service Design"
+        - name: "Availability reports"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Availability improvement actions"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR02
+          direction: bidirectional
+          description: "SLAs set targets; availability data feeds SLA evaluation"
+        - process_id: PR07
+          direction: bidirectional
+          description: "Availability manages high-probability risks; continuity manages high-impact risks"
+        - process_id: PR08
+          direction: bidirectional
+          description: "Performance and availability are complementary quality aspects"
+        - process_id: PR11
+          direction: in
+          description: "Incident data reveals availability impact patterns"
+        - process_id: PR14
+          direction: in
+          description: "Monitoring data provides availability measurements"
+        - process_id: PR17
+          direction: in
+          description: "Service dependency maps identify single points of failure"
+      activities:
+        - name: "Identify availability requirements"
+          description: "Work with customers to define what unavailability means and its business impact"
+        - name: "Select availability metrics"
+          description: "Choose metrics that reflect business impact, not just technical uptime"
+        - name: "Design availability controls"
+          description: "Identify single points of failure, design resilience, implement redundancy"
+        - name: "Monitor and measure availability"
+          description: "Track availability against agreed targets using business-relevant measures"
+        - name: "Analyse availability data"
+          description: "Identify trends, patterns, recurring failures, and improvement opportunities"
+        - name: "Produce availability reports"
+          description: "Report achieved availability in business terms to stakeholders"
+      kpis:
+        - name: "Service Availability"
+          formula: "(Actual uptime / Agreed service hours) x 100"
+          target: "Per SLA (typically >= 99.5%)"
+        - name: "Mean Time Between Failures"
+          formula: "Average time between service failures"
+          target: "Trending upward"
+        - name: "Single Points of Failure Addressed"
+          formula: "(SPOFs with mitigation / Total identified SPOFs) x 100"
+          target: ">= 90%"
+
+    - id: PR07
+      name: "Service Continuity Management"
+      framework_practice_name: "Service Continuity Management"
+      purpose: "Ensure availability and performance are maintained at sufficient levels in case of a disaster"
+      scope: "Business impact analysis, continuity strategies, plan development, testing, and invocation"
+      phase: D
+      inputs:
+        - name: "Business impact analysis data"
+          source: "PR22 Relationship Management"
+        - name: "Risk assessments"
+          source: "PR21 Risk Management"
+        - name: "Service dependency maps"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Service continuity plans"
+          destination: "Operations"
+        - name: "Recovery objectives (RTO, RPO)"
+          destination: "PR02 Service Level Management"
+        - name: "Continuity test results"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Continuity improvement actions"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR06
+          direction: bidirectional
+          description: "Availability manages high-probability risks; continuity manages high-impact disasters"
+        - process_id: PR09
+          direction: in
+          description: "Security requirements inform continuity planning for cyber incidents"
+        - process_id: PR21
+          direction: in
+          description: "Risk assessments identify threats requiring continuity plans"
+        - process_id: PR17
+          direction: in
+          description: "Service dependencies determine recovery sequence"
+      activities:
+        - name: "Perform business impact analysis"
+          description: "Quantify impact of service unavailability on provider and consumers"
+        - name: "Develop continuity strategies"
+          description: "Select recovery options, define risk mitigation measures, set recovery objectives"
+        - name: "Develop and maintain continuity plans"
+          description: "Document procedures for invocation, recovery, and return to normal operations"
+        - name: "Conduct continuity exercises"
+          description: "Test plan invocation through desktop, partial, and full exercises"
+        - name: "Invoke continuity plans"
+          description: "Execute plans during actual disruptive events, coordinate recovery"
+        - name: "Review and improve continuity capability"
+          description: "Analyse exercise results and actual invocations, update plans and strategies"
+      kpis:
+        - name: "Continuity Plan Coverage"
+          formula: "(Critical services with tested continuity plans / Total critical services) x 100"
+          target: "100%"
+        - name: "Exercise Completion Rate"
+          formula: "(Exercises completed on schedule / Total scheduled exercises) x 100"
+          target: "100%"
+        - name: "Recovery Objective Achievement"
+          formula: "(Exercises meeting RTO/RPO targets / Total exercises) x 100"
+          target: ">= 90%"
+
+    - id: PR08
+      name: "Capacity & Performance Management"
+      framework_practice_name: "Capacity and Performance Management"
+      purpose: "Ensure services achieve agreed performance levels and satisfy current and future demand cost-effectively"
+      scope: "Performance requirements, monitoring, analysis, capacity planning, and optimization"
+      phase: D
+      inputs:
+        - name: "SLA performance targets"
+          source: "PR02 Service Level Management"
+        - name: "Performance monitoring data"
+          source: "PR14 Monitoring & Event Management"
+        - name: "Business demand forecasts"
+          source: "PR01 Service Portfolio Management"
+      outputs:
+        - name: "Performance data and targets"
+          destination: "PR02 Service Level Management"
+        - name: "Capacity plans and forecasts"
+          destination: "PR04 Service Design"
+        - name: "Performance reports"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Capacity improvement actions"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR02
+          direction: bidirectional
+          description: "SLA targets drive performance requirements; performance data feeds SLA evaluation"
+        - process_id: PR06
+          direction: bidirectional
+          description: "Performance and availability are complementary quality aspects"
+        - process_id: PR14
+          direction: in
+          description: "Monitoring data provides performance measurements"
+        - process_id: PR03
+          direction: out
+          description: "Capacity plans inform cost estimates for financial planning"
+      activities:
+        - name: "Identify performance requirements"
+          description: "Define acceptable performance, degradation, and unavailability criteria"
+        - name: "Select performance metrics"
+          description: "Choose metrics that reflect business impact of capacity and performance"
+        - name: "Monitor and measure performance"
+          description: "Track service and resource performance against agreed targets"
+        - name: "Analyse capacity and performance data"
+          description: "Identify trends, constraints, bottlenecks, and optimization opportunities"
+        - name: "Produce capacity plans"
+          description: "Forecast demand, plan resource requirements, balance cost and capability"
+        - name: "Optimize performance controls"
+          description: "Tune configurations, recommend upgrades, implement efficiency improvements"
+      kpis:
+        - name: "Performance Target Achievement"
+          formula: "(Performance targets met / Total performance targets) x 100"
+          target: ">= 95%"
+        - name: "Capacity Plan Accuracy"
+          formula: "(Forecast demand - Actual demand) / Forecast demand x 100"
+          target: "Variance within +/- 15%"
+        - name: "Resource Utilization Efficiency"
+          formula: "Average resource utilization across critical infrastructure"
+          target: "60-80% (avoiding over/under provisioning)"
+
+    - id: PR18
+      name: "IT Asset Management"
+      framework_practice_name: "IT Asset Management"
+      purpose: "Plan and manage the full lifecycle of IT assets to maximize value, control costs, and manage risks"
+      scope: "Asset lifecycle from planning through acquisition, assignment, utilization, decommissioning, and disposal"
+      phase: D
+      inputs:
+        - name: "Procurement requests"
+          source: "All practices"
+        - name: "Configuration data"
+          source: "PR17 Service Configuration Management"
+        - name: "Financial data and budgets"
+          source: "PR03 Service Financial Management"
+        - name: "Licence compliance requirements"
+          source: "PR09 Information Security Management"
+      outputs:
+        - name: "Asset register data"
+          destination: "PR17 Service Configuration Management"
+        - name: "Asset cost information"
+          destination: "PR03 Service Financial Management"
+        - name: "Licence compliance reports"
+          destination: "PR09 Information Security Management"
+        - name: "Asset lifecycle reports"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: PR17
+          direction: bidirectional
+          description: "Asset register and CMDB are complementary data sources"
+        - process_id: PR03
+          direction: bidirectional
+          description: "Asset costs feed financial management; budgets fund asset procurement"
+        - process_id: PR15
+          direction: in
+          description: "Changes may trigger asset additions, modifications, or retirements"
+        - process_id: PR09
+          direction: bidirectional
+          description: "Security requirements apply to asset management; asset data informs security scope"
+      activities:
+        - name: "Define asset management approach"
+          description: "Establish asset types, lifecycle models, register structure, and governance"
+        - name: "Plan and budget for assets"
+          description: "Assess needs, select acquisition methods, budget with procurement and finance"
+        - name: "Acquire and register assets"
+          description: "Capture all documentation at acquisition, register in asset management system"
+        - name: "Assign and track assets"
+          description: "Delegate responsibility to consumers, log assignments, manage IMAC activities"
+        - name: "Optimize asset utilization"
+          description: "Monitor usage, track key dates, identify underutilized assets, manage licences"
+        - name: "Decommission and dispose of assets"
+          description: "Retrieve assets, handle data per security policy, manage disposal per regulations"
+      kpis:
+        - name: "Asset Register Accuracy"
+          formula: "(Assets verified as accurate / Total assets audited) x 100"
+          target: ">= 95%"
+        - name: "Licence Compliance Rate"
+          formula: "(Compliant licences / Total licences in use) x 100"
+          target: "100%"
+        - name: "Asset Utilization Rate"
+          formula: "(Actively utilized assets / Total deployed assets) x 100"
+          target: ">= 85%"
+
+    - id: PR19
+      name: "Knowledge Management"
+      framework_practice_name: "Knowledge Management"
+      purpose: "Maintain and improve effective use of information and knowledge across the organization"
+      scope: "Knowledge environment, DIKW transformation, tacit/explicit knowledge, knowledge asset lifecycle"
+      phase: D
+      inputs:
+        - name: "Incident resolution data"
+          source: "PR11 Incident Management"
+        - name: "Known errors and workarounds"
+          source: "PR13 Problem Management"
+        - name: "Service design documentation"
+          source: "PR04 Service Design"
+        - name: "Lessons learned from reviews"
+          source: "PR24 Continual Improvement"
+      outputs:
+        - name: "Knowledge articles and base"
+          destination: "PR10 Service Desk"
+        - name: "Operational procedures"
+          destination: "All operations practices"
+        - name: "Knowledge quality reports"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: PR10
+          direction: out
+          description: "Knowledge base supports first-line resolution at service desk"
+        - process_id: PR11
+          direction: in
+          description: "Incident resolutions generate new knowledge articles"
+        - process_id: PR13
+          direction: in
+          description: "Known errors and workarounds are key knowledge assets"
+        - process_id: PR24
+          direction: bidirectional
+          description: "Lessons learned feed knowledge base; knowledge gaps drive improvement"
+      activities:
+        - name: "Establish knowledge management environment"
+          description: "Define scope, tools, taxonomies, access controls, and governance model"
+        - name: "Capture and create knowledge"
+          description: "Transform tacit knowledge to explicit through documentation and collaboration"
+        - name: "Organize and classify knowledge"
+          description: "Structure knowledge assets using agreed taxonomies and metadata"
+        - name: "Share and distribute knowledge"
+          description: "Make knowledge available through appropriate channels and formats"
+        - name: "Use and apply knowledge"
+          description: "Support decision-making through accessible, relevant, timely knowledge"
+        - name: "Review and maintain knowledge quality"
+          description: "Assess relevance, accuracy, and completeness; archive or retire outdated content"
+      kpis:
+        - name: "Knowledge Article Usage Rate"
+          formula: "(Incidents resolved using knowledge articles / Total incidents) x 100"
+          target: ">= 30%"
+        - name: "Knowledge Base Currency"
+          formula: "(Articles reviewed within cycle / Total articles) x 100"
+          target: ">= 90%"
+        - name: "Knowledge Contribution Rate"
+          formula: "New or updated knowledge articles per period"
+          target: "Trending upward"
+
+    - id: PR20
+      name: "Measurement & Reporting"
+      framework_practice_name: "Measurement and Reporting"
+      purpose: "Support good decision-making and continual improvement by decreasing levels of uncertainty through valid data assessment"
+      scope: "Measurement approach, metrics design, report specification, data gathering, report production and distribution"
+      phase: D
+      inputs:
+        - name: "SLA targets and metrics requirements"
+          source: "PR02 Service Level Management"
+        - name: "Performance and monitoring data"
+          source: "PR14 Monitoring & Event Management"
+        - name: "Process performance data"
+          source: "All practices"
+      outputs:
+        - name: "Service reports for customers"
+          destination: "PR22 Relationship Management"
+        - name: "Management reports"
+          destination: "SMS governance"
+        - name: "KPI dashboards"
+          destination: "All practices"
+        - name: "Improvement insights"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: PR02
+          direction: in
+          description: "SLA targets and evaluation data form primary reporting input"
+        - process_id: PR14
+          direction: in
+          description: "Monitoring data feeds operational and service reports"
+        - process_id: PR22
+          direction: out
+          description: "Service reports support customer communication"
+        - process_id: PR24
+          direction: out
+          description: "Report analysis identifies improvement opportunities"
+      activities:
+        - name: "Define measurement and reporting approach"
+          description: "Establish organization-wide approach linking measurements to objectives"
+        - name: "Identify reporting requirements"
+          description: "Gather requirements from SLAs, customers, and internal stakeholders"
+        - name: "Develop metrics and KPI scorecards"
+          description: "Define metrics, measurement methods, targets, thresholds, and aggregation"
+        - name: "Design report templates"
+          description: "Create templates tailored to audience needs and decision-making contexts"
+        - name: "Gather and process measurement data"
+          description: "Collect data from multiple sources, validate quality, apply calculations"
+        - name: "Produce and distribute reports"
+          description: "Generate operational and analytical reports, distribute through agreed channels"
+        - name: "Review and optimize measurements"
+          description: "Assess metric relevance, report effectiveness, and measurement costs"
+      kpis:
+        - name: "Report Delivery Timeliness"
+          formula: "(Reports delivered on time / Total reports due) x 100"
+          target: ">= 95%"
+        - name: "Stakeholder Satisfaction with Reports"
+          formula: "Average satisfaction score from report consumers (scale 1-5)"
+          target: ">= 4.0 / 5"
+        - name: "Measurement Coverage"
+          formula: "(Processes with defined KPIs / Total in-scope processes) x 100"
+          target: "100%"
+
+    - id: PR21
+      name: "Risk Management"
+      framework_practice_name: "Risk Management"
+      purpose: "Ensure the organization understands and effectively handles risks to protect value creation"
+      scope: "Risk identification, analysis, evaluation, treatment, monitoring, and governance"
+      phase: D
+      inputs:
+        - name: "Organizational strategy and objectives"
+          source: "SMS governance"
+        - name: "Security risk assessments"
+          source: "PR09 Information Security Management"
+        - name: "Change risk assessments"
+          source: "PR15 Change Management"
+        - name: "Continuity threat assessments"
+          source: "PR07 Service Continuity Management"
+      outputs:
+        - name: "Risk register"
+          destination: "All practices"
+        - name: "Risk appetite and capacity guidance"
+          destination: "SMS governance"
+        - name: "Risk treatment plans"
+          destination: "Relevant practices"
+        - name: "Risk reports"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: PR07
+          direction: bidirectional
+          description: "Risk assessments identify continuity threats; continuity planning reduces risk"
+        - process_id: PR09
+          direction: bidirectional
+          description: "Security risks feed risk register; risk appetite governs security controls"
+        - process_id: PR15
+          direction: out
+          description: "Risk assessment informs change authorization decisions"
+        - process_id: PR24
+          direction: bidirectional
+          description: "Risk findings drive improvement; improvements reduce risk exposure"
+      activities:
+        - name: "Establish risk management framework"
+          description: "Define risk policy, governance, capacity, appetite, and assessment methods"
+        - name: "Identify risks"
+          description: "Systematically identify threats and opportunities across all dimensions"
+        - name: "Analyse and evaluate risks"
+          description: "Assess likelihood and impact, calculate risk scores, compare against appetite"
+        - name: "Determine risk treatment"
+          description: "Select treatment options — avoid, mitigate, transfer, accept, or exploit"
+        - name: "Implement risk controls"
+          description: "Deploy controls, assign risk owners, establish monitoring mechanisms"
+        - name: "Monitor and review risks"
+          description: "Track risk status, reassess periodically, update register, report to governance"
+      kpis:
+        - name: "Risk Register Currency"
+          formula: "(Risks reviewed within cycle / Total risks in register) x 100"
+          target: ">= 95%"
+        - name: "Risk Treatment Completion"
+          formula: "(Risks with implemented treatment plans / Risks requiring treatment) x 100"
+          target: ">= 90%"
+        - name: "Overdue Risk Actions"
+          formula: "Count of risk actions past their agreed completion date"
+          target: "Zero"
+
+    - id: PR24
+      name: "Continual Improvement"
+      framework_practice_name: "Continual Improvement"
+      purpose: "Align practices and services with changing business needs through ongoing improvement"
+      scope: "Improvement culture, opportunity identification, initiative prioritization, implementation, and evaluation"
+      phase: D
+      inputs:
+        - name: "Service review findings"
+          source: "PR02 Service Level Management"
+        - name: "Incident and problem analysis"
+          source: "PR11, PR13"
+        - name: "Audit and assessment results"
+          source: "PR09, PR21"
+        - name: "Customer and user feedback"
+          source: "PR22 Relationship Management"
+      outputs:
+        - name: "Improvement initiatives"
+          destination: "All practices"
+        - name: "Continual improvement register"
+          destination: "SMS governance"
+        - name: "Improvement results and lessons learned"
+          destination: "PR19 Knowledge Management"
+      interfaces:
+        - process_id: PR02
+          direction: in
+          description: "SLA gaps and service review findings feed improvement register"
+        - process_id: PR15
+          direction: out
+          description: "Improvements requiring changes go through change management"
+        - process_id: PR19
+          direction: out
+          description: "Lessons learned from improvements feed knowledge management"
+        - process_id: PR20
+          direction: in
+          description: "Measurement data identifies improvement opportunities"
+        - process_id: PR22
+          direction: in
+          description: "Customer feedback and complaints drive improvement priorities"
+      activities:
+        - name: "Establish improvement culture"
+          description: "Nurture organization-wide commitment to continual improvement"
+        - name: "Identify improvement opportunities"
+          description: "Capture opportunities from all sources — reviews, incidents, feedback, audits"
+        - name: "Assess and prioritize improvements"
+          description: "Evaluate business justification, effort, risk, and expected benefit"
+        - name: "Plan improvement initiatives"
+          description: "Define scope, resources, timeline, success criteria, and implementation approach"
+        - name: "Implement improvements"
+          description: "Execute initiatives through appropriate delivery mechanisms"
+        - name: "Evaluate improvement results"
+          description: "Measure outputs, outcomes, efficiency, risks, and costs against expectations"
+        - name: "Maintain the continual improvement register"
+          description: "Log all opportunities, track initiative lifecycle, report progress"
+        - name: "Share lessons learned"
+          description: "Document and communicate what worked, what did not, and why"
+      kpis:
+        - name: "Improvement Initiative Completion Rate"
+          formula: "(Initiatives completed on time / Total approved initiatives) x 100"
+          target: ">= 80%"
+        - name: "Improvement Benefit Realization"
+          formula: "(Initiatives achieving target benefits / Total completed initiatives) x 100"
+          target: ">= 70%"
+        - name: "CIR Currency"
+          formula: "(Initiatives updated within review cycle / Total active initiatives) x 100"
+          target: "100%"
+
+# ══════════════════════════════════════════════════════════════════════
+# ROLE MODEL
+# ══════════════════════════════════════════════════════════════════════
+
+role_model:
+  roles:
+    # ── Governance Roles ──────────────────────────────────────────────
+    - id: GOV-01
+      name: "SMS Owner"
+      description: "Overall accountability for the SMS, ensures top management commitment, approves SMS policy, conducts management reviews"
+      processes: [PR01, PR02, PR03, PR04, PR05, PR06, PR07, PR08, PR09, PR10, PR11, PR12, PR13, PR14, PR15, PR16, PR17, PR18, PR19, PR20, PR21, PR22, PR23, PR24]
+      raci_default:
+        PR01: A
+        PR09: A
+        PR24: A
+
+    - id: GOV-02
+      name: "SMS Manager"
+      description: "Day-to-day SMS operations, process coordination, improvement planning, management reporting"
+      processes: [PR01, PR02, PR03, PR04, PR05, PR06, PR07, PR08, PR09, PR10, PR11, PR12, PR13, PR14, PR15, PR16, PR17, PR18, PR19, PR20, PR21, PR22, PR23, PR24]
+      raci_default:
+        PR01: C
+        PR20: A
+        PR24: R
+
+    # ── PR01 Service Portfolio Management ─────────────────────────────
+    - id: PR01-R01
+      name: "Service Portfolio Manager"
+      description: "Manages the service portfolio lifecycle — maintains records, evaluates proposals, coordinates transitions, ensures strategy alignment"
+      processes: [PR01, PR02, PR03, PR22, PR24]
+      raci_default:
+        PR01: R
+
+    - id: PR01-R02
+      name: "Service Owner"
+      description: "Accountable for end-to-end delivery of a specific service, coordinates across processes, represents service in governance"
+      processes: [PR01, PR02, PR04, PR05, PR06, PR07, PR08, PR11, PR12, PR15, PR17, PR20, PR22]
+      raci_default:
+        PR01: C
+        PR02: A
+
+    - id: PR01-R03
+      name: "Service Portfolio Analyst"
+      description: "Analyses portfolio data, prepares business cases, produces portfolio reports, supports investment analysis"
+      processes: [PR01, PR03, PR20]
+      raci_default:
+        PR01: R
+
+    # ── PR02 Service Level Management ─────────────────────────────────
+    - id: PR02-R01
+      name: "Service Level Manager"
+      description: "Manages SLAs/OLAs/UAs, conducts service reviews, monitors performance against targets, manages underpinning agreements"
+      processes: [PR01, PR02, PR05, PR06, PR10, PR11, PR12, PR20, PR22, PR23]
+      raci_default:
+        PR02: R
+
+    - id: PR02-R02
+      name: "Service Level Management Team Member"
+      description: "Supports SLA management, collects performance data, prepares service reports, coordinates with service owners"
+      processes: [PR02, PR20]
+      raci_default:
+        PR02: R
+
+    - id: PR02-R03
+      name: "Service Review Owner"
+      description: "Leads formal service reviews with customers, prepares review materials, documents outcomes and actions"
+      processes: [PR02, PR22]
+      raci_default:
+        PR02: R
+
+    # ── PR03 Service Financial Management ─────────────────────────────
+    - id: PR03-R01
+      name: "Service Financial Manager"
+      description: "Manages financial planning, budgeting, accounting, and charging — maintains models, produces cost reports"
+      processes: [PR01, PR03, PR18]
+      raci_default:
+        PR03: R
+
+    - id: PR03-R02
+      name: "Service Financial Management Team Member"
+      description: "Supports financial modelling, processes cost allocations, maintains financial records, produces reports"
+      processes: [PR03]
+      raci_default:
+        PR03: R
+
+    - id: PR03-R03
+      name: "Finance Business Partner"
+      description: "Provides specialized financial expertise to product and service teams, advises on cost models and pricing"
+      processes: [PR01, PR03]
+      raci_default:
+        PR03: C
+
+    # ── PR04 Service Design ───────────────────────────────────────────
+    - id: PR04-R01
+      name: "Service Design Leader"
+      description: "Accountable for the service design practice — provides strategic direction, governs design packages, manages maturity"
+      processes: [PR01, PR04, PR15]
+      raci_default:
+        PR04: A
+
+    - id: PR04-R02
+      name: "Service Design Consultant"
+      description: "Develops detailed design activities, orchestrates service provisioning, coordinates design execution"
+      processes: [PR04, PR15, PR16]
+      raci_default:
+        PR04: R
+
+    - id: PR04-R03
+      name: "Service Design Authority"
+      description: "Approves service designs against standards and constraints, reviews design packages for completeness"
+      processes: [PR04]
+      raci_default:
+        PR04: A
+
+    # ── PR05 Service Catalogue Management ─────────────────────────────
+    - id: PR05-R01
+      name: "Service Catalogue Manager"
+      description: "Manages the service catalogue — ensures accuracy, coordinates with service owners, publishes to stakeholders"
+      processes: [PR01, PR02, PR05, PR22]
+      raci_default:
+        PR05: R
+
+    - id: PR05-R02
+      name: "Service Catalogue Team Member"
+      description: "Maintains catalogue records, updates service descriptions, manages access, supports publication"
+      processes: [PR05]
+      raci_default:
+        PR05: R
+
+    - id: PR05-R03
+      name: "Service Catalogue Owner"
+      description: "Accountable for a catalogue entry — ensures descriptions are accurate and current, approves updates"
+      processes: [PR05]
+      raci_default:
+        PR05: A
+
+    # ── PR06 Availability Management ──────────────────────────────────
+    - id: PR06-R01
+      name: "Availability Manager"
+      description: "Manages service availability — analyses data, identifies single points of failure, designs improvements, produces plans"
+      processes: [PR01, PR02, PR04, PR06, PR07, PR08, PR11, PR13, PR17, PR20, PR21]
+      raci_default:
+        PR06: R
+
+    - id: PR06-R02
+      name: "Availability Management Team Member"
+      description: "Monitors availability, collects data, supports analysis, maintains availability records"
+      processes: [PR06]
+      raci_default:
+        PR06: R
+
+    - id: PR06-R03
+      name: "Availability Design Authority"
+      description: "Reviews and approves availability designs, ensures requirements are met, validates resilience measures"
+      processes: [PR04, PR06]
+      raci_default:
+        PR06: A
+
+    # ── PR07 Service Continuity Management ────────────────────────────
+    - id: PR07-R01
+      name: "Service Continuity Manager"
+      description: "Manages service continuity — maintains plans, coordinates testing, manages recovery capabilities"
+      processes: [PR06, PR07, PR21]
+      raci_default:
+        PR07: R
+
+    - id: PR07-R02
+      name: "Service Continuity Team Member"
+      description: "Supports continuity planning, participates in exercises, maintains recovery procedures"
+      processes: [PR07]
+      raci_default:
+        PR07: R
+
+    - id: PR07-R03
+      name: "Service Continuity Exercise Coordinator"
+      description: "Plans and executes continuity exercises, designs scenarios, documents results, coordinates improvements"
+      processes: [PR07]
+      raci_default:
+        PR07: R
+
+    # ── PR08 Capacity & Performance Management ────────────────────────
+    - id: PR08-R01
+      name: "Capacity & Performance Manager"
+      description: "Manages capacity and performance — analyses trends, forecasts demand, produces capacity plans"
+      processes: [PR01, PR02, PR03, PR04, PR06, PR08, PR14, PR17, PR20]
+      raci_default:
+        PR08: R
+
+    - id: PR08-R02
+      name: "Capacity & Performance Team Member"
+      description: "Monitors metrics, collects data, supports analysis, maintains monitoring configurations"
+      processes: [PR08, PR14]
+      raci_default:
+        PR08: R
+
+    - id: PR08-R03
+      name: "Capacity Planning Analyst"
+      description: "Conducts detailed capacity analysis, models future demand, recommends adjustments"
+      processes: [PR08]
+      raci_default:
+        PR08: R
+
+    # ── PR09 Information Security Management ──────────────────────────
+    - id: PR09-R01
+      name: "Information Security Manager"
+      description: "Manages security practice — develops policy, conducts risk assessments, coordinates controls, manages security incidents"
+      processes: [PR09, PR11, PR14, PR15, PR17, PR18, PR21]
+      raci_default:
+        PR09: R
+
+    - id: PR09-R02
+      name: "Information Security Team Member"
+      description: "Implements controls, monitors security events, performs vulnerability assessments, maintains documentation"
+      processes: [PR09, PR14]
+      raci_default:
+        PR09: R
+
+    - id: PR09-R03
+      name: "Information Security Officer"
+      description: "Provides specialist expertise — conducts audits, advises on compliance, reviews architecture, manages awareness"
+      processes: [PR09, PR21]
+      raci_default:
+        PR09: C
+
+    # ── PR10 Service Desk ─────────────────────────────────────────────
+    - id: PR10-R01
+      name: "Service Desk Manager"
+      description: "Manages the service desk function — staffing, workflows, quality, first-contact resolution, channel integration"
+      processes: [PR02, PR10, PR11, PR12, PR19, PR22]
+      raci_default:
+        PR10: A
+
+    - id: PR10-R02
+      name: "Service Desk Analyst"
+      description: "Handles user contacts — logs incidents and requests, provides first-line resolution, routes and escalates"
+      processes: [PR10, PR11, PR12]
+      raci_default:
+        PR10: R
+
+    - id: PR10-R03
+      name: "Service Desk Supervisor"
+      description: "Oversees daily operations — monitors queues, manages shifts, coaches analysts, handles escalations"
+      processes: [PR10, PR11]
+      raci_default:
+        PR10: R
+
+    # ── PR11 Incident Management ──────────────────────────────────────
+    - id: PR11-R01
+      name: "Incident Manager"
+      description: "Manages the incident management practice — ensures timely resolution, coordinates escalations, oversees major incidents"
+      processes: [PR02, PR06, PR07, PR09, PR10, PR11, PR13, PR14, PR15]
+      raci_default:
+        PR11: A
+
+    - id: PR11-R02
+      name: "Incident Management Team Member"
+      description: "Investigates and resolves incidents, applies workarounds, updates records, participates in diagnosis"
+      processes: [PR11, PR19]
+      raci_default:
+        PR11: R
+
+    - id: PR11-R03
+      name: "Major Incident Manager"
+      description: "Leads major incident response — convenes teams, manages communication, drives restoration, coordinates review"
+      processes: [PR11, PR13]
+      raci_default:
+        PR11: R
+
+    # ── PR12 Service Request Management ───────────────────────────────
+    - id: PR12-R01
+      name: "Service Request Manager"
+      description: "Manages request fulfilment practice — maintains request catalogue, ensures fulfilment within timelines"
+      processes: [PR02, PR12]
+      raci_default:
+        PR12: A
+
+    - id: PR12-R02
+      name: "Service Request Management Team Member"
+      description: "Fulfils service requests, follows procedures, updates records, communicates with requestors"
+      processes: [PR12]
+      raci_default:
+        PR12: R
+
+    - id: PR12-R03
+      name: "Request Fulfilment Coordinator"
+      description: "Coordinates complex multi-team requests, orchestrates activities, tracks dependencies"
+      processes: [PR12]
+      raci_default:
+        PR12: R
+
+    # ── PR13 Problem Management ───────────────────────────────────────
+    - id: PR13-R01
+      name: "Problem Manager"
+      description: "Manages problem management — coordinates investigation, maintains KEDB, drives root cause analysis"
+      processes: [PR06, PR08, PR09, PR11, PR13, PR14, PR15, PR17, PR19]
+      raci_default:
+        PR13: A
+
+    - id: PR13-R02
+      name: "Problem Management Team Member"
+      description: "Investigates problems, performs root cause analysis, develops workarounds, documents known errors"
+      processes: [PR13, PR19]
+      raci_default:
+        PR13: R
+
+    - id: PR13-R03
+      name: "Problem Investigation Analyst"
+      description: "Conducts in-depth investigation, applies structured analysis, produces reports, recommends solutions"
+      processes: [PR13]
+      raci_default:
+        PR13: R
+
+    # ── PR14 Monitoring & Event Management ────────────────────────────
+    - id: PR14-R01
+      name: "Event Manager"
+      description: "Manages monitoring and event management — defines event rules, manages tools, ensures correct categorization"
+      processes: [PR06, PR08, PR09, PR11, PR13, PR14, PR20]
+      raci_default:
+        PR14: A
+
+    - id: PR14-R02
+      name: "Monitoring & Event Management Team Member"
+      description: "Configures monitoring tools, responds to events, tunes thresholds, maintains event rules"
+      processes: [PR14]
+      raci_default:
+        PR14: R
+
+    - id: PR14-R03
+      name: "Event Monitoring Analyst"
+      description: "Analyses event patterns, identifies trends, recommends threshold adjustments, investigates correlation"
+      processes: [PR14]
+      raci_default:
+        PR14: R
+
+    # ── PR15 Change Management ────────────────────────────────────────
+    - id: PR15-R01
+      name: "Change Manager"
+      description: "Manages change practice — coordinates assessment, chairs CAB, manages schedule, ensures governance"
+      processes: [PR11, PR13, PR15, PR16, PR17]
+      raci_default:
+        PR15: A
+
+    - id: PR15-R02
+      name: "Change Authority"
+      description: "Authorized to approve changes at defined level — may be individual, group, or CAB"
+      processes: [PR15]
+      raci_default:
+        PR15: A
+
+    - id: PR15-R03
+      name: "CAB Member"
+      description: "Participates in Change Advisory Board — provides specialist input on impact, risk, and scheduling"
+      processes: [PR15]
+      raci_default:
+        PR15: C
+
+    # ── PR16 Release & Deployment Management ──────────────────────────
+    - id: PR16-R01
+      name: "Release Manager"
+      description: "Manages release and deployment — plans releases, coordinates build and test, manages deployment schedule"
+      processes: [PR15, PR16, PR17]
+      raci_default:
+        PR16: A
+
+    - id: PR16-R02
+      name: "Release & Deployment Team Member"
+      description: "Builds, tests, and deploys releases, manages deployment infrastructure, performs rollback"
+      processes: [PR16]
+      raci_default:
+        PR16: R
+
+    - id: PR16-R03
+      name: "Deployment Engineer"
+      description: "Executes deployment activities — manages scripts, monitors deployment health, performs technical rollback"
+      processes: [PR16]
+      raci_default:
+        PR16: R
+
+    # ── PR17 Service Configuration Management ─────────────────────────
+    - id: PR17-R01
+      name: "Configuration Manager"
+      description: "Manages configuration practice — defines CI scope, maintains CMDB integrity, coordinates verification"
+      processes: [PR01, PR05, PR09, PR15, PR16, PR17, PR18]
+      raci_default:
+        PR17: A
+
+    - id: PR17-R02
+      name: "Configuration Management Team Member"
+      description: "Maintains CI records, performs CMDB updates, supports verification audits, manages relationships"
+      processes: [PR17]
+      raci_default:
+        PR17: R
+
+    - id: PR17-R03
+      name: "CI Owner"
+      description: "Accountable for accuracy of a specific CI or CI group — ensures records are current, authorizes changes"
+      processes: [PR17]
+      raci_default:
+        PR17: A
+
+    # ── PR18 IT Asset Management ──────────────────────────────────────
+    - id: PR18-R01
+      name: "IT Asset Manager"
+      description: "Manages IT assets through lifecycle — maintains register, coordinates procurement and disposal, ensures compliance"
+      processes: [PR03, PR17, PR18, PR23]
+      raci_default:
+        PR18: A
+
+    - id: PR18-R02
+      name: "IT Asset Management Team Member"
+      description: "Maintains asset records, performs audits, processes requests, tracks licence usage"
+      processes: [PR18]
+      raci_default:
+        PR18: R
+
+    - id: PR18-R03
+      name: "Asset Lifecycle Owner"
+      description: "Accountable for a category of assets through lifecycle — plans procurement, manages refresh, ensures disposal compliance"
+      processes: [PR18]
+      raci_default:
+        PR18: A
+
+    # ── PR19 Knowledge Management ─────────────────────────────────────
+    - id: PR19-R01
+      name: "Knowledge Manager"
+      description: "Manages knowledge practice — establishes KM environment, curates assets, promotes sharing culture"
+      processes: [PR19, PR24]
+      raci_default:
+        PR19: A
+
+    - id: PR19-R02
+      name: "Knowledge Management Team Member"
+      description: "Maintains knowledge assets, processes information requests, validates content, supports tools"
+      processes: [PR19]
+      raci_default:
+        PR19: R
+
+    - id: PR19-R03
+      name: "Knowledge Asset Owner"
+      description: "Accountable for quality and currency of specific knowledge assets — reviews content, approves updates"
+      processes: [PR19]
+      raci_default:
+        PR19: A
+
+    # ── PR20 Measurement & Reporting ──────────────────────────────────
+    - id: PR20-R01
+      name: "Measurement & Reporting Manager"
+      description: "Manages measurement and reporting — defines metrics framework, produces management reports, ensures data quality"
+      processes: [PR02, PR06, PR08, PR14, PR20, PR24]
+      raci_default:
+        PR20: A
+
+    - id: PR20-R02
+      name: "Measurement & Reporting Team Member"
+      description: "Collects data, produces reports, maintains dashboards, supports data analysis"
+      processes: [PR20]
+      raci_default:
+        PR20: R
+
+    - id: PR20-R03
+      name: "Report Design Authority"
+      description: "Designs report specifications — ensures reports meet stakeholder needs, validates data sources"
+      processes: [PR20]
+      raci_default:
+        PR20: A
+
+    # ── PR21 Risk Management ──────────────────────────────────────────
+    - id: PR21-R01
+      name: "Risk Management Committee Member"
+      description: "Governs risk framework — analyses environment, documents capacity and appetite, establishes policy"
+      processes: [PR07, PR09, PR15, PR21, PR24]
+      raci_default:
+        PR21: A
+
+    - id: PR21-R02
+      name: "Risk Owner"
+      description: "Accountable for a specific risk — ensures identification, analysis, evaluation, and treatment within timeframes"
+      processes: [PR21]
+      raci_default:
+        PR21: R
+
+    - id: PR21-R03
+      name: "Risk Auditor"
+      description: "Conducts risk audits — assesses effectiveness, verifies controls, ensures compliance, provides assurance"
+      processes: [PR21]
+      raci_default:
+        PR21: C
+
+    # ── PR22 Relationship Management ──────────────────────────────────
+    - id: PR22-R01
+      name: "Relationship Manager"
+      description: "Manages stakeholder relationships — maintains satisfaction, handles complaints, facilitates communication"
+      processes: [PR01, PR02, PR10, PR12, PR22, PR23]
+      raci_default:
+        PR22: R
+
+    - id: PR22-R02
+      name: "Relationship Management Team Member"
+      description: "Supports relationship activities, manages channels, collects satisfaction data, coordinates ordering"
+      processes: [PR22]
+      raci_default:
+        PR22: R
+
+    - id: PR22-R03
+      name: "Customer Relationship Representative"
+      description: "Designated contact for a customer or group — manages day-to-day relationship, escalates issues"
+      processes: [PR22]
+      raci_default:
+        PR22: R
+
+    # ── PR23 Supplier Management ──────────────────────────────────────
+    - id: PR23-R01
+      name: "Supplier Manager"
+      description: "Manages supplier relationships — negotiates contracts, evaluates performance, manages disputes"
+      processes: [PR01, PR02, PR03, PR16, PR22, PR23]
+      raci_default:
+        PR23: A
+
+    - id: PR23-R02
+      name: "Supplier Management Team Member"
+      description: "Supports supplier management, monitors compliance, maintains records, coordinates operations"
+      processes: [PR23]
+      raci_default:
+        PR23: R
+
+    - id: PR23-R03
+      name: "Supplier Relationship Representative"
+      description: "Designated contact for a specific supplier — manages day-to-day relationship, monitors delivery"
+      processes: [PR23]
+      raci_default:
+        PR23: R
+
+    # ── PR24 Continual Improvement ────────────────────────────────────
+    - id: PR24-R01
+      name: "CSI Manager"
+      description: "Manages continual improvement — maintains CSI register, evaluates proposals, coordinates implementation"
+      processes: [PR01, PR02, PR20, PR24]
+      raci_default:
+        PR24: R
+
+    - id: PR24-R02
+      name: "Continual Improvement Team Member"
+      description: "Supports improvement activities, analyses opportunities, tracks progress"
+      processes: [PR24]
+      raci_default:
+        PR24: R
+
+    - id: PR24-R03
+      name: "Improvement Owner"
+      description: "Accountable for a specific improvement initiative — manages implementation, tracks benefits, reports outcomes"
+      processes: [PR24]
+      raci_default:
+        PR24: A
+
+# ══════════════════════════════════════════════════════════════════════
+# GENERAL REQUIREMENTS
+# ══════════════════════════════════════════════════════════════════════
+
+general_requirements:
+  requirements:
+    # ── Guiding Principles (GP1–GP7) ──────────────────────────────────
+    - id: GP1
+      name: "Focus on Value"
+      description: "Everything the organization does should link back to value for stakeholders. Consider the consumer experience, map every activity to stakeholder value, and understand what the consumer values rather than what the provider delivers"
+      evidence:
+        - document_type: sms-policy
+          section: "Value Alignment Statement"
+        - document_type: process-definition
+          section: "Purpose and Value Contribution"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP2
+      name: "Start Where You Are"
+      description: "Assess the current state objectively before creating something new. Leverage existing services, processes, people, and tools — do not discard them without understanding their value"
+      evidence:
+        - document_type: sms-policy
+          section: "Current State Assessment"
+        - document_type: process-definition
+          section: "Baseline and Starting Point"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP3
+      name: "Progress Iteratively with Feedback"
+      description: "Resist the temptation to do everything at once. Organize work into manageable sections, use feedback loops to ensure actions remain focused and appropriate"
+      evidence:
+        - document_type: sms-policy
+          section: "Iterative Improvement Approach"
+        - document_type: process-definition
+          section: "Feedback Mechanisms"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP4
+      name: "Collaborate and Promote Visibility"
+      description: "Work across boundaries, share information openly, and build trust. Insufficient visibility leads to poor decision-making. Involve the right people at the right time"
+      evidence:
+        - document_type: sms-policy
+          section: "Collaboration and Transparency"
+        - document_type: process-definition
+          section: "Stakeholder Engagement"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP5
+      name: "Think and Work Holistically"
+      description: "No service, practice, or component stands alone. Consider the whole system — understand how all parts interact and how changes in one area affect others"
+      evidence:
+        - document_type: sms-policy
+          section: "Holistic Service Management"
+        - document_type: process-definition
+          section: "Process Interfaces and Dependencies"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP6
+      name: "Keep It Simple and Practical"
+      description: "Use the minimum number of steps to accomplish an objective. Eliminate waste, use outcome-based thinking, and avoid overly complex processes"
+      evidence:
+        - document_type: sms-policy
+          section: "Simplicity and Proportionality"
+        - document_type: process-definition
+          section: "Process Efficiency"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: GP7
+      name: "Optimize and Automate"
+      description: "Optimize human and technical resources before automating. Automation should enhance efficiency, reduce errors, and free people for complex tasks"
+      evidence:
+        - document_type: sms-policy
+          section: "Automation Strategy"
+        - document_type: process-definition
+          section: "Automation Opportunities"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    # ── Four Dimensions (D1–D4) ───────────────────────────────────────
+    - id: D1
+      name: "Organizations and People"
+      description: "Ensure formal structures, roles, authority, communication, and culture support the strategy. Address competencies, capacity, staffing, and organizational design"
+      evidence:
+        - document_type: raci-matrix
+          section: "Role Assignments"
+        - document_type: process-definition
+          section: "Roles and Responsibilities"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: D2
+      name: "Information and Technology"
+      description: "Address the information and technology needed to manage services — including knowledge, tools, data, and the technologies required by the services themselves"
+      evidence:
+        - document_type: process-definition
+          section: "Information and Technology Requirements"
+        - document_type: sms-policy
+          section: "Technology Strategy"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: D3
+      name: "Partners and Suppliers"
+      description: "Consider every organization's relationships with other organizations involved in service design, development, deployment, delivery, support, and improvement"
+      evidence:
+        - document_type: process-definition
+          section: "Supplier and Partner Dependencies"
+        - document_type: sms-policy
+          section: "Sourcing Strategy"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: D4
+      name: "Value Streams and Processes"
+      description: "Define how the various parts of the organization work together to enable value creation through defined models, workflows, controls, and procedures"
+      evidence:
+        - document_type: process-definition
+          section: "Value Stream Mapping"
+        - document_type: procedure
+          section: "Process Workflows"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+# ══════════════════════════════════════════════════════════════════════
+# COMPLIANCE MAPPING
+# ══════════════════════════════════════════════════════════════════════
+
+compliance_mapping:
+  standards:
+    - standard: "ISO/IEC 20000-1:2018"
+      # ITIL v4 does not provide a formal clause-by-clause mapping like FitSM.
+      # The following mapping is indicative, based on practice alignment to SMS requirements.
+      clauses:
+        - clause: "4"
+          title: "Context of the organization"
+          processes: [PR01, PR22]
+          documents: [sms-policy, scoping-brief]
+        - clause: "5"
+          title: "Leadership"
+          processes: [PR01, PR24]
+          documents: [sms-policy]
+        - clause: "6"
+          title: "Planning"
+          processes: [PR01, PR21, PR24]
+          documents: [sms-policy, process-definition]
+        - clause: "7"
+          title: "Support of the service management system"
+          processes: [PR17, PR19, PR20]
+          documents: [process-definition, procedure]
+        - clause: "8.2"
+          title: "Service portfolio"
+          processes: [PR01]
+          documents: [process-definition, service-catalogue]
+        - clause: "8.3"
+          title: "Relationship and agreement"
+          processes: [PR02, PR05, PR22, PR23]
+          documents: [process-definition, sla-template]
+        - clause: "8.4"
+          title: "Supply and demand"
+          processes: [PR08, PR23]
+          documents: [process-definition]
+        - clause: "8.5"
+          title: "Service design, build and transition"
+          processes: [PR04, PR15, PR16]
+          documents: [process-definition, procedure]
+        - clause: "8.6"
+          title: "Resolution and fulfilment"
+          processes: [PR10, PR11, PR12, PR13]
+          documents: [process-definition, procedure]
+        - clause: "8.7"
+          title: "Service assurance"
+          processes: [PR06, PR07, PR09, PR14]
+          documents: [process-definition, procedure]
+        - clause: "9"
+          title: "Performance evaluation"
+          processes: [PR20, PR24]
+          documents: [process-definition, kpi-definition]
+        - clause: "10"
+          title: "Improvement"
+          processes: [PR24]
+          documents: [process-definition, csi-register]
+
+# ══════════════════════════════════════════════════════════════════════
+# INTAKE QUESTIONS
+# ══════════════════════════════════════════════════════════════════════
+
+intake_questions:
+  questions:
+    - question: "Is the organization pursuing or planning ITIL 4 certification (Foundation, Managing Professional, Strategic Leader)?"
+      rationale: "Certification goals influence terminology rigour, practice depth, and documentation formality"
+      signal: "compliance"
+
+    - question: "Which ITIL 4 practices are currently adopted, and at what maturity level?"
+      rationale: "Determines starting point for practice documentation and identifies gaps in the SVS"
+      signal: "processes"
+
+    - question: "Has the organization defined its Service Value System and Service Value Chain activities?"
+      rationale: "SVS adoption level determines how practices are integrated and how value streams are mapped"
+      signal: "processes"
+
+    - question: "Which of the four dimensions (Organizations and People, Information and Technology, Partners and Suppliers, Value Streams and Processes) present the greatest challenges?"
+      rationale: "Identifies areas requiring deeper documentation and more detailed design considerations"
+      signal: "complexity"
+
+    - question: "Does the organization integrate ITIL with other frameworks (DevOps, Agile, Lean, COBIT, SIAM)?"
+      rationale: "Framework integration affects terminology alignment, process boundaries, and documentation scope"
+      signal: "complexity"
+
+    - question: "Are Practice Success Factors (PSFs) defined and measured for existing practices?"
+      rationale: "PSF adoption indicates practice maturity and influences KPI documentation depth"
+      signal: "processes"
+
+    - question: "How are value streams currently designed — are they mapped end-to-end or practice-by-practice?"
+      rationale: "Value stream maturity determines how process interfaces and handoffs are documented"
+      signal: "processes"
+
+    - question: "What is the organization's approach to continual improvement — ad hoc, structured, or embedded?"
+      rationale: "Improvement maturity determines how the CI practice and register are documented"
+      signal: "complexity"
+
+# ══════════════════════════════════════════════════════════════════════
+# REQUIREMENT PROMPTS
+# ══════════════════════════════════════════════════════════════════════
+
+requirement_prompts:
+  prompts:
+    - category: "1"
+      prompt: "Identify Practice Success Factors (PSFs) for each in-scope practice and determine which are highest priority"
+      framework_context: "ITIL 4 defines PSFs as complex functional components necessary for a practice to fulfil its purpose — they drive KPI selection and practice design"
+
+    - category: "2"
+      prompt: "Map each in-scope practice to the Service Value Chain activities it contributes to (Plan, Improve, Engage, Design & Transition, Obtain/Build, Deliver & Support)"
+      framework_context: "ITIL 4 practices contribute to SVC activities — this mapping ensures documentation covers how each practice creates value"
+
+    - category: "3"
+      prompt: "For each process definition, document how all four dimensions (Organizations and People, Information and Technology, Partners and Suppliers, Value Streams and Processes) are addressed"
+      framework_context: "ITIL 4 requires holistic consideration of all four dimensions for every practice and service"
+
+    - category: "4"
+      prompt: "Determine whether ITIL 4 practice terminology or traditional process terminology will be used in documentation"
+      framework_context: "ITIL 4 uses 'practice' rather than 'process' — organizations must decide on consistent terminology for their documentation corpus"
+
+    - category: "5"
+      prompt: "Design value streams for key service scenarios (new service onboarding, incident resolution, service request fulfilment, change implementation)"
+      framework_context: "ITIL 4 emphasizes end-to-end value streams over isolated process flows — documentation should reflect this holistic view"
+
+    - category: "6"
+      prompt: "Define the organization's approach to each of the seven guiding principles and document how they apply to service management"
+      framework_context: "The guiding principles are fundamental to ITIL 4 — they should be reflected in the SMS policy and all process documentation"
+
+    - category: "7"
+      prompt: "Identify which practices require capability levels beyond the current state and define target maturity levels"
+      framework_context: "ITIL 4 Practice Guides define capability levels — these should be used to set improvement targets and prioritize documentation effort"
+
+    - category: "8"
+      prompt: "Document how the organization's governance structure aligns with the ITIL 4 Service Value System components (governance, SVS, SVC, practices, CI)"
+      framework_context: "The SVS is the overarching framework — documentation should show how organizational governance maps to SVS governance"
+
+# ══════════════════════════════════════════════════════════════════════
+# DOCUMENT SECTION TEMPLATES
+# ══════════════════════════════════════════════════════════════════════
+
+document_section_templates:
+  templates:
+    - document_type: sms-policy
+      sections:
+        - heading: "Service Value System Alignment"
+          guidance: "Describe how the SMS aligns with the ITIL 4 Service Value System — including the relationship between organizational governance, the SVS, guiding principles, and continual improvement. State which SVS components are adopted and how they interact"
+          tier: t1
+        - heading: "Guiding Principles Adoption"
+          guidance: "Document the organization's commitment to each of the seven ITIL 4 guiding principles (Focus on Value, Start Where You Are, Progress Iteratively with Feedback, Collaborate and Promote Visibility, Think and Work Holistically, Keep It Simple and Practical, Optimize and Automate). For each principle, state how it applies to the organization's service management approach"
+          tier: t1
+        - heading: "Four Dimensions Governance"
+          guidance: "Describe how the organization ensures all four dimensions of service management are addressed in governance decisions — Organizations and People, Information and Technology, Partners and Suppliers, Value Streams and Processes"
+          tier: t2
+        - heading: "Service Value Chain Activities"
+          guidance: "Map the organization's service management activities to the six SVC activities (Plan, Improve, Engage, Design and Transition, Obtain/Build, Deliver and Support) and describe how value flows through the chain"
+          tier: t3
+
+    - document_type: process-definition
+      sections:
+        - heading: "Practice Success Factors"
+          guidance: "Document the Practice Success Factors (PSFs) for this practice — the complex functional components necessary for the practice to fulfil its purpose. For each PSF, describe what it means in the organization's context and how achievement will be measured"
+          tier: t1
+        - heading: "Value Chain Mapping"
+          guidance: "Map this practice to the Service Value Chain activities it contributes to. For each SVC activity, describe the practice's specific contribution and the value it creates"
+          tier: t2
+        - heading: "Four Dimensions Considerations"
+          guidance: "Document how this practice addresses each of the four dimensions: what organizational structures and roles are needed (D1), what information and technology are required (D2), which partners and suppliers are involved (D3), and what value streams and processes are defined (D4)"
+          tier: t2
+        - heading: "Practice Capability Level"
+          guidance: "Assess and document the current and target capability level for this practice using the ITIL 4 capability model. Identify gaps and improvement actions needed to achieve the target level"
+          tier: t3
+
+    - document_type: completeness-report
+      sections:
+        - heading: "Practice Maturity Assessment"
+          guidance: "Provide a maturity assessment for each in-scope ITIL 4 practice against the capability model. Include current level, target level, key gaps, and priority improvement actions. Reference Practice Success Factors as the primary assessment criteria"
+          tier: t2
+        - heading: "Value Stream Coverage"
+          guidance: "Assess whether the documented practices adequately cover all key value streams. Identify any value stream segments that lack sufficient practice support or documentation"
+          tier: t3
+
+# ══════════════════════════════════════════════════════════════════════
+# QUALITY CHECKS
+# ══════════════════════════════════════════════════════════════════════
+
+quality_checks:
+  checks:
+    - gate: G3
+      check: "All 24 ITIL 4 practices in scope have corresponding process definitions with PSFs documented"
+      pass_criteria: "Every in-scope practice has a process definition document that includes a Practice Success Factors section with at least one PSF defined"
+      tier: t1
+
+    - gate: G3
+      check: "Practice coverage spans all four phases (Foundation, Agreements, Operations, Assurance)"
+      pass_criteria: "At least one process definition exists for each of the four interdependency phases (A, B, C, D)"
+      tier: t1
+
+    - gate: G4
+      check: "Practice Success Factors are documented with measurable indicators"
+      pass_criteria: "Each documented PSF has at least one associated KPI or metric that can be measured to assess PSF achievement"
+      tier: t2
+
+    - gate: G4
+      check: "Four dimensions are addressed in all process definitions"
+      pass_criteria: "Every process definition includes consideration of Organizations and People, Information and Technology, Partners and Suppliers, and Value Streams and Processes"
+      tier: t2
+
+    - gate: G5
+      check: "Service Value Chain alignment is consistent across all practice documents"
+      pass_criteria: "SVC activity mappings are consistent — no practice claims contribution to an SVC activity without corresponding activities and interfaces documented"
+      tier: t2
+
+    - gate: G5
+      check: "Guiding principles are consistently reflected in SMS policy and process definitions"
+      pass_criteria: "SMS policy references all seven guiding principles; process definitions demonstrate principle application through documented activities and controls"
+      tier: t1
+
+    - gate: G7
+      check: "Value stream integrity — end-to-end value streams are documented and practice handoffs are defined"
+      pass_criteria: "At least one value stream is documented end-to-end with clear practice contributions, inputs, outputs, and handoff points identified"
+      tier: t3
+
+    - gate: G7
+      check: "Process interfaces form complete value chains without gaps"
+      pass_criteria: "Every process output has a receiving process identified; every process input has a source process identified; no orphan interfaces exist"
+      tier: t2
+
+    - gate: G8
+      check: "Practice capability levels are assessed and improvement targets are set"
+      pass_criteria: "Each practice has a documented current capability level and target level with identified gaps and improvement actions"
+      tier: t3
+
+    - gate: G8
+      check: "ITIL 4 terminology is used consistently throughout the documentation corpus"
+      pass_criteria: "All documents use ITIL 4 preferred terms as defined in the terminology section; no conflicting terminology from other frameworks appears without explicit alias notation"
+      tier: t1
+
+# ══════════════════════════════════════════════════════════════════════
+# TERMINOLOGY
+# ══════════════════════════════════════════════════════════════════════
+
+terminology:
+  terms:
+    - term: "Service Value System (SVS)"
+      definition: "A model representing how all the components and activities of an organization work together to facilitate value creation. The SVS includes guiding principles, governance, service value chain, practices, and continual improvement"
+      aliases: ["SMS (FitSM)"]
+      context: "The overarching framework within which all service management activities operate"
+
+    - term: "Service Value Chain (SVC)"
+      definition: "A set of six interconnected activities that an organization performs to deliver a valuable product or service: Plan, Improve, Engage, Design and Transition, Obtain/Build, Deliver and Support"
+      aliases: []
+      context: "The operating model for value creation — practices contribute to SVC activities"
+
+    - term: "Practice"
+      definition: "A set of organizational resources designed for performing work or accomplishing an objective. ITIL 4 defines 34 management practices organized into general, service, and technical categories"
+      aliases: ["process (FitSM)", "process area"]
+      context: "ITIL 4 uses 'practice' instead of 'process' to emphasize the broader scope including people, technology, and partners"
+
+    - term: "Four Dimensions of Service Management"
+      definition: "Four perspectives that must be considered for effective service management: Organizations and People, Information and Technology, Partners and Suppliers, Value Streams and Processes"
+      aliases: []
+      context: "Every practice and service must address all four dimensions for holistic management"
+
+    - term: "Guiding Principles"
+      definition: "Seven recommendations that guide an organization in all circumstances: Focus on Value, Start Where You Are, Progress Iteratively with Feedback, Collaborate and Promote Visibility, Think and Work Holistically, Keep It Simple and Practical, Optimize and Automate"
+      aliases: []
+      context: "Universal principles applicable regardless of changes in goals, strategies, or management structure"
+
+    - term: "Value Stream"
+      definition: "A series of steps an organization undertakes to create and deliver products and services to consumers. A value stream is a combination of the organization's value chain activities"
+      aliases: []
+      context: "Value streams map the end-to-end flow of value creation for specific scenarios"
+
+    - term: "Service Relationship"
+      definition: "A cooperation between a service provider and service consumer that includes service provision, service consumption, and service relationship management"
+      aliases: []
+      context: "The overarching relationship model encompassing all interactions between provider and consumer"
+
+    - term: "Service Offering"
+      definition: "A formal description of one or more services designed to address the needs of a target consumer group. May include goods, access to resources, and service actions"
+      aliases: ["service description (FitSM)"]
+      context: "How services are presented to consumers in the service catalogue"
+
+    - term: "Utility"
+      definition: "The functionality offered by a product or service to meet a particular need. Summarized as what the service does — whether it is fit for purpose"
+      aliases: ["fitness for purpose"]
+      context: "One half of the value equation — utility addresses functional requirements"
+
+    - term: "Warranty"
+      definition: "Assurance that a product or service will meet agreed requirements. Summarized as how the service performs — whether it is fit for use"
+      aliases: ["fitness for use"]
+      context: "The other half of the value equation — warranty addresses availability, capacity, continuity, and security"
+
+    - term: "Outcome"
+      definition: "A result for a stakeholder enabled by one or more outputs. Outcomes are what the consumer actually achieves"
+      aliases: []
+      context: "Distinguish from output — outcomes represent the value delivered, not the deliverable itself"
+
+    - term: "Output"
+      definition: "A tangible or intangible deliverable of an activity. Outputs contribute to outcomes but are not outcomes themselves"
+      aliases: []
+      context: "Products and services deliver outputs that enable consumer outcomes"
+
+    - term: "Cost"
+      definition: "The amount of money spent on a specific activity or resource. In service management, costs include the price the consumer pays and the cost of utilizing the service"
+      aliases: []
+      context: "Value assessment includes both costs removed and costs imposed by the service"
+
+    - term: "Risk (Service Context)"
+      definition: "A possible event that could cause harm or loss, or make it more difficult to achieve objectives. Includes both threats (negative) and opportunities (positive)"
+      aliases: []
+      context: "Value assessment includes both risks removed and risks imposed by the service"
+
+    - term: "Sponsor"
+      definition: "A person who authorizes budget for service consumption. The sponsor is a key stakeholder role distinct from customer and user"
+      aliases: []
+      context: "Part of the service consumer role model — sponsors authorize, customers define requirements, users consume"
+
+    - term: "Customer"
+      definition: "A person who defines the requirements for a service and takes responsibility for the outcomes of service consumption"
+      aliases: []
+      context: "Distinct from user (who uses the service) and sponsor (who authorizes budget)"
+
+    - term: "User"
+      definition: "A person who uses services. Users are distinct from customers — a customer may define requirements on behalf of many users"
+      aliases: []
+      context: "The person who actually interacts with and consumes the service"
+
+    - term: "Service Provider"
+      definition: "An organization that provides services to consumers. May be internal (shared services) or external"
+      aliases: ["IT service provider (FitSM)"]
+      context: "One side of the service relationship — the provider creates value through service delivery"
+
+    - term: "Service Consumer"
+      definition: "A role that includes the sub-roles of customer, user, and sponsor. The service consumer receives services from the provider"
+      aliases: ["customer (FitSM, simplified)"]
+      context: "The collective term for all roles on the consuming side of the service relationship"
+
+    - term: "Practice Success Factor (PSF)"
+      definition: "A complex functional component of a practice that is required for the practice to fulfil its purpose. PSFs are measured through KPIs"
+      aliases: []
+      context: "Used to assess practice effectiveness and set improvement targets"
+
+    - term: "Service Design Package (SDP)"
+      definition: "A document or set of documents defining all aspects of an IT service and its requirements through each lifecycle stage"
+      aliases: ["service specification (FitSM)"]
+      context: "The primary design artefact — addresses all four dimensions with CX/UX at the centre"
+
+    - term: "Continual Improvement Register (CIR)"
+      definition: "A database or structured document used to track and manage improvement opportunities and initiatives throughout their lifecycle"
+      aliases: ["CSI register"]
+      context: "The central repository for all improvement ideas, from identification through implementation to evaluation"
+
+    - term: "Known Error Database (KEDB)"
+      definition: "A database containing all known error records with documented root causes and workarounds, consumed by incident management"
+      aliases: []
+      context: "Maintained by problem management, used by incident management to accelerate resolution"
+
+    - term: "Configuration Management Database (CMDB)"
+      definition: "A database used to store configuration records throughout their lifecycle. The CMDB records the attributes of CIs and relationships between them"
+      aliases: []
+      context: "The primary data store for configuration management — feeds impact analysis, change assessment, and root cause investigation"
+
+    - term: "Change Enablement"
+      definition: "The ITIL 4 practice name for change management — emphasizes enabling changes rather than controlling them"
+      aliases: ["change management (FitSM)", "change control"]
+      context: "ITIL 4 renamed the practice to shift focus from gatekeeping to enabling successful changes"
+
+    - term: "Incident Model"
+      definition: "A repeatable, predefined approach to managing a particular type of incident — describes steps, roles, timescales, and escalation paths"
+      aliases: []
+      context: "Enables consistent, rapid resolution by encoding proven resolution paths"
+
+    - term: "Service Request Model"
+      definition: "A repeatable, predefined approach to the fulfilment of a particular type of service request — documents procedures, roles, automation, and third-party involvement"
+      aliases: ["standardised service request (FitSM)"]
+      context: "Request models are produced during design, tested, and deployed alongside service components"
+
+# ══════════════════════════════════════════════════════════════════════
+# TOOLING RECOMMENDATIONS
+# ══════════════════════════════════════════════════════════════════════
+
+tooling_recommendations:
+  tools:
+    - name: "ITIL 4 Practice Guides Collection"
+      purpose: "Authoritative reference for each ITIL 4 practice — provides detailed activities, PSFs, capability levels, and role descriptions"
+      url: "https://www.axelos.com/best-practice-solutions/itil"
+      integration: "Use as primary source for populating process definitions, PSFs, and capability assessments during P3 authoring"
+
+    - name: "ITIL 4 Maturity Model"
+      purpose: "Assess organizational maturity across all ITIL 4 practices using capability levels"
+      url: ""
+      integration: "Use during P1 intake to assess current state and during P4 QA to validate maturity claims in documentation"
+
+    - name: "ITIL 4 Value Stream Mapping Tool"
+      purpose: "Map end-to-end value streams across SVC activities and identify practice contributions"
+      url: ""
+      integration: "Use during P2 requirements to design value streams and during P3 authoring to document value chain mappings"
+
+    - name: "Service Value Chain Activity Mapper"
+      purpose: "Map practices to SVC activities and identify coverage gaps in the organization's service management approach"
+      url: ""
+      integration: "Use during P4 QA to verify SVC alignment (G5 checks) and ensure complete practice coverage"
+
+    - name: "Practice Success Factor Assessment Template"
+      purpose: "Assess practice effectiveness through PSF-based evaluation with linked KPI measurement"
+      url: ""
+      integration: "Use during P3 authoring to document PSFs and during P4 QA to verify PSF documentation completeness"
+
+# ══════════════════════════════════════════════════════════════════════
+# BEST PRACTICES REFERENCE
+# ══════════════════════════════════════════════════════════════════════
+
+best_practices_ref:
+  mapping:
+    # ── PR01 Service Portfolio Management ─────────────────────────────
+    - framework_concept: "ITIL 4 Portfolio Management — Definition"
+      best_practice_path: "best-practices/pr01-spm/definition.md"
+      notes: "Use ITIL v4-sourced sections for portfolio approach, lifecycle phases, and optimization decisions"
+    - framework_concept: "ITIL 4 Portfolio Management — KPIs"
+      best_practice_path: "best-practices/pr01-spm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for value realization and portfolio review metrics"
+    - framework_concept: "ITIL 4 Portfolio Management — Policy"
+      best_practice_path: "best-practices/pr01-spm/policy.md"
+      notes: "Use ITIL v4-sourced sections for portfolio governance and investment policy"
+    - framework_concept: "ITIL 4 Portfolio Management — Procedures"
+      best_practice_path: "best-practices/pr01-spm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for portfolio review and proposal evaluation procedures"
+    - framework_concept: "ITIL 4 Portfolio Management — RACI"
+      best_practice_path: "best-practices/pr01-spm/raci.md"
+      notes: "Use ITIL v4-sourced sections for portfolio owner and manager responsibilities"
+
+    # ── PR02 Service Level Management ─────────────────────────────────
+    - framework_concept: "ITIL 4 Service Level Management — Definition"
+      best_practice_path: "best-practices/pr02-slm/definition.md"
+      notes: "Use ITIL v4-sourced sections for watermelon effect, service quality aspects, and SLA lifecycle"
+    - framework_concept: "ITIL 4 Service Level Management — KPIs"
+      best_practice_path: "best-practices/pr02-slm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for PSF-aligned metrics and satisfaction measurement"
+    - framework_concept: "ITIL 4 Service Level Management — Policy"
+      best_practice_path: "best-practices/pr02-slm/policy.md"
+      notes: "Use ITIL v4-sourced sections for SLA governance and service review policy"
+    - framework_concept: "ITIL 4 Service Level Management — Procedures"
+      best_practice_path: "best-practices/pr02-slm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for SLA negotiation and service review procedures"
+    - framework_concept: "ITIL 4 Service Level Management — RACI"
+      best_practice_path: "best-practices/pr02-slm/raci.md"
+      notes: "Use ITIL v4-sourced sections for service owner and relationship manager responsibilities"
+
+    # ── PR03 Service Financial Management ─────────────────────────────
+    - framework_concept: "ITIL 4 Service Financial Management — Definition"
+      best_practice_path: "best-practices/pr03-sfm/definition.md"
+      notes: "Use ITIL v4-sourced sections for cost models, budgeting approach, and charging"
+    - framework_concept: "ITIL 4 Service Financial Management — KPIs"
+      best_practice_path: "best-practices/pr03-sfm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for budget accuracy, cost allocation, and reporting timeliness"
+    - framework_concept: "ITIL 4 Service Financial Management — Policy"
+      best_practice_path: "best-practices/pr03-sfm/policy.md"
+      notes: "Use ITIL v4-sourced sections for financial governance and cost management policy"
+    - framework_concept: "ITIL 4 Service Financial Management — Procedures"
+      best_practice_path: "best-practices/pr03-sfm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for budgeting, cost allocation, and financial reporting procedures"
+    - framework_concept: "ITIL 4 Service Financial Management — RACI"
+      best_practice_path: "best-practices/pr03-sfm/raci.md"
+      notes: "Use ITIL v4-sourced sections for financial manager and business partner responsibilities"
+
+    # ── PR04 Service Design ───────────────────────────────────────────
+    - framework_concept: "ITIL 4 Service Design — Definition"
+      best_practice_path: "best-practices/pr04-sdes/definition.md"
+      notes: "Use ITIL v4-sourced sections for design thinking, SDP structure, and risk modelling"
+    - framework_concept: "ITIL 4 Service Design — KPIs"
+      best_practice_path: "best-practices/pr04-sdes/kpis.md"
+      notes: "Use ITIL v4-sourced sections for fitness for purpose/use rates and design defect tracking"
+    - framework_concept: "ITIL 4 Service Design — Policy"
+      best_practice_path: "best-practices/pr04-sdes/policy.md"
+      notes: "Use ITIL v4-sourced sections for design approach governance and SDP requirements"
+    - framework_concept: "ITIL 4 Service Design — Procedures"
+      best_practice_path: "best-practices/pr04-sdes/procedures.md"
+      notes: "Use ITIL v4-sourced sections for design review and orchestration procedures"
+    - framework_concept: "ITIL 4 Service Design — RACI"
+      best_practice_path: "best-practices/pr04-sdes/raci.md"
+      notes: "Use ITIL v4-sourced sections for design leader and consultant responsibilities"
+
+    # ── PR05 Service Catalogue Management ─────────────────────────────
+    - framework_concept: "ITIL 4 Service Catalogue Management — Definition"
+      best_practice_path: "best-practices/pr05-scatm/definition.md"
+      notes: "Use ITIL v4-sourced sections for catalogue views, data integration, and request catalogues"
+    - framework_concept: "ITIL 4 Service Catalogue Management — KPIs"
+      best_practice_path: "best-practices/pr05-scatm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for catalogue completeness and stakeholder satisfaction"
+    - framework_concept: "ITIL 4 Service Catalogue Management — Policy"
+      best_practice_path: "best-practices/pr05-scatm/policy.md"
+      notes: "Use ITIL v4-sourced sections for catalogue governance and data quality policy"
+    - framework_concept: "ITIL 4 Service Catalogue Management — Procedures"
+      best_practice_path: "best-practices/pr05-scatm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for catalogue maintenance and view management procedures"
+    - framework_concept: "ITIL 4 Service Catalogue Management — RACI"
+      best_practice_path: "best-practices/pr05-scatm/raci.md"
+      notes: "Use ITIL v4-sourced sections for catalogue manager and technical specialist responsibilities"
+
+    # ── PR06 Availability Management ──────────────────────────────────
+    - framework_concept: "ITIL 4 Availability Management — Definition"
+      best_practice_path: "best-practices/pr06-am/definition.md"
+      notes: "Use ITIL v4-sourced sections for availability controls, SPOF analysis, and business-impact metrics"
+    - framework_concept: "ITIL 4 Availability Management — KPIs"
+      best_practice_path: "best-practices/pr06-am/kpis.md"
+      notes: "Use ITIL v4-sourced sections for availability metrics and MTBF/MTRS measurement"
+    - framework_concept: "ITIL 4 Availability Management — Policy"
+      best_practice_path: "best-practices/pr06-am/policy.md"
+      notes: "Use ITIL v4-sourced sections for availability governance and target-setting policy"
+    - framework_concept: "ITIL 4 Availability Management — Procedures"
+      best_practice_path: "best-practices/pr06-am/procedures.md"
+      notes: "Use ITIL v4-sourced sections for availability analysis and SPOF mitigation procedures"
+    - framework_concept: "ITIL 4 Availability Management — RACI"
+      best_practice_path: "best-practices/pr06-am/raci.md"
+      notes: "Use ITIL v4-sourced sections for availability manager and design authority responsibilities"
+
+    # ── PR07 Service Continuity Management ────────────────────────────
+    - framework_concept: "ITIL 4 Service Continuity Management — Definition"
+      best_practice_path: "best-practices/pr07-scm/definition.md"
+      notes: "Use ITIL v4-sourced sections for BIA, recovery objectives, and continuity strategies"
+    - framework_concept: "ITIL 4 Service Continuity Management — KPIs"
+      best_practice_path: "best-practices/pr07-scm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for plan coverage, exercise completion, and RTO/RPO achievement"
+    - framework_concept: "ITIL 4 Service Continuity Management — Policy"
+      best_practice_path: "best-practices/pr07-scm/policy.md"
+      notes: "Use ITIL v4-sourced sections for continuity governance and exercise policy"
+    - framework_concept: "ITIL 4 Service Continuity Management — Procedures"
+      best_practice_path: "best-practices/pr07-scm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for plan invocation and recovery procedures"
+    - framework_concept: "ITIL 4 Service Continuity Management — RACI"
+      best_practice_path: "best-practices/pr07-scm/raci.md"
+      notes: "Use ITIL v4-sourced sections for continuity manager and exercise coordinator responsibilities"
+
+    # ── PR08 Capacity & Performance Management ────────────────────────
+    - framework_concept: "ITIL 4 Capacity and Performance Management — Definition"
+      best_practice_path: "best-practices/pr08-cpm/definition.md"
+      notes: "Use ITIL v4-sourced sections for capacity planning, performance monitoring, and demand analysis"
+    - framework_concept: "ITIL 4 Capacity and Performance Management — KPIs"
+      best_practice_path: "best-practices/pr08-cpm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for capacity plan accuracy and performance target achievement"
+    - framework_concept: "ITIL 4 Capacity and Performance Management — Policy"
+      best_practice_path: "best-practices/pr08-cpm/policy.md"
+      notes: "Use ITIL v4-sourced sections for capacity governance and performance target policy"
+    - framework_concept: "ITIL 4 Capacity and Performance Management — Procedures"
+      best_practice_path: "best-practices/pr08-cpm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for capacity planning and performance tuning procedures"
+    - framework_concept: "ITIL 4 Capacity and Performance Management — RACI"
+      best_practice_path: "best-practices/pr08-cpm/raci.md"
+      notes: "Use ITIL v4-sourced sections for capacity manager and planning analyst responsibilities"
+
+    # ── PR09 Information Security Management ──────────────────────────
+    - framework_concept: "ITIL 4 Information Security Management — Definition"
+      best_practice_path: "best-practices/pr09-ism/definition.md"
+      notes: "Use ITIL v4-sourced sections for security policy, CIA triad, and security controls framework"
+    - framework_concept: "ITIL 4 Information Security Management — KPIs"
+      best_practice_path: "best-practices/pr09-ism/kpis.md"
+      notes: "Use ITIL v4-sourced sections for security incident rates and compliance metrics"
+    - framework_concept: "ITIL 4 Information Security Management — Policy"
+      best_practice_path: "best-practices/pr09-ism/policy.md"
+      notes: "Use ITIL v4-sourced sections for information security policy structure and controls"
+    - framework_concept: "ITIL 4 Information Security Management — Procedures"
+      best_practice_path: "best-practices/pr09-ism/procedures.md"
+      notes: "Use ITIL v4-sourced sections for risk assessment and security incident response procedures"
+    - framework_concept: "ITIL 4 Information Security Management — RACI"
+      best_practice_path: "best-practices/pr09-ism/raci.md"
+      notes: "Use ITIL v4-sourced sections for security manager and security officer responsibilities"
+
+    # ── PR10 Service Desk ─────────────────────────────────────────────
+    - framework_concept: "ITIL 4 Service Desk — Definition"
+      best_practice_path: "best-practices/pr10-sdesk/definition.md"
+      notes: "Use ITIL v4-sourced sections for omnichannel communications, service empathy, and channel design"
+    - framework_concept: "ITIL 4 Service Desk — KPIs"
+      best_practice_path: "best-practices/pr10-sdesk/kpis.md"
+      notes: "Use ITIL v4-sourced sections for first contact resolution and user satisfaction"
+    - framework_concept: "ITIL 4 Service Desk — Policy"
+      best_practice_path: "best-practices/pr10-sdesk/policy.md"
+      notes: "Use ITIL v4-sourced sections for channel strategy and user communication policy"
+    - framework_concept: "ITIL 4 Service Desk — Procedures"
+      best_practice_path: "best-practices/pr10-sdesk/procedures.md"
+      notes: "Use ITIL v4-sourced sections for contact handling and escalation procedures"
+    - framework_concept: "ITIL 4 Service Desk — RACI"
+      best_practice_path: "best-practices/pr10-sdesk/raci.md"
+      notes: "Use ITIL v4-sourced sections for desk manager and analyst responsibilities"
+
+    # ── PR11 Incident Management ──────────────────────────────────────
+    - framework_concept: "ITIL 4 Incident Management — Definition"
+      best_practice_path: "best-practices/pr11-im/definition.md"
+      notes: "Use ITIL v4-sourced sections for incident models, major incident process, and swarming"
+    - framework_concept: "ITIL 4 Incident Management — KPIs"
+      best_practice_path: "best-practices/pr11-im/kpis.md"
+      notes: "Use ITIL v4-sourced sections for MTRS, resolution rates, and major incident review completion"
+    - framework_concept: "ITIL 4 Incident Management — Policy"
+      best_practice_path: "best-practices/pr11-im/policy.md"
+      notes: "Use ITIL v4-sourced sections for incident classification, prioritization, and major incident policy"
+    - framework_concept: "ITIL 4 Incident Management — Procedures"
+      best_practice_path: "best-practices/pr11-im/procedures.md"
+      notes: "Use ITIL v4-sourced sections for incident handling and major incident response procedures"
+    - framework_concept: "ITIL 4 Incident Management — RACI"
+      best_practice_path: "best-practices/pr11-im/raci.md"
+      notes: "Use ITIL v4-sourced sections for incident manager and major incident manager responsibilities"
+
+    # ── PR12 Service Request Management ───────────────────────────────
+    - framework_concept: "ITIL 4 Service Request Management — Definition"
+      best_practice_path: "best-practices/pr12-srm/definition.md"
+      notes: "Use ITIL v4-sourced sections for request models, fulfilment workflows, and request types"
+    - framework_concept: "ITIL 4 Service Request Management — KPIs"
+      best_practice_path: "best-practices/pr12-srm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for fulfilment rates and model coverage metrics"
+    - framework_concept: "ITIL 4 Service Request Management — Policy"
+      best_practice_path: "best-practices/pr12-srm/policy.md"
+      notes: "Use ITIL v4-sourced sections for request model governance and approval policy"
+    - framework_concept: "ITIL 4 Service Request Management — Procedures"
+      best_practice_path: "best-practices/pr12-srm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for request processing and fulfilment procedures"
+    - framework_concept: "ITIL 4 Service Request Management — RACI"
+      best_practice_path: "best-practices/pr12-srm/raci.md"
+      notes: "Use ITIL v4-sourced sections for request manager and fulfilment coordinator responsibilities"
+
+    # ── PR13 Problem Management ───────────────────────────────────────
+    - framework_concept: "ITIL 4 Problem Management — Definition"
+      best_practice_path: "best-practices/pr13-pm/definition.md"
+      notes: "Use ITIL v4-sourced sections for reactive/proactive identification, KEDB, and known error lifecycle"
+    - framework_concept: "ITIL 4 Problem Management — KPIs"
+      best_practice_path: "best-practices/pr13-pm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for known error documentation and recurrence reduction"
+    - framework_concept: "ITIL 4 Problem Management — Policy"
+      best_practice_path: "best-practices/pr13-pm/policy.md"
+      notes: "Use ITIL v4-sourced sections for problem investigation and known error management policy"
+    - framework_concept: "ITIL 4 Problem Management — Procedures"
+      best_practice_path: "best-practices/pr13-pm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for root cause analysis and workaround documentation procedures"
+    - framework_concept: "ITIL 4 Problem Management — RACI"
+      best_practice_path: "best-practices/pr13-pm/raci.md"
+      notes: "Use ITIL v4-sourced sections for problem manager and investigation analyst responsibilities"
+
+    # ── PR14 Monitoring & Event Management ────────────────────────────
+    - framework_concept: "ITIL 4 Monitoring and Event Management — Definition"
+      best_practice_path: "best-practices/pr14-mem/definition.md"
+      notes: "Use ITIL v4-sourced sections for monitoring scope, event types, and correlation rules"
+    - framework_concept: "ITIL 4 Monitoring and Event Management — KPIs"
+      best_practice_path: "best-practices/pr14-mem/kpis.md"
+      notes: "Use ITIL v4-sourced sections for monitoring coverage and event processing timeliness"
+    - framework_concept: "ITIL 4 Monitoring and Event Management — Policy"
+      best_practice_path: "best-practices/pr14-mem/policy.md"
+      notes: "Use ITIL v4-sourced sections for monitoring strategy and event classification policy"
+    - framework_concept: "ITIL 4 Monitoring and Event Management — Procedures"
+      best_practice_path: "best-practices/pr14-mem/procedures.md"
+      notes: "Use ITIL v4-sourced sections for event processing and threshold management procedures"
+    - framework_concept: "ITIL 4 Monitoring and Event Management — RACI"
+      best_practice_path: "best-practices/pr14-mem/raci.md"
+      notes: "Use ITIL v4-sourced sections for event manager and monitoring analyst responsibilities"
+
+    # ── PR15 Change Management ────────────────────────────────────────
+    - framework_concept: "ITIL 4 Change Enablement — Definition"
+      best_practice_path: "best-practices/pr15-chm/definition.md"
+      notes: "Use ITIL v4-sourced sections for change types, change models, and authorization levels"
+    - framework_concept: "ITIL 4 Change Enablement — KPIs"
+      best_practice_path: "best-practices/pr15-chm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for change success rate and emergency change ratio"
+    - framework_concept: "ITIL 4 Change Enablement — Policy"
+      best_practice_path: "best-practices/pr15-chm/policy.md"
+      notes: "Use ITIL v4-sourced sections for change governance, authorization, and standard change policy"
+    - framework_concept: "ITIL 4 Change Enablement — Procedures"
+      best_practice_path: "best-practices/pr15-chm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for RFC processing and emergency change procedures"
+    - framework_concept: "ITIL 4 Change Enablement — RACI"
+      best_practice_path: "best-practices/pr15-chm/raci.md"
+      notes: "Use ITIL v4-sourced sections for change manager and change authority responsibilities"
+
+    # ── PR16 Release & Deployment Management ──────────────────────────
+    - framework_concept: "ITIL 4 Release Management — Definition"
+      best_practice_path: "best-practices/pr16-rdm/definition.md"
+      notes: "Use ITIL v4-sourced sections for release types, deployment strategies, and CI/CD integration"
+    - framework_concept: "ITIL 4 Release Management — KPIs"
+      best_practice_path: "best-practices/pr16-rdm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for release success rate and deployment failure rate"
+    - framework_concept: "ITIL 4 Release Management — Policy"
+      best_practice_path: "best-practices/pr16-rdm/policy.md"
+      notes: "Use ITIL v4-sourced sections for release governance and deployment approval policy"
+    - framework_concept: "ITIL 4 Release Management — Procedures"
+      best_practice_path: "best-practices/pr16-rdm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for release planning and deployment execution procedures"
+    - framework_concept: "ITIL 4 Release Management — RACI"
+      best_practice_path: "best-practices/pr16-rdm/raci.md"
+      notes: "Use ITIL v4-sourced sections for release manager and deployment engineer responsibilities"
+
+    # ── PR17 Service Configuration Management ─────────────────────────
+    - framework_concept: "ITIL 4 Service Configuration Management — Definition"
+      best_practice_path: "best-practices/pr17-scfgm/definition.md"
+      notes: "Use ITIL v4-sourced sections for CI scope, CMDB model, and configuration verification"
+    - framework_concept: "ITIL 4 Service Configuration Management — KPIs"
+      best_practice_path: "best-practices/pr17-scfgm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for CMDB accuracy and CI coverage metrics"
+    - framework_concept: "ITIL 4 Service Configuration Management — Policy"
+      best_practice_path: "best-practices/pr17-scfgm/policy.md"
+      notes: "Use ITIL v4-sourced sections for configuration governance and CMDB integrity policy"
+    - framework_concept: "ITIL 4 Service Configuration Management — Procedures"
+      best_practice_path: "best-practices/pr17-scfgm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for CI registration and verification audit procedures"
+    - framework_concept: "ITIL 4 Service Configuration Management — RACI"
+      best_practice_path: "best-practices/pr17-scfgm/raci.md"
+      notes: "Use ITIL v4-sourced sections for configuration manager and CI owner responsibilities"
+
+    # ── PR18 IT Asset Management ──────────────────────────────────────
+    - framework_concept: "ITIL 4 IT Asset Management — Definition"
+      best_practice_path: "best-practices/pr18-itam/definition.md"
+      notes: "Use ITIL v4-sourced sections for asset lifecycle, register structure, and SAM"
+    - framework_concept: "ITIL 4 IT Asset Management — KPIs"
+      best_practice_path: "best-practices/pr18-itam/kpis.md"
+      notes: "Use ITIL v4-sourced sections for register accuracy and licence compliance metrics"
+    - framework_concept: "ITIL 4 IT Asset Management — Policy"
+      best_practice_path: "best-practices/pr18-itam/policy.md"
+      notes: "Use ITIL v4-sourced sections for asset lifecycle governance and disposal policy"
+    - framework_concept: "ITIL 4 IT Asset Management — Procedures"
+      best_practice_path: "best-practices/pr18-itam/procedures.md"
+      notes: "Use ITIL v4-sourced sections for asset acquisition and disposal procedures"
+    - framework_concept: "ITIL 4 IT Asset Management — RACI"
+      best_practice_path: "best-practices/pr18-itam/raci.md"
+      notes: "Use ITIL v4-sourced sections for IT asset manager and lifecycle owner responsibilities"
+
+    # ── PR19 Knowledge Management ─────────────────────────────────────
+    - framework_concept: "ITIL 4 Knowledge Management — Definition"
+      best_practice_path: "best-practices/pr19-km/definition.md"
+      notes: "Use ITIL v4-sourced sections for DIKW model, tacit/explicit knowledge, and SECI model"
+    - framework_concept: "ITIL 4 Knowledge Management — KPIs"
+      best_practice_path: "best-practices/pr19-km/kpis.md"
+      notes: "Use ITIL v4-sourced sections for knowledge usage rates and base currency metrics"
+    - framework_concept: "ITIL 4 Knowledge Management — Policy"
+      best_practice_path: "best-practices/pr19-km/policy.md"
+      notes: "Use ITIL v4-sourced sections for knowledge sharing culture and asset management policy"
+    - framework_concept: "ITIL 4 Knowledge Management — Procedures"
+      best_practice_path: "best-practices/pr19-km/procedures.md"
+      notes: "Use ITIL v4-sourced sections for knowledge capture and review procedures"
+    - framework_concept: "ITIL 4 Knowledge Management — RACI"
+      best_practice_path: "best-practices/pr19-km/raci.md"
+      notes: "Use ITIL v4-sourced sections for knowledge manager and asset owner responsibilities"
+
+    # ── PR20 Measurement & Reporting ──────────────────────────────────
+    - framework_concept: "ITIL 4 Measurement and Reporting — Definition"
+      best_practice_path: "best-practices/pr20-mr/definition.md"
+      notes: "Use ITIL v4-sourced sections for measurement approach, metrics design, and report specification"
+    - framework_concept: "ITIL 4 Measurement and Reporting — KPIs"
+      best_practice_path: "best-practices/pr20-mr/kpis.md"
+      notes: "Use ITIL v4-sourced sections for report timeliness and stakeholder satisfaction"
+    - framework_concept: "ITIL 4 Measurement and Reporting — Policy"
+      best_practice_path: "best-practices/pr20-mr/policy.md"
+      notes: "Use ITIL v4-sourced sections for reporting governance and data quality policy"
+    - framework_concept: "ITIL 4 Measurement and Reporting — Procedures"
+      best_practice_path: "best-practices/pr20-mr/procedures.md"
+      notes: "Use ITIL v4-sourced sections for report design and data collection procedures"
+    - framework_concept: "ITIL 4 Measurement and Reporting — RACI"
+      best_practice_path: "best-practices/pr20-mr/raci.md"
+      notes: "Use ITIL v4-sourced sections for M&R manager and report design authority responsibilities"
+
+    # ── PR21 Risk Management ──────────────────────────────────────────
+    - framework_concept: "ITIL 4 Risk Management — Definition"
+      best_practice_path: "best-practices/pr21-rm/definition.md"
+      notes: "Use ITIL v4-sourced sections for risk appetite, risk register, and treatment options"
+    - framework_concept: "ITIL 4 Risk Management — KPIs"
+      best_practice_path: "best-practices/pr21-rm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for risk register currency and treatment completion"
+    - framework_concept: "ITIL 4 Risk Management — Policy"
+      best_practice_path: "best-practices/pr21-rm/policy.md"
+      notes: "Use ITIL v4-sourced sections for risk governance, appetite statement, and assessment policy"
+    - framework_concept: "ITIL 4 Risk Management — Procedures"
+      best_practice_path: "best-practices/pr21-rm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for risk assessment and treatment procedures"
+    - framework_concept: "ITIL 4 Risk Management — RACI"
+      best_practice_path: "best-practices/pr21-rm/raci.md"
+      notes: "Use ITIL v4-sourced sections for risk committee and risk owner responsibilities"
+
+    # ── PR22 Relationship Management ──────────────────────────────────
+    - framework_concept: "ITIL 4 Relationship Management — Definition"
+      best_practice_path: "best-practices/pr22-relm/definition.md"
+      notes: "Use ITIL v4-sourced sections for stakeholder analysis, relationship types, and satisfaction measurement"
+    - framework_concept: "ITIL 4 Relationship Management — KPIs"
+      best_practice_path: "best-practices/pr22-relm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for stakeholder satisfaction and complaint resolution"
+    - framework_concept: "ITIL 4 Relationship Management — Policy"
+      best_practice_path: "best-practices/pr22-relm/policy.md"
+      notes: "Use ITIL v4-sourced sections for relationship governance and engagement policy"
+    - framework_concept: "ITIL 4 Relationship Management — Procedures"
+      best_practice_path: "best-practices/pr22-relm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for complaint handling and relationship review procedures"
+    - framework_concept: "ITIL 4 Relationship Management — RACI"
+      best_practice_path: "best-practices/pr22-relm/raci.md"
+      notes: "Use ITIL v4-sourced sections for relationship manager and CRR responsibilities"
+
+    # ── PR23 Supplier Management ──────────────────────────────────────
+    - framework_concept: "ITIL 4 Supplier Management — Definition"
+      best_practice_path: "best-practices/pr23-suppm/definition.md"
+      notes: "Use ITIL v4-sourced sections for sourcing strategy, supplier categorization, and performance management"
+    - framework_concept: "ITIL 4 Supplier Management — KPIs"
+      best_practice_path: "best-practices/pr23-suppm/kpis.md"
+      notes: "Use ITIL v4-sourced sections for supplier compliance and contract coverage metrics"
+    - framework_concept: "ITIL 4 Supplier Management — Policy"
+      best_practice_path: "best-practices/pr23-suppm/policy.md"
+      notes: "Use ITIL v4-sourced sections for supplier governance and contract management policy"
+    - framework_concept: "ITIL 4 Supplier Management — Procedures"
+      best_practice_path: "best-practices/pr23-suppm/procedures.md"
+      notes: "Use ITIL v4-sourced sections for supplier evaluation and onboarding procedures"
+    - framework_concept: "ITIL 4 Supplier Management — RACI"
+      best_practice_path: "best-practices/pr23-suppm/raci.md"
+      notes: "Use ITIL v4-sourced sections for supplier manager and SRR responsibilities"
+
+    # ── PR24 Continual Improvement ────────────────────────────────────
+    - framework_concept: "ITIL 4 Continual Improvement — Definition"
+      best_practice_path: "best-practices/pr24-ci/definition.md"
+      notes: "Use ITIL v4-sourced sections for CI model, CIR management, and improvement culture"
+    - framework_concept: "ITIL 4 Continual Improvement — KPIs"
+      best_practice_path: "best-practices/pr24-ci/kpis.md"
+      notes: "Use ITIL v4-sourced sections for initiative completion and benefit realization"
+    - framework_concept: "ITIL 4 Continual Improvement — Policy"
+      best_practice_path: "best-practices/pr24-ci/policy.md"
+      notes: "Use ITIL v4-sourced sections for improvement governance and CIR management policy"
+    - framework_concept: "ITIL 4 Continual Improvement — Procedures"
+      best_practice_path: "best-practices/pr24-ci/procedures.md"
+      notes: "Use ITIL v4-sourced sections for improvement identification and evaluation procedures"
+    - framework_concept: "ITIL 4 Continual Improvement — RACI"
+      best_practice_path: "best-practices/pr24-ci/raci.md"
+      notes: "Use ITIL v4-sourced sections for CSI manager and improvement owner responsibilities"
+
+    # ── Cross-Cutting ─────────────────────────────────────────────────
+    - framework_concept: "ITIL 4 Role Model"
+      best_practice_path: "best-practices/cross-cutting/role-catalog.md"
+      notes: "Use ITIL v4-sourced sections for practice-specific roles and SVS governance roles"
+    - framework_concept: "ITIL 4 Policy Patterns"
+      best_practice_path: "best-practices/cross-cutting/policy-patterns.md"
+      notes: "Use ITIL v4-sourced sections for guiding principles and SVS alignment policy patterns"
+    - framework_concept: "ITIL 4 Interface Patterns"
+      best_practice_path: "best-practices/cross-cutting/interface-patterns.md"
+      notes: "Use ITIL v4-sourced sections for SVC activity interfaces and value stream handoffs"
+    - framework_concept: "ITIL 4 Escalation Models"
+      best_practice_path: "best-practices/cross-cutting/escalation-models.md"
+      notes: "Use ITIL v4-sourced sections for practice-based escalation paths and major incident escalation"
+    - framework_concept: "ITIL 4 Priority Models"
+      best_practice_path: "best-practices/cross-cutting/priority-models.md"
+      notes: "Use ITIL v4-sourced sections for impact-urgency matrices and prioritization schemes"
+    - framework_concept: "ITIL 4 Maturity Model"
+      best_practice_path: "best-practices/cross-cutting/maturity-model.md"
+      notes: "Use ITIL v4-sourced sections for practice capability levels and maturity assessment"

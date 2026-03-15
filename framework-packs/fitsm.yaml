@@ -1,0 +1,1794 @@
+# 3PA Framework Pack: FitSM v3
+# Generated from FitSM-0 through FitSM-6 source documents and 3PA best practices
+# Maps FitSM's 14 processes to 16 of 3PA's 24 unified process model
+
+meta:
+  name: "FitSM v3"
+  version: "0.1"
+  framework_id: fitsm
+  description: "Lightweight IT service management standard for federated infrastructures"
+  source_version: "3.0.1"
+  last_updated: "2026-03-15"
+  keywords:
+    - fitsm
+    - fit-sm
+    - lightweight
+    - federated
+    - "lightweight itsm"
+    - fitsm-1
+    - fitsm-2
+
+process_model:
+  processes:
+    # ── Phase A (Foundation) ──────────────────────────────────────────────
+
+    - id: "PR01"
+      name: "Service Portfolio Management"
+      framework_process_id: "PR1"
+      purpose: "Maintain the service portfolio and manage services through their lifecycle"
+      scope: "All services offered by the service provider — proposed, in development, live, and retired — including federation member contributions"
+      phase: "A"
+      inputs:
+        - name: "Customer demand and service proposals"
+          source: "PR22 Relationship Management"
+        - name: "Service performance data"
+          source: "PR02 Service Level Management"
+        - name: "Change proposals affecting portfolio composition"
+          source: "PR15 Change Management"
+      outputs:
+        - name: "Updated service portfolio register"
+          destination: "PR02 Service Level Management"
+        - name: "Service lifecycle transition decisions"
+          destination: "PR15 Change Management"
+        - name: "Portfolio roadmap for stakeholder communication"
+          destination: "PR22 Relationship Management"
+      interfaces:
+        - process_id: "PR02"
+          direction: "bidirectional"
+          description: "Portfolio decisions inform SLA scope; service performance feeds portfolio reviews"
+        - process_id: "PR15"
+          direction: "bidirectional"
+          description: "Portfolio-driven changes and change proposals affecting the portfolio"
+        - process_id: "PR22"
+          direction: "bidirectional"
+          description: "Customer demand feeds portfolio; portfolio roadmap communicated to customers"
+        - process_id: "PR24"
+          direction: "in"
+          description: "Improvement initiatives may affect portfolio composition"
+      activities:
+        - name: "Establish and maintain the service portfolio"
+          description: "Create and update the service portfolio register listing all services with their lifecycle status, owners, and delivery parties"
+        - name: "Evaluate service proposals"
+          description: "Assess proposals for new or changed services against defined criteria covering demand, resources, and expected benefits"
+        - name: "Manage service lifecycle transitions"
+          description: "Plan and coordinate the transition of services between lifecycle phases including new service introduction and retirement"
+        - name: "Identify federation member contributions"
+          description: "For each service, identify the internal and external suppliers including federation members, their contact points and responsibilities"
+        - name: "Conduct periodic portfolio reviews"
+          description: "Review the portfolio at planned intervals to validate alignment with strategy and make investment decisions"
+      kpis:
+        - name: "Portfolio completeness"
+          formula: "(Services in portfolio register / Total known live services) x 100"
+          target: "100%"
+        - name: "Proposal evaluation rate"
+          formula: "(Proposals evaluated within SLA / Total proposals submitted) x 100"
+          target: ">= 90%"
+        - name: "Portfolio currency"
+          formula: "(Portfolio entries updated within review cycle / Total portfolio entries) x 100"
+          target: ">= 95%"
+
+    - id: "PR09"
+      name: "Information Security Management"
+      framework_process_id: "PR6"
+      purpose: "Preserve confidentiality, integrity, and availability of information related to managing and delivering services"
+      scope: "All information assets within the SMS scope, including security policies, risk assessments, controls, events, incidents, and access management"
+      phase: "A"
+      inputs:
+        - name: "Security requirements from SLAs and regulations"
+          source: "PR02 Service Level Management"
+        - name: "Security events and incidents"
+          source: "PR11 Incident Management"
+        - name: "Configuration data on security-relevant CIs"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Information security policies and controls"
+          destination: "All processes"
+        - name: "Security risk assessment results"
+          destination: "PR08 Capacity & Performance Management"
+        - name: "Access control procedures"
+          destination: "PR15 Change Management"
+      interfaces:
+        - process_id: "PR11"
+          direction: "bidirectional"
+          description: "Security incidents are escalated from incident management; security guidance feeds incident handling"
+        - process_id: "PR15"
+          direction: "bidirectional"
+          description: "Security assessments inform change approval; changes to security controls follow change management"
+        - process_id: "PR17"
+          direction: "in"
+          description: "CMDB provides CI data needed for security risk assessments"
+      activities:
+        - name: "Define and review information security policies"
+          description: "Establish information security requirements and review policies at planned intervals"
+        - name: "Assess information security risks"
+          description: "Identify, assess, and prioritize information security risks at planned intervals"
+        - name: "Implement security controls"
+          description: "Deploy physical, technical, and organizational controls to mitigate identified security risks"
+        - name: "Handle security events and incidents"
+          description: "Detect, classify, and respond to information security events and incidents in a consistent manner"
+        - name: "Manage access control"
+          description: "Control provisioning of access rights for information-processing systems and services"
+      kpis:
+        - name: "Security policy review adherence"
+          formula: "(Security policies reviewed on schedule / Total security policies) x 100"
+          target: "100%"
+        - name: "Security incident response time"
+          formula: "Average time from security event detection to initial response"
+          target: "<= 4 hours for high-severity events"
+        - name: "Security risk assessment coverage"
+          formula: "(Services with current risk assessment / Total services) x 100"
+          target: ">= 95%"
+
+    - id: "PR17"
+      name: "Service Configuration Management"
+      framework_process_id: "PR11"
+      purpose: "Provide and maintain a logical model of configuration items in support of other service management activities"
+      scope: "All configuration items within the SMS scope, their attributes, relationships, and the CMDB that stores this information"
+      phase: "A"
+      inputs:
+        - name: "Change records affecting CIs"
+          source: "PR15 Change Management"
+        - name: "Release deployment records"
+          source: "PR16 Release & Deployment Management"
+        - name: "Incident and problem data referencing CIs"
+          source: "PR11 Incident Management"
+      outputs:
+        - name: "Accurate CI information and relationship data"
+          destination: "All processes"
+        - name: "Configuration baselines"
+          destination: "PR15 Change Management"
+        - name: "CI audit and verification reports"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR15"
+          direction: "bidirectional"
+          description: "Changes update CI records; CMDB data informs change impact assessment"
+        - process_id: "PR16"
+          direction: "in"
+          description: "Releases update CI records upon deployment"
+        - process_id: "PR11"
+          direction: "in"
+          description: "Incidents reference affected CIs for diagnosis"
+      activities:
+        - name: "Define configuration management scope"
+          description: "Determine the types of CIs and relationships to be tracked and the required level of detail"
+        - name: "Maintain the CMDB"
+          description: "Record and update information on CIs and their relationships in the configuration management database"
+        - name: "Control configuration items"
+          description: "Ensure CIs are controlled and changes to CIs tracked in the CMDB"
+        - name: "Verify configuration information"
+          description: "Conduct planned verifications to ensure CMDB data accuracy and completeness"
+      kpis:
+        - name: "CMDB accuracy"
+          formula: "(CIs verified as accurate / Total CIs audited) x 100"
+          target: ">= 95%"
+        - name: "Configuration verification adherence"
+          formula: "(Verifications completed on schedule / Planned verifications) x 100"
+          target: "100%"
+
+    # ── Phase B (Agreements) ──────────────────────────────────────────────
+
+    - id: "PR02"
+      name: "Service Level Management"
+      framework_process_id: "PR2"
+      purpose: "Maintain service catalogues, and define and evaluate agreements on service quality with customers and suppliers"
+      scope: "Service catalogue maintenance, SLA negotiation and review, OLA and UA management, and service performance evaluation against agreed targets"
+      phase: "B"
+      inputs:
+        - name: "Service portfolio decisions"
+          source: "PR01 Service Portfolio Management"
+        - name: "Customer requirements and expectations"
+          source: "PR22 Relationship Management"
+        - name: "Service performance reports"
+          source: "PR20 Measurement & Reporting"
+      outputs:
+        - name: "Service catalogue"
+          destination: "All processes"
+        - name: "Service level agreements"
+          destination: "PR11 Incident Management"
+        - name: "Operational level agreements and underpinning agreements"
+          destination: "PR23 Supplier Management"
+      interfaces:
+        - process_id: "PR01"
+          direction: "bidirectional"
+          description: "Portfolio decisions scope the catalogue; service performance feeds portfolio reviews"
+        - process_id: "PR11"
+          direction: "out"
+          description: "SLA targets drive incident prioritization and escalation"
+        - process_id: "PR22"
+          direction: "bidirectional"
+          description: "Customer requirements inform SLAs; SLA performance is communicated to customers"
+        - process_id: "PR23"
+          direction: "out"
+          description: "OLAs and UAs are negotiated to underpin customer-facing SLAs"
+      activities:
+        - name: "Maintain the service catalogue"
+          description: "Keep a current, customer-facing catalogue of all live services with relevant descriptions"
+        - name: "Negotiate and manage SLAs"
+          description: "Define, agree, and periodically review service level agreements for all delivered services"
+        - name: "Evaluate service performance"
+          description: "Measure actual service performance against SLA targets and identify deviations"
+        - name: "Manage OLAs and UAs"
+          description: "Agree and review operational level agreements and underpinning agreements that support customer SLAs"
+        - name: "Conduct service reviews"
+          description: "Hold periodic reviews with customers to assess service quality and identify improvement opportunities"
+      kpis:
+        - name: "SLA coverage"
+          formula: "(Services with active SLA / Total live services) x 100"
+          target: "100%"
+        - name: "SLA target achievement"
+          formula: "(SLA targets met / Total SLA targets measured) x 100"
+          target: ">= 95%"
+        - name: "Service review adherence"
+          formula: "(Service reviews conducted on schedule / Planned reviews) x 100"
+          target: "100%"
+
+    - id: "PR22"
+      name: "Relationship Management"
+      framework_process_id: "PR7"
+      purpose: "Establish and maintain good relationships with customers receiving services"
+      scope: "Customer identification, communication channels, service reviews, complaint handling, and customer satisfaction management"
+      phase: "B"
+      inputs:
+        - name: "Service performance reports"
+          source: "PR20 Measurement & Reporting"
+        - name: "SLA performance data"
+          source: "PR02 Service Level Management"
+        - name: "Incident and request status updates"
+          source: "PR11 Incident Management"
+      outputs:
+        - name: "Customer requirements and demand signals"
+          destination: "PR01 Service Portfolio Management"
+        - name: "Service complaints and feedback"
+          destination: "PR24 Continual Improvement"
+        - name: "Customer satisfaction data"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: "PR02"
+          direction: "bidirectional"
+          description: "Customer requirements inform SLAs; SLA performance reviewed in customer meetings"
+        - process_id: "PR01"
+          direction: "out"
+          description: "Customer demand signals feed portfolio decisions"
+        - process_id: "PR24"
+          direction: "out"
+          description: "Customer feedback drives improvement initiatives"
+      activities:
+        - name: "Identify service customers"
+          description: "Maintain a register of all service customers and their designated contacts"
+        - name: "Establish communication channels"
+          description: "Define and maintain channels for customer communication including ordering, escalation, and complaint mechanisms"
+        - name: "Conduct service reviews with customers"
+          description: "Hold periodic service reviews to discuss performance, address concerns, and identify needs"
+        - name: "Handle service complaints"
+          description: "Receive, investigate, and resolve customer complaints in a consistent manner"
+        - name: "Manage customer satisfaction"
+          description: "Measure, track, and take action to improve customer satisfaction"
+      kpis:
+        - name: "Customer satisfaction score"
+          formula: "Average score from customer satisfaction surveys (scale 1-5)"
+          target: ">= 3.5 / 5"
+        - name: "Complaint resolution rate"
+          formula: "(Complaints resolved within target time / Total complaints) x 100"
+          target: ">= 90%"
+
+    - id: "PR23"
+      name: "Supplier Management"
+      framework_process_id: "PR8"
+      purpose: "Establish and maintain healthy relationships with internal and external suppliers and monitor their performance"
+      scope: "Supplier identification, communication channels, performance evaluation, and contract management for all suppliers including federation members"
+      phase: "B"
+      inputs:
+        - name: "OLAs and UAs requiring supplier alignment"
+          source: "PR02 Service Level Management"
+        - name: "Supplier performance data"
+          source: "PR20 Measurement & Reporting"
+      outputs:
+        - name: "Supplier performance evaluations"
+          destination: "PR02 Service Level Management"
+        - name: "Supplier risk information"
+          destination: "PR09 Information Security Management"
+      interfaces:
+        - process_id: "PR02"
+          direction: "bidirectional"
+          description: "UAs and OLAs drive supplier requirements; supplier performance feeds SLA evaluation"
+        - process_id: "PR15"
+          direction: "in"
+          description: "Changes to supplier contracts follow change management"
+      activities:
+        - name: "Identify suppliers"
+          description: "Maintain a register of all internal and external suppliers including federation members"
+        - name: "Establish supplier communication channels"
+          description: "Define communication mechanisms and escalation paths for each supplier"
+        - name: "Evaluate supplier performance"
+          description: "Monitor and evaluate supplier performance at planned intervals against agreed targets"
+        - name: "Manage supplier relationships"
+          description: "Maintain designated contacts for each supplier and conduct regular relationship reviews"
+      kpis:
+        - name: "Supplier performance evaluation adherence"
+          formula: "(Supplier evaluations completed on schedule / Planned evaluations) x 100"
+          target: "100%"
+        - name: "Supplier contract compliance"
+          formula: "(Suppliers meeting contractual targets / Total active suppliers) x 100"
+          target: ">= 90%"
+
+    # ── Phase C (Operations) ──────────────────────────────────────────────
+
+    - id: "PR11"
+      name: "Incident Management"
+      framework_process_id: "PR9"
+      purpose: "Restore agreed service operation after an incident as quickly as possible"
+      scope: "Registration, classification, prioritization, escalation, resolution, and closure of incidents including major incident handling"
+      phase: "C"
+      inputs:
+        - name: "User reports and monitoring alerts"
+          source: "External / PR20 Measurement & Reporting"
+        - name: "SLA targets for prioritization"
+          source: "PR02 Service Level Management"
+        - name: "Known errors and workarounds"
+          source: "PR13 Problem Management"
+      outputs:
+        - name: "Incident records"
+          destination: "PR13 Problem Management"
+        - name: "Resolved and closed incident records"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Major incident notifications"
+          destination: "PR22 Relationship Management"
+      interfaces:
+        - process_id: "PR12"
+          direction: "bidirectional"
+          description: "Incidents and service requests share registration and classification; FitSM treats them as a single process (ISRM)"
+        - process_id: "PR13"
+          direction: "out"
+          description: "Incident trends and recurring incidents trigger problem investigation"
+        - process_id: "PR02"
+          direction: "in"
+          description: "SLA targets inform incident prioritization and escalation thresholds"
+        - process_id: "PR17"
+          direction: "in"
+          description: "CMDB data supports incident diagnosis"
+      activities:
+        - name: "Register and classify incidents"
+          description: "Record all incidents consistently with classification, categorization, and priority based on SLA targets"
+        - name: "Investigate and resolve incidents"
+          description: "Diagnose incidents using known errors and workarounds, escalate functionally and hierarchically as needed"
+        - name: "Manage escalation"
+          description: "Perform functional and hierarchical escalation in a consistent manner per defined rules"
+        - name: "Communicate with users"
+          description: "Keep customers and users informed of incident progress as appropriate"
+        - name: "Close incidents"
+          description: "Verify resolution with the user and close the incident record"
+        - name: "Handle major incidents"
+          description: "Identify and manage major incidents based on defined criteria using a dedicated procedure"
+      kpis:
+        - name: "First-contact resolution rate"
+          formula: "(Incidents resolved at first contact / Total incidents) x 100"
+          target: ">= 60%"
+        - name: "Mean time to restore service"
+          formula: "Average(Resolution time - Report time) for all incidents in period"
+          target: "Within SLA targets per priority level"
+        - name: "SLA breach rate for incidents"
+          formula: "(Incidents exceeding SLA resolution target / Total incidents) x 100"
+          target: "<= 5%"
+
+    - id: "PR12"
+      name: "Service Request Management"
+      framework_process_id: "PR9"
+      purpose: "Respond to user service requests in a timely and effective manner"
+      scope: "Registration, classification, prioritization, fulfilment, and closure of service requests"
+      phase: "C"
+      inputs:
+        - name: "User service requests"
+          source: "External"
+        - name: "Service catalogue defining available requests"
+          source: "PR02 Service Level Management"
+        - name: "SLA targets for fulfilment"
+          source: "PR02 Service Level Management"
+      outputs:
+        - name: "Fulfilled service request records"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Request fulfilment data"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR11"
+          direction: "bidirectional"
+          description: "Incidents and service requests share registration and classification in FitSM ISRM"
+        - process_id: "PR02"
+          direction: "in"
+          description: "Service catalogue and SLA targets define available requests and fulfilment targets"
+      activities:
+        - name: "Register and classify service requests"
+          description: "Record all service requests consistently with appropriate classification and priority"
+        - name: "Fulfil service requests"
+          description: "Process requests following defined fulfilment procedures, taking account of SLA targets"
+        - name: "Communicate with requestors"
+          description: "Keep users informed of request progress and expected completion"
+        - name: "Close service requests"
+          description: "Confirm fulfilment with the requestor and close the service request record"
+      kpis:
+        - name: "Service request fulfilment rate"
+          formula: "(Requests fulfilled within SLA / Total requests) x 100"
+          target: ">= 95%"
+        - name: "Service request backlog"
+          formula: "Count of open service requests older than the target fulfilment time"
+          target: "Trending downward"
+
+    - id: "PR13"
+      name: "Problem Management"
+      framework_process_id: "PR10"
+      purpose: "Identify and investigate problems to reduce their impact and prevent incidents from recurring"
+      scope: "Problem identification, investigation, root cause analysis, known error management, and workaround documentation"
+      phase: "C"
+      inputs:
+        - name: "Incident trend data"
+          source: "PR11 Incident Management"
+        - name: "Recurring incident patterns"
+          source: "PR20 Measurement & Reporting"
+      outputs:
+        - name: "Known errors and workarounds"
+          destination: "PR11 Incident Management"
+        - name: "Change requests for permanent fixes"
+          destination: "PR15 Change Management"
+        - name: "Problem resolution data"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR11"
+          direction: "bidirectional"
+          description: "Incident patterns trigger problems; known errors and workarounds feed back to incident resolution"
+        - process_id: "PR15"
+          direction: "out"
+          description: "Permanent fixes require change requests"
+        - process_id: "PR17"
+          direction: "in"
+          description: "CMDB data supports root cause analysis"
+      activities:
+        - name: "Identify and register problems"
+          description: "Analyse incident patterns and trends to identify problems and register them consistently"
+        - name: "Investigate problems"
+          description: "Perform root cause analysis to identify resolution actions or impact reduction measures"
+        - name: "Manage known errors"
+          description: "Register known errors with documented workarounds when permanent resolution is not yet available"
+        - name: "Maintain known error information"
+          description: "Keep up-to-date information on known errors and effective workarounds for use by incident staff"
+      kpis:
+        - name: "Problems resolved within target"
+          formula: "(Problems resolved within SLA / Total problems) x 100"
+          target: ">= 80%"
+        - name: "Known error database currency"
+          formula: "(Known errors reviewed within cycle / Total active known errors) x 100"
+          target: ">= 90%"
+
+    - id: "PR15"
+      name: "Change Management"
+      framework_process_id: "PR12"
+      purpose: "Plan, approve, and review changes in a controlled manner to avoid adverse impact on services"
+      scope: "Registration, classification, assessment, approval, scheduling, post-implementation review, and closure of all changes"
+      phase: "C"
+      inputs:
+        - name: "Requests for change"
+          source: "All processes"
+        - name: "CI impact data"
+          source: "PR17 Service Configuration Management"
+        - name: "Release schedules"
+          source: "PR16 Release & Deployment Management"
+      outputs:
+        - name: "Approved change records"
+          destination: "PR16 Release & Deployment Management"
+        - name: "Updated change schedule"
+          destination: "All processes"
+        - name: "Post-implementation review findings"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR16"
+          direction: "out"
+          description: "Approved changes are bundled into releases for deployment"
+        - process_id: "PR17"
+          direction: "bidirectional"
+          description: "CMDB data informs impact assessment; changes update CI records"
+        - process_id: "PR06"
+          direction: "in"
+          description: "Availability impact assessments inform change approval"
+        - process_id: "PR09"
+          direction: "in"
+          description: "Security assessments inform change approval for security-relevant changes"
+      activities:
+        - name: "Register and classify changes"
+          description: "Record all changes consistently with classification covering standard, normal, emergency, and major changes"
+        - name: "Assess changes"
+          description: "Evaluate benefits, risks, potential impact, effort, and technical feasibility for each change"
+        - name: "Approve changes"
+          description: "Obtain approval at the appropriate authority level based on defined criteria and CAB review"
+        - name: "Manage the change schedule"
+          description: "Maintain a schedule of approved changes with deployment dates, communicated to interested parties"
+        - name: "Conduct post-implementation reviews"
+          description: "Review implemented changes for success or failure and close change records"
+      kpis:
+        - name: "Change success rate"
+          formula: "(Changes implemented without rollback or unplanned outage / Total implemented changes) x 100"
+          target: ">= 90%"
+        - name: "Emergency change ratio"
+          formula: "(Emergency changes / Total changes) x 100"
+          target: "<= 10%"
+        - name: "Change assessment completeness"
+          formula: "(Changes with completed impact assessment / Total changes submitted) x 100"
+          target: "100%"
+
+    - id: "PR16"
+      name: "Release & Deployment Management"
+      framework_process_id: "PR13"
+      purpose: "Bundle approved changes into appropriate types of releases and effectively deploy them"
+      scope: "Release strategy definition, release planning, build and test, deployment, and post-deployment evaluation"
+      phase: "C"
+      inputs:
+        - name: "Approved change records"
+          source: "PR15 Change Management"
+        - name: "CI data for release components"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Deployed releases"
+          destination: "PR17 Service Configuration Management"
+        - name: "Deployment evaluation reports"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR15"
+          direction: "in"
+          description: "Approved changes are the primary input for release packaging"
+        - process_id: "PR17"
+          direction: "bidirectional"
+          description: "CMDB data identifies release components; deployments update CI records"
+      activities:
+        - name: "Define release and deployment strategies"
+          description: "Establish strategies covering CI scope, frequency, impact, and supporting technology"
+        - name: "Define release inclusion criteria"
+          description: "Determine which approved changes are included in each release based on strategy and timing"
+        - name: "Plan and build releases"
+          description: "Plan deployment including acceptance criteria and build the release package"
+        - name: "Test and evaluate releases"
+          description: "Test releases against acceptance criteria appropriate to the release type and service impact"
+        - name: "Deploy releases"
+          description: "Execute deployment with preparation for rollback in case of unsuccessful deployment"
+        - name: "Evaluate deployment outcomes"
+          description: "Assess deployment activities for success or failure and document lessons learned"
+      kpis:
+        - name: "Release success rate"
+          formula: "(Releases deployed without rollback / Total releases deployed) x 100"
+          target: ">= 95%"
+        - name: "Release on-time delivery"
+          formula: "(Releases deployed within planned window / Total planned releases) x 100"
+          target: ">= 90%"
+
+    # ── Phase D (Assurance) ───────────────────────────────────────────────
+
+    - id: "PR06"
+      name: "Availability Management"
+      framework_process_id: "PR4"
+      purpose: "Ensure sufficient service availability to meet service targets"
+      scope: "Availability requirements identification, risk assessment, availability planning, monitoring, and improvement measures"
+      phase: "D"
+      inputs:
+        - name: "SLA availability targets"
+          source: "PR02 Service Level Management"
+        - name: "Incident data on service outages"
+          source: "PR11 Incident Management"
+        - name: "CI dependency data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Availability plans and requirements"
+          destination: "PR15 Change Management"
+        - name: "Availability monitoring data"
+          destination: "PR20 Measurement & Reporting"
+      interfaces:
+        - process_id: "PR07"
+          direction: "bidirectional"
+          description: "FitSM combines availability and continuity in PR4 SACM; availability and continuity planning are closely linked"
+        - process_id: "PR02"
+          direction: "in"
+          description: "SLA targets define availability requirements"
+        - process_id: "PR15"
+          direction: "out"
+          description: "Availability improvement measures are implemented through change management"
+      activities:
+        - name: "Identify availability requirements"
+          description: "Determine service availability requirements at planned intervals taking into account SLA targets"
+        - name: "Assess availability risks"
+          description: "Evaluate availability risks at planned intervals and identify single points of failure"
+        - name: "Plan availability measures"
+          description: "Define appropriate measures to reduce the probability and impact of availability risks"
+        - name: "Monitor service availability"
+          description: "Continuously monitor the availability of services and service components"
+      kpis:
+        - name: "Service availability"
+          formula: "(Agreed uptime - Downtime) / Agreed uptime x 100"
+          target: "Per SLA targets, typically >= 99.5%"
+        - name: "Availability plan currency"
+          formula: "(Availability plans reviewed within cycle / Total availability plans) x 100"
+          target: "100%"
+
+    - id: "PR07"
+      name: "Service Continuity Management"
+      framework_process_id: "PR4"
+      purpose: "Ensure sufficient service continuity to meet agreed targets even in exceptional circumstances"
+      scope: "Continuity requirements identification, risk assessment, continuity planning, testing, and recovery preparedness"
+      phase: "D"
+      inputs:
+        - name: "SLA continuity targets"
+          source: "PR02 Service Level Management"
+        - name: "Availability risk assessments"
+          source: "PR06 Availability Management"
+        - name: "CI dependency data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Service continuity plans"
+          destination: "PR15 Change Management"
+        - name: "Continuity test results"
+          destination: "PR24 Continual Improvement"
+      interfaces:
+        - process_id: "PR06"
+          direction: "bidirectional"
+          description: "FitSM combines availability and continuity in PR4 SACM; continuity builds on availability risk data"
+        - process_id: "PR02"
+          direction: "in"
+          description: "SLA targets define continuity requirements"
+        - process_id: "PR15"
+          direction: "out"
+          description: "Continuity improvement measures are implemented through change management"
+      activities:
+        - name: "Identify continuity requirements"
+          description: "Determine service continuity requirements at planned intervals taking into account SLA targets"
+        - name: "Assess continuity risks"
+          description: "Evaluate continuity risks covering emergencies, crises, and disasters affecting service delivery"
+        - name: "Develop and maintain continuity plans"
+          description: "Create continuity plans with recovery procedures, contact lists, and recovery targets"
+        - name: "Test continuity plans"
+          description: "Conduct regular tests of preventive and reactive continuity measures"
+      kpis:
+        - name: "Continuity plan coverage"
+          formula: "(Critical services with current continuity plan / Total critical services) x 100"
+          target: "100%"
+        - name: "Continuity test adherence"
+          formula: "(Continuity tests completed on schedule / Planned tests) x 100"
+          target: "100%"
+
+    - id: "PR08"
+      name: "Capacity & Performance Management"
+      framework_process_id: "PR5"
+      purpose: "Ensure sufficient capacity and service performance to meet agreed service targets"
+      scope: "Capacity requirements identification, current utilization tracking, future capacity planning, and performance monitoring"
+      phase: "D"
+      inputs:
+        - name: "SLA performance targets"
+          source: "PR02 Service Level Management"
+        - name: "Service demand forecasts"
+          source: "PR01 Service Portfolio Management"
+        - name: "CI capacity data"
+          source: "PR17 Service Configuration Management"
+      outputs:
+        - name: "Capacity plans"
+          destination: "PR15 Change Management"
+        - name: "Performance monitoring data"
+          destination: "PR20 Measurement & Reporting"
+        - name: "Capacity warnings and exceptions"
+          destination: "PR11 Incident Management"
+      interfaces:
+        - process_id: "PR02"
+          direction: "in"
+          description: "SLA targets and predicted demand inform capacity requirements"
+        - process_id: "PR15"
+          direction: "out"
+          description: "Capacity adjustments require change management approval"
+      activities:
+        - name: "Identify capacity and performance requirements"
+          description: "Determine service capacity and performance requirements taking into account SLAs and predicted demand"
+        - name: "Assess current capacity"
+          description: "Identify current capacity and utilization across human, technical, and financial resources"
+        - name: "Plan future capacity"
+          description: "Plan capacity to meet identified requirements considering resource constraints"
+        - name: "Monitor performance"
+          description: "Analyse performance data to identify utilization trends, operational warnings, and exceptions"
+      kpis:
+        - name: "Capacity plan accuracy"
+          formula: "Variance between predicted and actual capacity utilization"
+          target: "<= 15% variance"
+        - name: "Performance SLA compliance"
+          formula: "(Performance metrics within SLA targets / Total measured metrics) x 100"
+          target: ">= 95%"
+
+    - id: "PR20"
+      name: "Measurement & Reporting"
+      framework_process_id: "PR3"
+      purpose: "Specify reports on services and processes and ensure they are produced and delivered"
+      scope: "Report identification, specification, production, and delivery covering service performance, process effectiveness, and detected nonconformities"
+      phase: "D"
+      inputs:
+        - name: "Performance data from all processes"
+          source: "All processes"
+        - name: "SLA targets and service catalogue"
+          source: "PR02 Service Level Management"
+      outputs:
+        - name: "Service and process reports"
+          destination: "PR22 Relationship Management"
+        - name: "Management review input reports"
+          destination: "PR24 Continual Improvement"
+        - name: "Trend and exception reports"
+          destination: "All processes"
+      interfaces:
+        - process_id: "PR02"
+          direction: "in"
+          description: "SLA targets define reporting baselines"
+        - process_id: "PR22"
+          direction: "out"
+          description: "Service reports are distributed to customers via relationship management"
+        - process_id: "PR24"
+          direction: "out"
+          description: "Performance and nonconformity reports feed improvement decisions"
+      activities:
+        - name: "Identify required reports"
+          description: "Determine which reports are needed covering service performance, significant events, and nonconformities"
+        - name: "Specify reports"
+          description: "Agree report specifications with recipients covering identity, purpose, audience, frequency, content, format, and delivery method"
+        - name: "Produce and deliver reports"
+          description: "Generate reports according to specifications and deliver them to defined recipients on schedule"
+      kpis:
+        - name: "Report delivery adherence"
+          formula: "(Reports delivered on schedule / Total scheduled reports) x 100"
+          target: "100%"
+        - name: "Report specification coverage"
+          formula: "(Reports with formal specification / Total reports produced) x 100"
+          target: "100%"
+
+    - id: "PR24"
+      name: "Continual Improvement"
+      framework_process_id: "PR14"
+      purpose: "Plan, implement, and review improvements to services and processes"
+      scope: "Identification, evaluation, prioritization, and implementation of improvement opportunities across the entire SMS"
+      phase: "D"
+      inputs:
+        - name: "Assessment and audit results"
+          source: "PR20 Measurement & Reporting"
+        - name: "Management review outcomes"
+          source: "SMS governance"
+        - name: "Service review findings"
+          source: "PR22 Relationship Management"
+      outputs:
+        - name: "Improvement initiatives"
+          destination: "PR15 Change Management"
+        - name: "Updated CSI register"
+          destination: "All processes"
+      interfaces:
+        - process_id: "PR20"
+          direction: "in"
+          description: "Reports and measurements identify improvement opportunities"
+        - process_id: "PR15"
+          direction: "out"
+          description: "Approved improvements requiring changes follow change management"
+        - process_id: "PR01"
+          direction: "out"
+          description: "Improvement initiatives that affect the portfolio composition"
+      activities:
+        - name: "Identify improvement opportunities"
+          description: "Register opportunities based on reports, assessments, audits, and management reviews"
+        - name: "Evaluate improvement proposals"
+          description: "Assess identified opportunities to decide on necessary actions and prioritization"
+        - name: "Control improvement implementation"
+          description: "Track the implementation of approved improvement actions in a consistent manner"
+      kpis:
+        - name: "Improvement implementation rate"
+          formula: "(Improvements implemented on schedule / Total approved improvements) x 100"
+          target: ">= 80%"
+        - name: "Improvement identification rate"
+          formula: "Number of new improvement opportunities registered per quarter"
+          target: "Trending upward or stable at maturity"
+
+role_model:
+  roles:
+    # ── Governance Roles ──────────────────────────────────────────────────
+
+    - id: "sms-owner"
+      name: "SMS Owner"
+      description: "Senior accountable owner of the entire service management system. Sets key goals, approves SMS policy and scope, conducts management reviews, and provides overall direction. Must be a member of top management."
+      processes:
+        - "PR01"
+        - "PR02"
+        - "PR06"
+        - "PR07"
+        - "PR08"
+        - "PR09"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR17"
+        - "PR20"
+        - "PR22"
+        - "PR23"
+        - "PR24"
+      raci_default:
+        PR01: "A"
+        PR09: "A"
+        PR24: "A"
+
+    - id: "sms-manager"
+      name: "SMS Manager"
+      description: "Operational coordinator of the SMS. Acts as the primary contact for all operational concerns, maintains the service management plan, ensures processes are implemented according to policies, monitors SMS maturity, and reports to the SMS owner."
+      processes:
+        - "PR01"
+        - "PR02"
+        - "PR06"
+        - "PR07"
+        - "PR08"
+        - "PR09"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR17"
+        - "PR20"
+        - "PR22"
+        - "PR23"
+        - "PR24"
+      raci_default:
+        PR01: "R"
+        PR20: "R"
+        PR24: "R"
+
+    # ── Generic Role Patterns ─────────────────────────────────────────────
+
+    - id: "process-owner"
+      name: "Process Owner"
+      description: "Accountable for a single ITSM process. Defines process goals and policies, nominates the process manager, approves process changes, allocates resources, and reviews process performance. One per process."
+      processes:
+        - "PR01"
+        - "PR02"
+        - "PR06"
+        - "PR07"
+        - "PR08"
+        - "PR09"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR17"
+        - "PR20"
+        - "PR22"
+        - "PR23"
+        - "PR24"
+      raci_default:
+        PR01: "A"
+
+    - id: "process-manager"
+      name: "Process Manager"
+      description: "Day-to-day operational leader of a process. Maintains the process definition, monitors execution, manages staff awareness and competence, handles escalations, and reports performance to the process owner."
+      processes:
+        - "PR01"
+        - "PR02"
+        - "PR06"
+        - "PR07"
+        - "PR08"
+        - "PR09"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR17"
+        - "PR20"
+        - "PR22"
+        - "PR23"
+        - "PR24"
+      raci_default:
+        PR01: "R"
+
+    - id: "case-owner"
+      name: "Case Owner"
+      description: "Responsible for a single case within a process — such as an incident, service request, problem, change, or release. Coordinates all activities through the case lifecycle and escalates exceptions."
+      processes:
+        - "PR02"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR22"
+        - "PR23"
+      raci_default:
+        PR11: "R"
+
+    - id: "process-staff-member"
+      name: "Process Staff Member"
+      description: "Performs operational tasks within a process according to defined procedures. Reports to case owners and process managers. May participate in multiple processes."
+      processes:
+        - "PR01"
+        - "PR02"
+        - "PR06"
+        - "PR07"
+        - "PR08"
+        - "PR09"
+        - "PR11"
+        - "PR12"
+        - "PR13"
+        - "PR15"
+        - "PR16"
+        - "PR17"
+        - "PR20"
+        - "PR22"
+        - "PR23"
+        - "PR24"
+      raci_default:
+        PR11: "R"
+
+    # ── Process-Specific Roles ────────────────────────────────────────────
+
+    - id: "spm-manager"
+      name: "SPM Manager"
+      description: "Maintains the service portfolio, manages updates and lifecycle transitions, evaluates service proposals, reviews the portfolio at planned intervals, and ensures federation member contributions are identified."
+      processes: ["PR01"]
+      raci_default:
+        PR01: "R"
+
+    - id: "slm-manager"
+      name: "SLM Manager"
+      description: "Maintains the service catalogue, negotiates SLAs with customers, proposes and manages OLAs and UAs, ensures agreements are aligned and documented consistently."
+      processes: ["PR02"]
+      raci_default:
+        PR02: "R"
+
+    - id: "srm-manager"
+      name: "SRM Manager"
+      description: "Maintains the list of reports, reviews report specifications at planned intervals, and monitors production of accurate reports according to specifications."
+      processes: ["PR20"]
+      raci_default:
+        PR20: "R"
+
+    - id: "sacm-manager"
+      name: "SACM Manager"
+      description: "Identifies service availability and continuity requirements, produces and reviews availability and continuity plans, ensures improvement measures are implemented through change management."
+      processes: ["PR06", "PR07"]
+      raci_default:
+        PR06: "R"
+        PR07: "R"
+
+    - id: "capm-manager"
+      name: "CAPM Manager"
+      description: "Identifies capacity and performance requirements, ensures capacity plans are produced and maintained, monitors utilization trends and operational exceptions."
+      processes: ["PR08"]
+      raci_default:
+        PR08: "R"
+
+    - id: "ism-manager"
+      name: "ISM Manager"
+      description: "Primary contact for information security issues. Monitors security activities including risk assessments, security event handling, and control implementation. Ensures security documentation is current."
+      processes: ["PR09"]
+      raci_default:
+        PR09: "R"
+
+    - id: "crm-manager"
+      name: "CRM Manager"
+      description: "Maintains the customer database, handles complaints, coordinates satisfaction surveys, and reviews service review results."
+      processes: ["PR22"]
+      raci_default:
+        PR22: "R"
+
+    - id: "suppm-manager"
+      name: "SUPPM Manager"
+      description: "Maintains the supplier database, monitors supplier performance according to the process, and manages supplier relationships."
+      processes: ["PR23"]
+      raci_default:
+        PR23: "R"
+
+    - id: "isrm-manager"
+      name: "ISRM Manager"
+      description: "Ensures all incidents and service requests are recorded with sufficient quality for traceability. Monitors resolution progress and identifies potential SLA violations."
+      processes: ["PR11", "PR12"]
+      raci_default:
+        PR11: "R"
+        PR12: "R"
+
+    - id: "major-incident-manager"
+      name: "Major Incident Manager"
+      description: "Leads the response to major incidents, convenes resolution teams, manages stakeholder communication, drives service restoration, and coordinates post-incident review."
+      processes: ["PR11"]
+      raci_default:
+        PR11: "R"
+
+    - id: "pm-manager"
+      name: "PM Manager"
+      description: "Ensures incident trends are analysed, problems are recorded with sufficient quality, investigations yield results, known errors are documented, and problems are brought to closure."
+      processes: ["PR13"]
+      raci_default:
+        PR13: "R"
+
+    - id: "confm-manager"
+      name: "CONFM Manager"
+      description: "Maintains the scope and granularity of the CMDB, defines CI and relationship types, plans and ensures configuration verifications are conducted and nonconformities addressed."
+      processes: ["PR17"]
+      raci_default:
+        PR17: "R"
+
+    - id: "chm-manager"
+      name: "CHM Manager"
+      description: "Plans and moderates CAB meetings, maintains standard change descriptions, ensures RFCs are processed effectively, monitors change progress, and reviews change records for trends."
+      processes: ["PR15"]
+      raci_default:
+        PR15: "R"
+
+    - id: "change-advisory-board"
+      name: "Change Advisory Board"
+      description: "Evaluates non-standard changes considering benefits, risks, impact, feasibility, and cost. Decides on approval and identifies candidates for pre-approval. Composed of relevant stakeholders."
+      processes: ["PR15"]
+      raci_default:
+        PR15: "C"
+
+    - id: "rdm-manager"
+      name: "RDM Manager"
+      description: "Maintains overall release planning and release cycles, manages deployment strategies, applies strategies to component groups, and reviews deployed releases for success."
+      processes: ["PR16"]
+      raci_default:
+        PR16: "R"
+
+    - id: "csi-manager"
+      name: "CSI Manager"
+      description: "Manages the CSI register, evaluates improvement proposals, coordinates improvement implementation, and tracks improvement outcomes."
+      processes: ["PR24"]
+      raci_default:
+        PR24: "R"
+
+general_requirements:
+  requirements:
+    - id: "GR1"
+      name: "Top Management Commitment & Accountability"
+      description: "Top management shall demonstrate commitment by assigning an SMS owner, defining and approving a service management policy, and conducting management reviews at planned intervals."
+      sub_requirements:
+        - "GR1.1: Assign a member of top management as accountable SMS owner"
+        - "GR1.2: Define a general service management policy including goals, commitment to improvement, and service/process orientation"
+        - "GR1.3: Conduct management reviews at planned intervals"
+      evidence:
+        - document_type: "sms-policy"
+          section: "Leadership commitment and SMS ownership"
+        - document_type: "process-definition"
+          section: "Management review procedure"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR2"
+      name: "Documentation Management"
+      description: "The SMS shall be documented including scope statement, policy, plan, process definitions, and process outputs. Documentation shall be controlled with defined creation, approval, review, versioning, and distribution procedures."
+      sub_requirements:
+        - "GR2.1: Document SMS key elements (scope, policy, plan, process definitions)"
+        - "GR2.2: Create and maintain documented process definitions with goals, inputs, activities, outputs, roles, interfaces, policies, and procedures"
+        - "GR2.3: Document key outputs and record execution of key activities"
+        - "GR2.4: Control documentation addressing creation, approval, distribution, review, and versioning"
+      evidence:
+        - document_type: "sms-policy"
+          section: "Documentation management policy"
+        - document_type: "process-definition"
+          section: "Process definitions for all processes"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR3"
+      name: "Scope Definition & Stakeholder Management"
+      description: "Stakeholders shall be identified and their needs analysed. The SMS scope shall be defined considering stakeholder analysis results, including legal, regulatory, and contractual requirements."
+      sub_requirements:
+        - "GR3.1: Identify stakeholders and analyse their needs and expectations including legal and regulatory requirements"
+        - "GR3.2: Define the SMS scope taking into account stakeholder analysis results"
+      evidence:
+        - document_type: "sms-policy"
+          section: "SMS scope statement"
+        - document_type: "process-definition"
+          section: "Stakeholder register"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR4"
+      name: "Planning"
+      description: "A service management plan shall be created covering goals, timing, roles, training, and technology. Process-specific plans shall align to the overall plan."
+      sub_requirements:
+        - "GR4.1: Create and maintain a service management plan with goals, timing, roles, training, and technology"
+        - "GR4.2: Align process-specific plans to the overall service management plan"
+      evidence:
+        - document_type: "sms-policy"
+          section: "Service management plan"
+        - document_type: "process-definition"
+          section: "Process-specific plans"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR5"
+      name: "Implementation Support"
+      description: "The service management plan shall be implemented. Defined processes shall be followed in practice and adherence to policies and procedures shall be enforced."
+      sub_requirements:
+        - "GR5.1: Implement the service management plan"
+        - "GR5.2: Enforce adherence to defined processes, policies, and procedures"
+      evidence:
+        - document_type: "process-definition"
+          section: "Implementation evidence and compliance records"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR6"
+      name: "Monitoring & Review"
+      description: "SMS and process effectiveness shall be measured using KPIs. Assessments and audits shall be conducted at planned intervals to evaluate maturity and conformity."
+      sub_requirements:
+        - "GR6.1: Measure and evaluate SMS effectiveness using suitable KPIs"
+        - "GR6.2: Conduct assessments or audits at planned intervals"
+      evidence:
+        - document_type: "process-definition"
+          section: "KPI definitions and measurement procedures"
+        - document_type: "completeness-report"
+          section: "Maturity assessment results"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+    - id: "GR7"
+      name: "Continual Improvement"
+      description: "Nonconformities shall be identified and corrective actions taken. The SMS policy, plan, and all processes shall be subject to continual improvement through the CSI process."
+      sub_requirements:
+        - "GR7.1: Identify nonconformities and take corrective actions to prevent recurrence"
+        - "GR7.2: Subject the entire SMS to continual improvement via the CSI process"
+      evidence:
+        - document_type: "process-definition"
+          section: "CSI register and improvement records"
+        - document_type: "completeness-report"
+          section: "Improvement tracking"
+      tier_applicability:
+        t1: true
+        t2: true
+        t3: true
+
+compliance_mapping:
+  standards:
+    - standard: "ISO/IEC 20000-1:2018"
+      clauses:
+        - clause: "4.1"
+          title: "Understanding the organization and its context"
+          processes: ["PR01", "PR22"]
+          documents: ["sms-policy"]
+        - clause: "4.2"
+          title: "Understanding the needs and expectations of interested parties"
+          processes: ["PR22", "PR23"]
+          documents: ["sms-policy"]
+        - clause: "4.3"
+          title: "Determining the scope of the SMS"
+          processes: ["PR01"]
+          documents: ["sms-policy"]
+        - clause: "4.4"
+          title: "Service management system"
+          processes: ["PR01", "PR24"]
+          documents: ["sms-policy", "process-definition"]
+        - clause: "5.1"
+          title: "Leadership and commitment"
+          processes: ["PR01", "PR24"]
+          documents: ["sms-policy"]
+        - clause: "5.2"
+          title: "Policy"
+          processes: ["PR01", "PR09"]
+          documents: ["sms-policy", "process-policy"]
+        - clause: "5.3"
+          title: "Organizational roles, responsibilities and authorities"
+          processes: ["PR01"]
+          documents: ["sms-policy", "raci-matrix"]
+        - clause: "7.1"
+          title: "Resources"
+          processes: ["PR01", "PR08"]
+          documents: ["sms-policy"]
+        - clause: "7.2"
+          title: "Competence"
+          processes: ["PR01"]
+          documents: ["sms-policy"]
+        - clause: "7.5"
+          title: "Documented information"
+          processes: ["PR20"]
+          documents: ["sms-policy", "process-definition"]
+        - clause: "8.2"
+          title: "Service portfolio"
+          processes: ["PR01"]
+          documents: ["process-definition"]
+        - clause: "8.3"
+          title: "Relationship and agreement"
+          processes: ["PR02", "PR22", "PR23"]
+          documents: ["process-definition", "sla-template"]
+        - clause: "8.5"
+          title: "Service design and transition"
+          processes: ["PR01", "PR15", "PR16"]
+          documents: ["process-definition"]
+        - clause: "8.6"
+          title: "Resolution and fulfilment"
+          processes: ["PR11", "PR12", "PR13"]
+          documents: ["process-definition", "procedure"]
+        - clause: "9.1"
+          title: "Monitoring, measurement, analysis and evaluation"
+          processes: ["PR20", "PR06", "PR08"]
+          documents: ["kpi-definition", "process-definition"]
+        - clause: "9.2"
+          title: "Internal audit"
+          processes: ["PR20", "PR24"]
+          documents: ["completeness-report"]
+        - clause: "9.3"
+          title: "Management review"
+          processes: ["PR24"]
+          documents: ["sms-policy", "completeness-report"]
+        - clause: "10.1"
+          title: "Nonconformity and corrective action"
+          processes: ["PR24"]
+          documents: ["process-definition"]
+        - clause: "10.2"
+          title: "Continual improvement"
+          processes: ["PR24"]
+          documents: ["process-definition"]
+
+intake_questions:
+  questions:
+    - question: "Does your organization operate in a federated environment where multiple parties jointly contribute to service delivery without a strict hierarchical structure?"
+      rationale: "FitSM was specifically designed for federated infrastructures. Federation changes how roles, responsibilities, and agreements are structured — particularly for OLAs, supplier management, and service portfolio coordination."
+      signal: "Federation scope — affects PR01, PR02, PR22, PR23 complexity and role model design"
+
+    - question: "Are you targeting FitSM certification or using FitSM as a stepping stone toward ISO/IEC 20000-1 certification?"
+      rationale: "Certification goals determine how rigorously GR1-GR7 requirements must be documented and evidenced. ISO 20000 readiness requires additional documentation depth beyond FitSM minimums."
+      signal: "Compliance tier — determines documentation depth and evidence requirements across all processes"
+
+    - question: "Have you previously conducted a FitSM-6 maturity or capability assessment, and if so, what was the overall maturity level and which processes scored lowest?"
+      rationale: "Existing assessment results identify specific process gaps and set a baseline for the documentation engagement. Low-scoring processes require more detailed process definitions and procedures."
+      signal: "Maturity baseline — identifies priority processes and gaps to address in the documentation corpus"
+
+    - question: "How many of the 14 FitSM processes are currently implemented (even informally), and which ones have documented process definitions?"
+      rationale: "FitSM organizations vary widely in formalization. Understanding current coverage helps determine whether this is a greenfield or revision engagement and which processes need the most documentation work."
+      signal: "Process coverage — determines engagement mode (greenfield vs. revision) and documentation effort per process"
+
+    - question: "Have your staff received FitSM Foundation or Advanced training, and do you have designated process managers for each in-scope process?"
+      rationale: "FitSM role model compliance (FitSM-3) requires process owners and managers. Training gaps affect the level of guidance needed in process definitions and procedures."
+      signal: "Role readiness — affects role model design, training recommendations, and procedure detail level"
+
+    - question: "In your federated setup, how are underpinning agreements (UAs) and operational level agreements (OLAs) currently managed between federation members?"
+      rationale: "FitSM's agreement hierarchy (SLA > OLA/UA) is central to service level management. Federated environments often have complex multi-party agreements that require careful documentation."
+      signal: "Agreement complexity — affects PR02 SLM and PR23 SUPPM documentation depth"
+
+    - question: "Do you maintain a configuration management database (CMDB), and if so, what is its approximate scope and accuracy level?"
+      rationale: "FitSM PR11 CONFM requires a CMDB with defined CI types, relationships, and verification. The current state determines whether configuration management documentation needs to cover initial setup or optimization."
+      signal: "CMDB maturity — affects PR17 documentation scope and verification procedure requirements"
+
+requirement_prompts:
+  prompts:
+    - category: "1"
+      prompt: "Map each in-scope process to the corresponding FitSM-1 process-specific requirements (PR1.x through PR14.x). Identify which requirements are already met, partially met, or unmet."
+      framework_context: "FitSM-1 defines 65 process-specific requirements across 14 processes. Each process definition must demonstrate traceability to these requirements for conformity assessment."
+
+    - category: "2"
+      prompt: "For each process, determine whether the process owner and process manager roles will be combined or separate. Document where the SMS owner will also serve as process owner."
+      framework_context: "FitSM-3 defines a three-tier role pattern (process owner, process manager, case owner) for each process. In smaller organizations, roles are often combined — this must be explicitly documented."
+
+    - category: "3"
+      prompt: "Decide how FitSM's combined ISRM process (PR9) will be documented — as a single combined process or as separate Incident Management and Service Request Management processes."
+      framework_context: "FitSM combines incident and service request management into PR9 ISRM. The 3PA model separates them (PR11, PR12). The decision affects process definition structure, RACI matrices, and procedure documents."
+
+    - category: "3"
+      prompt: "Decide how FitSM's combined SACM process (PR4) will be documented — as a single combined process or as separate Availability Management and Service Continuity Management processes."
+      framework_context: "FitSM combines availability and continuity management into PR4 SACM. The 3PA model separates them (PR06, PR07). The decision affects process definition structure and plan documents."
+
+    - category: "4"
+      prompt: "Define the target maturity level for each in-scope process using the FitSM-6 capability level scale (0-5). Set a realistic initial target and a 12-month improvement target."
+      framework_context: "FitSM-6 defines a capability assessment scale that can be applied to each process. Setting explicit targets drives documentation depth and improvement planning."
+
+    - category: "6"
+      prompt: "Establish the CSI governance model: how will improvement opportunities be registered, evaluated, and prioritized? Define the CSI register format and review cadence."
+      framework_context: "FitSM GR7 and PR14 CSI require a systematic approach to continual improvement. The governance model determines how improvements flow from identification through implementation."
+
+    - category: "7"
+      prompt: "For each of the seven general requirements (GR1-GR7), identify the specific evidence artifacts that will demonstrate conformity — linking each sub-requirement to a document or record."
+      framework_context: "FitSM-1 general requirements apply across the entire SMS and must be evidenced through documentation. The evidence mapping ensures completeness and supports assessment readiness."
+
+    - category: "8"
+      prompt: "Define the approach for managing the FitSM documentation hierarchy: service management policy, service management plan, process definitions, procedures, and records. Specify ownership, review cycles, and version control."
+      framework_context: "FitSM GR2 requires controlled documentation. The documentation hierarchy must be consistent with FitSM-1 requirements and the organization's documentation management approach."
+
+document_section_templates:
+  templates:
+    - document_type: "sms-policy"
+      sections:
+        - heading: "FitSM General Requirements Alignment"
+          guidance: "For each general requirement GR1-GR7, state how the organization addresses the requirement. Reference the specific FitSM-1 sub-requirements (GR1.1-GR1.3, GR2.1-GR2.4, etc.) and identify the evidence artifacts that demonstrate conformity."
+          tier: "t1"
+        - heading: "FitSM Certification Scope"
+          guidance: "If pursuing FitSM certification or ISO 20000 readiness, state the certification scope, target timeline, and the subset of FitSM processes in scope. Reference the FitSM-6 assessment tool and planned assessment schedule."
+          tier: "t2"
+        - heading: "Federation Governance"
+          guidance: "If operating in a federated environment, describe the federation structure, the role of the federator, member responsibilities, and how SMS policies apply across federation boundaries."
+          tier: "t2"
+
+    - document_type: "process-definition"
+      sections:
+        - heading: "FitSM Requirements Traceability"
+          guidance: "List each FitSM-1 process-specific requirement applicable to this process (e.g., PR1.1-PR1.4 for SPM). For each requirement, describe how this process definition addresses it and reference the specific section, activity, or artifact."
+          tier: "t1"
+        - heading: "FitSM Role Mapping"
+          guidance: "Map the roles defined in this process to the FitSM-3 role model. Identify the process owner, process manager, and any case owner roles. Where roles are combined, document the combination and rationale."
+          tier: "t1"
+
+    - document_type: "process-policy"
+      sections:
+        - heading: "FitSM Alignment Statement"
+          guidance: "State how this process policy aligns with FitSM-1 requirements and the overarching service management policy. Reference the specific general requirements (GR1-GR7) that this process supports."
+          tier: "t1"
+
+    - document_type: "completeness-report"
+      sections:
+        - heading: "FitSM Maturity Assessment Summary"
+          guidance: "Summarize the current FitSM-6 capability level for each in-scope process. Compare against target levels set during P2. Highlight processes that have not yet reached their target capability level and the specific gaps."
+          tier: "t2"
+        - heading: "General Requirements Conformity Status"
+          guidance: "For each general requirement GR1-GR7, state the conformity status (conforming, partially conforming, nonconforming) with evidence references."
+          tier: "t2"
+
+quality_checks:
+  checks:
+    - gate: "G3"
+      check: "FitSM process coverage completeness"
+      pass_criteria: "All FitSM processes in scope have corresponding process definitions. For split processes (SACM to PR06/PR07, ISRM to PR11/PR12), both halves are documented."
+      tier: "t1"
+
+    - gate: "G4"
+      check: "FitSM-1 requirements traceability"
+      pass_criteria: "Every FitSM-1 process-specific requirement for in-scope processes is addressed in the corresponding process definition with an explicit traceability statement."
+      tier: "t1"
+
+    - gate: "G5"
+      check: "FitSM general requirements coverage"
+      pass_criteria: "All seven general requirements (GR1-GR7) are addressed in the SMS policy with specific evidence artifacts identified. Sub-requirements GR1.1-GR1.3, GR2.1-GR2.4, GR3.1-GR3.2, GR4.1-GR4.2, GR5.1-GR5.2, GR6.1-GR6.2, GR7.1-GR7.2 are each covered."
+      tier: "t1"
+
+    - gate: "G6"
+      check: "FitSM-3 role model compliance"
+      pass_criteria: "Every in-scope process has process owner and process manager roles assigned. Case owner roles are defined for ticket-based processes. Role descriptions align with FitSM-3 generic patterns."
+      tier: "t1"
+
+    - gate: "G8"
+      check: "FitSM certification readiness"
+      pass_criteria: "Documentation corpus is sufficient to support a FitSM-6 assessment at the target maturity level. All required evidence artifacts for GR1-GR7 and process-specific requirements are present and current."
+      tier: "t2"
+
+terminology:
+  terms:
+    - term: "Service Management System (SMS)"
+      definition: "Overall management system that controls and supports management of services within an organization or federation. Comprises the entirety of interconnected policies, processes, procedures, roles, agreements, plans, and related resources."
+      aliases: ["management system"]
+      context: "Central concept in FitSM. All processes operate within the SMS context."
+
+    - term: "Service Availability and Continuity Management (SACM)"
+      definition: "FitSM process (PR4) that combines availability management and continuity management into a single process to ensure services meet agreed availability and continuity targets."
+      aliases: ["PR4", "SACM", "availability and continuity management"]
+      context: "In the 3PA model, this FitSM process maps to two separate processes: PR06 Availability Management and PR07 Service Continuity Management."
+
+    - term: "Incident and Service Request Management (ISRM)"
+      definition: "FitSM process (PR9) that combines incident management and service request management into a single process for restoring service and responding to user requests."
+      aliases: ["PR9", "ISRM", "incident and service request management"]
+      context: "In the 3PA model, this FitSM process maps to two separate processes: PR11 Incident Management and PR12 Service Request Management."
+
+    - term: "Continual Service Improvement (CSI)"
+      definition: "FitSM process (PR14) for planning, implementing, and reviewing improvements to services and processes based on assessments, reports, and management reviews."
+      aliases: ["PR14", "CSI", "continual improvement"]
+      context: "Maps to 3PA PR24 Continual Improvement. Driven by GR7 general requirement."
+
+    - term: "Service Portfolio"
+      definition: "Internal list detailing all services offered by a service provider, including those in preparation, live, and discontinued."
+      aliases: ["portfolio"]
+      context: "Maintained by the SPM process (PR1). Contains the service pipeline, service catalogue, and retired services."
+
+    - term: "Service Catalogue"
+      definition: "Customer-facing list of all live services offered, along with relevant information about those services."
+      aliases: ["catalog", "service catalog"]
+      context: "A filtered, customer-visible view of the service portfolio. Maintained by the SLM process (PR2) in FitSM."
+
+    - term: "Service Level Agreement (SLA)"
+      definition: "Documented agreement between a customer and service provider specifying the service to be provided and the service targets that define how it will be provided."
+      aliases: ["SLA"]
+      context: "Primary agreement type in FitSM. All services delivered to customers shall have SLAs per PR2."
+
+    - term: "Operational Level Agreement (OLA)"
+      definition: "Documented agreement between a service provider and an internal supplier or federation member specifying the underpinning service or service components and related operational targets."
+      aliases: ["OLA"]
+      context: "Supports customer-facing SLAs with internal operational commitments. Important in federated environments."
+
+    - term: "Underpinning Agreement (UA)"
+      definition: "Documented agreement between a service provider and an external supplier specifying the underpinning service or service components and related operational targets."
+      aliases: ["UA", "underpinning contract", "UC"]
+      context: "External counterpart to OLAs. Required per FitSM PR2 for supporting services from external suppliers."
+
+    - term: "Configuration Management Database (CMDB)"
+      definition: "Store for data about configuration items. May be a single database or composed of multiple data stores."
+      aliases: ["CMDB", "configuration database"]
+      context: "Central data store for FitSM PR11 CONFM. Stores CI records, attributes, and relationships."
+
+    - term: "Configuration Item (CI)"
+      definition: "Element that contributes to the delivery of one or more services or service components, requiring control of its configuration."
+      aliases: ["CI"]
+      context: "Tracked in the CMDB. CIs range from hardware and software to documentation and agreements."
+
+    - term: "Request for Change (RFC)"
+      definition: "Documented proposal for a change to a configuration item or other entity requiring change control."
+      aliases: ["RFC", "change request"]
+      context: "Primary input to the change management process (PR12 CHM in FitSM)."
+
+    - term: "Known Error"
+      definition: "Problem which has not yet been resolved, but for which documented workarounds or measures exist to reduce or prevent negative impact on services."
+      aliases: ["known error record", "KEDB entry"]
+      context: "Managed by the problem management process (PR10 PM in FitSM). Used by incident management to speed resolution."
+
+    - term: "Major Incident"
+      definition: "Incident that has or may have significant impact on the customer and requires dedicated handling procedures."
+      aliases: ["P1 incident", "critical incident"]
+      context: "FitSM PR9.6 requires major incidents to be identified based on defined criteria and handled consistently."
+
+    - term: "Process Owner"
+      definition: "Role accountable for the strategic direction, fitness for purpose, and continual improvement of a specific ITSM process."
+      aliases: ["process sponsor"]
+      context: "FitSM-3 defines process owners for each of the 14 processes. Analogous to the SMS owner at the process level."
+
+    - term: "Process Manager"
+      definition: "Role responsible for the day-to-day operational management of a specific ITSM process including staff coordination, monitoring, and reporting."
+      aliases: ["process coordinator"]
+      context: "FitSM-3 defines process managers for each of the 14 processes. Responsible counterpart to the process owner."
+
+    - term: "Case Owner"
+      definition: "Role with overall responsibility for managing a specific case (such as an incident, problem, change, or release) through its lifecycle within a process."
+      aliases: ["ticket owner", "case coordinator"]
+      context: "FitSM-3 defines case owners for ticket-based processes. One case owner per case instance."
+
+    - term: "Capability Level"
+      definition: "Achieved level of effectiveness of an individual process or general aspect of management, as measured by the FitSM-6 assessment scheme."
+      aliases: ["process capability", "maturity level (process)"]
+      context: "FitSM-6 defines capability levels 0-5 for individual processes. The overall SMS maturity is derived from individual process capabilities."
+
+    - term: "Federation"
+      definition: "Situation in which multiple parties (federation members) jointly contribute to the delivery of services to customers without being organized in a strict hierarchical setup or supply chain."
+      aliases: ["federated environment", "federated infrastructure"]
+      context: "Key FitSM differentiator. Federation affects role assignments, agreement structures, and governance models."
+
+    - term: "Federator"
+      definition: "Body that acts to coordinate a set of federation members in a federated service delivery arrangement."
+      aliases: ["federation coordinator"]
+      context: "In a federation, the federator coordinates but does not hierarchically control federation members."
+
+    - term: "Service Management Plan"
+      definition: "Overall plan for implementing and operating a service management system, including goals, timing, roles, training, and technology."
+      aliases: ["SMP", "SMS plan"]
+      context: "Required by FitSM GR4. All process-specific plans must align to the service management plan."
+
+    - term: "Post Implementation Review (PIR)"
+      definition: "Review conducted after the implementation of a change to determine whether the change was successful."
+      aliases: ["PIR", "post-change review"]
+      context: "Required by FitSM PR12.5 for changes. Depth varies by change type and complexity."
+
+tooling_recommendations:
+  tools:
+    - name: "FitSM-6 Assessment and Audit Tool"
+      purpose: "Structured assessment of SMS maturity and process capability levels against FitSM requirements"
+      url: "https://www.fitsm.eu"
+      integration: "Use during P1 to establish maturity baseline, during P4 to validate documentation completeness, and during P5 to produce the maturity assessment summary in the completeness report."
+
+    - name: "FitSM Process Definition Template"
+      purpose: "Standardized template for documenting process definitions according to FitSM-1 GR2.2 requirements"
+      url: "https://www.fitsm.eu"
+      integration: "Use as a reference during P3 to ensure process definitions include all FitSM-required sections: goals, inputs, activities, outputs, roles, interfaces, policies, and procedures."
+
+    - name: "FitSM SLA Template"
+      purpose: "Sample SLA structure aligned with FitSM PR2 service level management requirements"
+      url: "https://www.fitsm.eu"
+      integration: "Use during P3 as a starting point for SLA document authoring. Customize service targets, reporting frequency, and review cadence to match organizational needs."
+
+best_practices_ref:
+  mapping:
+    # ── PR01 SPM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR1 Service Portfolio Management - Definition"
+      best_practice_path: "best-practices/pr01-spm/definition.md"
+      notes: "Focus on FitSM-sourced activities: portfolio register, service lifecycle management, federation member identification"
+    - framework_concept: "FitSM PR1 Service Portfolio Management - Policy"
+      best_practice_path: "best-practices/pr01-spm/policy.md"
+      notes: "Adapt GR1-GR7 policy patterns for portfolio governance context"
+    - framework_concept: "FitSM PR1 Service Portfolio Management - Procedures"
+      best_practice_path: "best-practices/pr01-spm/procedures.md"
+      notes: "Use FitSM-lightweight approach: minimal viable procedures for proposal evaluation and lifecycle management"
+    - framework_concept: "FitSM PR1 Service Portfolio Management - RACI"
+      best_practice_path: "best-practices/pr01-spm/raci.md"
+      notes: "Map to FitSM-3 SPM roles: Process Owner SPM, Process Manager SPM, Service Owner"
+    - framework_concept: "FitSM PR1 Service Portfolio Management - KPIs"
+      best_practice_path: "best-practices/pr01-spm/kpis.md"
+      notes: "Select essential KPIs aligned with FitSM PR1 requirements: portfolio completeness, proposal evaluation rate"
+
+    # ── PR02 SLM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR2 Service Level Management - Definition"
+      best_practice_path: "best-practices/pr02-slm/definition.md"
+      notes: "Emphasize FitSM's combined SLM approach: catalogue + SLA/OLA/UA management in one process"
+    - framework_concept: "FitSM PR2 Service Level Management - Policy"
+      best_practice_path: "best-practices/pr02-slm/policy.md"
+      notes: "Include FitSM-specific agreement hierarchy: SLA, OLA, UA"
+    - framework_concept: "FitSM PR2 Service Level Management - Procedures"
+      best_practice_path: "best-practices/pr02-slm/procedures.md"
+      notes: "Cover catalogue maintenance, SLA negotiation, OLA/UA management, and service reviews"
+    - framework_concept: "FitSM PR2 Service Level Management - RACI"
+      best_practice_path: "best-practices/pr02-slm/raci.md"
+      notes: "Map to FitSM-3 SLM roles: Process Owner SLM, Process Manager SLM, SLA/OLA/UA Owner"
+    - framework_concept: "FitSM PR2 Service Level Management - KPIs"
+      best_practice_path: "best-practices/pr02-slm/kpis.md"
+      notes: "Focus on SLA coverage, target achievement, and service review adherence"
+
+    # ── PR06 AM (from FitSM PR4 SACM) ────────────────────────────────────
+    - framework_concept: "FitSM PR4 SACM (Availability) - Definition"
+      best_practice_path: "best-practices/pr06-am/definition.md"
+      notes: "Extract availability-specific content from FitSM PR4 SACM. FitSM combines availability and continuity."
+    - framework_concept: "FitSM PR4 SACM (Availability) - Policy"
+      best_practice_path: "best-practices/pr06-am/policy.md"
+      notes: "Availability policy statements derived from FitSM PR4 requirements"
+    - framework_concept: "FitSM PR4 SACM (Availability) - Procedures"
+      best_practice_path: "best-practices/pr06-am/procedures.md"
+      notes: "Availability planning, risk assessment, and monitoring procedures"
+    - framework_concept: "FitSM PR4 SACM (Availability) - RACI"
+      best_practice_path: "best-practices/pr06-am/raci.md"
+      notes: "Map to FitSM-3 SACM roles for availability functions"
+    - framework_concept: "FitSM PR4 SACM (Availability) - KPIs"
+      best_practice_path: "best-practices/pr06-am/kpis.md"
+      notes: "Service availability, plan currency, and risk assessment coverage KPIs"
+
+    # ── PR07 SCM (from FitSM PR4 SACM) ───────────────────────────────────
+    - framework_concept: "FitSM PR4 SACM (Continuity) - Definition"
+      best_practice_path: "best-practices/pr07-scm/definition.md"
+      notes: "Extract continuity-specific content from FitSM PR4 SACM."
+    - framework_concept: "FitSM PR4 SACM (Continuity) - Policy"
+      best_practice_path: "best-practices/pr07-scm/policy.md"
+      notes: "Continuity policy statements derived from FitSM PR4 requirements"
+    - framework_concept: "FitSM PR4 SACM (Continuity) - Procedures"
+      best_practice_path: "best-practices/pr07-scm/procedures.md"
+      notes: "Continuity planning, testing, and recovery procedures"
+    - framework_concept: "FitSM PR4 SACM (Continuity) - RACI"
+      best_practice_path: "best-practices/pr07-scm/raci.md"
+      notes: "Map to FitSM-3 SACM roles for continuity functions"
+    - framework_concept: "FitSM PR4 SACM (Continuity) - KPIs"
+      best_practice_path: "best-practices/pr07-scm/kpis.md"
+      notes: "Continuity plan coverage, test adherence, and recovery time KPIs"
+
+    # ── PR08 CPM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR5 Capacity Management - Definition"
+      best_practice_path: "best-practices/pr08-cpm/definition.md"
+      notes: "Focus on FitSM's lightweight capacity management: requirements, planning, and performance monitoring"
+    - framework_concept: "FitSM PR5 Capacity Management - Policy"
+      best_practice_path: "best-practices/pr08-cpm/policy.md"
+      notes: "Capacity policy covering SLA-driven requirements and demand forecasting"
+    - framework_concept: "FitSM PR5 Capacity Management - Procedures"
+      best_practice_path: "best-practices/pr08-cpm/procedures.md"
+      notes: "Capacity assessment, planning, and performance monitoring procedures"
+    - framework_concept: "FitSM PR5 Capacity Management - RACI"
+      best_practice_path: "best-practices/pr08-cpm/raci.md"
+      notes: "Map to FitSM-3 CAPM roles: Process Owner CAPM, Process Manager CAPM, Capacity Plan Owner"
+    - framework_concept: "FitSM PR5 Capacity Management - KPIs"
+      best_practice_path: "best-practices/pr08-cpm/kpis.md"
+      notes: "Capacity plan accuracy and performance SLA compliance KPIs"
+
+    # ── PR09 ISM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR6 Information Security Management - Definition"
+      best_practice_path: "best-practices/pr09-ism/definition.md"
+      notes: "Cover all five FitSM PR6 requirement areas: policy, risk assessment, controls, events/incidents, access control"
+    - framework_concept: "FitSM PR6 Information Security Management - Policy"
+      best_practice_path: "best-practices/pr09-ism/policy.md"
+      notes: "Information security policy aligned with FitSM PR6.1 requirements"
+    - framework_concept: "FitSM PR6 Information Security Management - Procedures"
+      best_practice_path: "best-practices/pr09-ism/procedures.md"
+      notes: "Security risk assessment, control implementation, event handling, and access control procedures"
+    - framework_concept: "FitSM PR6 Information Security Management - RACI"
+      best_practice_path: "best-practices/pr09-ism/raci.md"
+      notes: "Map to FitSM-3 ISM roles: ISM Manager, Security Risk Owner, Security Control Owner"
+    - framework_concept: "FitSM PR6 Information Security Management - KPIs"
+      best_practice_path: "best-practices/pr09-ism/kpis.md"
+      notes: "Policy review adherence, incident response time, and risk assessment coverage KPIs"
+
+    # ── PR11 IM (from FitSM PR9 ISRM) ────────────────────────────────────
+    - framework_concept: "FitSM PR9 ISRM (Incidents) - Definition"
+      best_practice_path: "best-practices/pr11-im/definition.md"
+      notes: "Extract incident-specific content from FitSM PR9 ISRM including major incident handling"
+    - framework_concept: "FitSM PR9 ISRM (Incidents) - Policy"
+      best_practice_path: "best-practices/pr11-im/policy.md"
+      notes: "Incident management policy including major incident criteria"
+    - framework_concept: "FitSM PR9 ISRM (Incidents) - Procedures"
+      best_practice_path: "best-practices/pr11-im/procedures.md"
+      notes: "Incident registration, classification, escalation, resolution, closure, and major incident procedures"
+    - framework_concept: "FitSM PR9 ISRM (Incidents) - RACI"
+      best_practice_path: "best-practices/pr11-im/raci.md"
+      notes: "Map to FitSM-3 ISRM roles for incident functions including Major Incident Manager"
+    - framework_concept: "FitSM PR9 ISRM (Incidents) - KPIs"
+      best_practice_path: "best-practices/pr11-im/kpis.md"
+      notes: "First-contact resolution, MTRS, and SLA breach rate KPIs"
+
+    # ── PR12 SRM (from FitSM PR9 ISRM) ───────────────────────────────────
+    - framework_concept: "FitSM PR9 ISRM (Service Requests) - Definition"
+      best_practice_path: "best-practices/pr12-srm/definition.md"
+      notes: "Extract service request-specific content from FitSM PR9 ISRM"
+    - framework_concept: "FitSM PR9 ISRM (Service Requests) - Policy"
+      best_practice_path: "best-practices/pr12-srm/policy.md"
+      notes: "Service request fulfilment policy"
+    - framework_concept: "FitSM PR9 ISRM (Service Requests) - Procedures"
+      best_practice_path: "best-practices/pr12-srm/procedures.md"
+      notes: "Request registration, fulfilment, and closure procedures"
+    - framework_concept: "FitSM PR9 ISRM (Service Requests) - RACI"
+      best_practice_path: "best-practices/pr12-srm/raci.md"
+      notes: "Map to FitSM-3 ISRM roles for service request functions"
+    - framework_concept: "FitSM PR9 ISRM (Service Requests) - KPIs"
+      best_practice_path: "best-practices/pr12-srm/kpis.md"
+      notes: "Fulfilment rate and request backlog KPIs"
+
+    # ── PR13 PM ───────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR10 Problem Management - Definition"
+      best_practice_path: "best-practices/pr13-pm/definition.md"
+      notes: "Cover all four FitSM PR10 requirements: identification, investigation, known errors, workaround maintenance"
+    - framework_concept: "FitSM PR10 Problem Management - Policy"
+      best_practice_path: "best-practices/pr13-pm/policy.md"
+      notes: "Problem management policy including known error database governance"
+    - framework_concept: "FitSM PR10 Problem Management - Procedures"
+      best_practice_path: "best-practices/pr13-pm/procedures.md"
+      notes: "Problem identification, investigation, known error registration, and closure procedures"
+    - framework_concept: "FitSM PR10 Problem Management - RACI"
+      best_practice_path: "best-practices/pr13-pm/raci.md"
+      notes: "Map to FitSM-3 PM roles: Process Owner PM, Process Manager PM, Problem Owner"
+    - framework_concept: "FitSM PR10 Problem Management - KPIs"
+      best_practice_path: "best-practices/pr13-pm/kpis.md"
+      notes: "Problem resolution rate and KEDB currency KPIs"
+
+    # ── PR15 CHM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR12 Change Management - Definition"
+      best_practice_path: "best-practices/pr15-chm/definition.md"
+      notes: "Cover all six FitSM PR12 requirements including change schedule and PIR"
+    - framework_concept: "FitSM PR12 Change Management - Policy"
+      best_practice_path: "best-practices/pr15-chm/policy.md"
+      notes: "Change management policy including change categories and approval authorities"
+    - framework_concept: "FitSM PR12 Change Management - Procedures"
+      best_practice_path: "best-practices/pr15-chm/procedures.md"
+      notes: "RFC submission, assessment, CAB review, approval, implementation, and PIR procedures"
+    - framework_concept: "FitSM PR12 Change Management - RACI"
+      best_practice_path: "best-practices/pr15-chm/raci.md"
+      notes: "Map to FitSM-3 CHM roles: CHM Manager, Change Owner, CAB"
+    - framework_concept: "FitSM PR12 Change Management - KPIs"
+      best_practice_path: "best-practices/pr15-chm/kpis.md"
+      notes: "Change success rate, emergency change ratio, and assessment completeness KPIs"
+
+    # ── PR16 RDM ──────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR13 Release & Deployment Management - Definition"
+      best_practice_path: "best-practices/pr16-rdm/definition.md"
+      notes: "Cover all six FitSM PR13 requirements including strategies, planning, testing, and deployment evaluation"
+    - framework_concept: "FitSM PR13 Release & Deployment Management - Policy"
+      best_practice_path: "best-practices/pr16-rdm/policy.md"
+      notes: "Release and deployment policy including strategy definitions and rollback requirements"
+    - framework_concept: "FitSM PR13 Release & Deployment Management - Procedures"
+      best_practice_path: "best-practices/pr16-rdm/procedures.md"
+      notes: "Release planning, build, test, deployment, and rollback procedures"
+    - framework_concept: "FitSM PR13 Release & Deployment Management - RACI"
+      best_practice_path: "best-practices/pr16-rdm/raci.md"
+      notes: "Map to FitSM-3 RDM roles: RDM Manager, Release Owner"
+    - framework_concept: "FitSM PR13 Release & Deployment Management - KPIs"
+      best_practice_path: "best-practices/pr16-rdm/kpis.md"
+      notes: "Release success rate and on-time delivery KPIs"
+
+    # ── PR17 SCFGM ────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR11 Configuration Management - Definition"
+      best_practice_path: "best-practices/pr17-scfgm/definition.md"
+      notes: "Cover all five FitSM PR11 requirements: scope, detail, CMDB, control, and verification"
+    - framework_concept: "FitSM PR11 Configuration Management - Policy"
+      best_practice_path: "best-practices/pr17-scfgm/policy.md"
+      notes: "Configuration management policy including CMDB scope and CI governance"
+    - framework_concept: "FitSM PR11 Configuration Management - Procedures"
+      best_practice_path: "best-practices/pr17-scfgm/procedures.md"
+      notes: "CI registration, CMDB maintenance, change tracking, and verification procedures"
+    - framework_concept: "FitSM PR11 Configuration Management - RACI"
+      best_practice_path: "best-practices/pr17-scfgm/raci.md"
+      notes: "Map to FitSM-3 CONFM roles: CONFM Manager, CI Owner"
+    - framework_concept: "FitSM PR11 Configuration Management - KPIs"
+      best_practice_path: "best-practices/pr17-scfgm/kpis.md"
+      notes: "CMDB accuracy and verification adherence KPIs"
+
+    # ── PR20 MR ───────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR3 Service Reporting Management - Definition"
+      best_practice_path: "best-practices/pr20-mr/definition.md"
+      notes: "Cover all three FitSM PR3 requirements: report identification, specification, and delivery"
+    - framework_concept: "FitSM PR3 Service Reporting Management - Policy"
+      best_practice_path: "best-practices/pr20-mr/policy.md"
+      notes: "Measurement and reporting policy including report specification requirements"
+    - framework_concept: "FitSM PR3 Service Reporting Management - Procedures"
+      best_practice_path: "best-practices/pr20-mr/procedures.md"
+      notes: "Report specification, production, and delivery procedures"
+    - framework_concept: "FitSM PR3 Service Reporting Management - RACI"
+      best_practice_path: "best-practices/pr20-mr/raci.md"
+      notes: "Map to FitSM-3 SRM roles: SRM Manager, Report Owner"
+    - framework_concept: "FitSM PR3 Service Reporting Management - KPIs"
+      best_practice_path: "best-practices/pr20-mr/kpis.md"
+      notes: "Report delivery adherence and specification coverage KPIs"
+
+    # ── PR22 RELM ─────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR7 Customer Relationship Management - Definition"
+      best_practice_path: "best-practices/pr22-relm/definition.md"
+      notes: "Cover all six FitSM PR7 requirements: customer identification, contacts, channels, reviews, complaints, satisfaction"
+    - framework_concept: "FitSM PR7 Customer Relationship Management - Policy"
+      best_practice_path: "best-practices/pr22-relm/policy.md"
+      notes: "Relationship management policy including customer communication and complaint handling"
+    - framework_concept: "FitSM PR7 Customer Relationship Management - Procedures"
+      best_practice_path: "best-practices/pr22-relm/procedures.md"
+      notes: "Customer identification, communication, service review, and complaint handling procedures"
+    - framework_concept: "FitSM PR7 Customer Relationship Management - RACI"
+      best_practice_path: "best-practices/pr22-relm/raci.md"
+      notes: "Map to FitSM-3 CRM roles: CRM Manager, Customer Relationship Manager (Account Manager)"
+    - framework_concept: "FitSM PR7 Customer Relationship Management - KPIs"
+      best_practice_path: "best-practices/pr22-relm/kpis.md"
+      notes: "Customer satisfaction score and complaint resolution rate KPIs"
+
+    # ── PR23 SUPPM ────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR8 Supplier Relationship Management - Definition"
+      best_practice_path: "best-practices/pr23-suppm/definition.md"
+      notes: "Cover all four FitSM PR8 requirements: identification, contacts, channels, and performance evaluation"
+    - framework_concept: "FitSM PR8 Supplier Relationship Management - Policy"
+      best_practice_path: "best-practices/pr23-suppm/policy.md"
+      notes: "Supplier management policy including federation member management"
+    - framework_concept: "FitSM PR8 Supplier Relationship Management - Procedures"
+      best_practice_path: "best-practices/pr23-suppm/procedures.md"
+      notes: "Supplier identification, communication, performance monitoring, and evaluation procedures"
+    - framework_concept: "FitSM PR8 Supplier Relationship Management - RACI"
+      best_practice_path: "best-practices/pr23-suppm/raci.md"
+      notes: "Map to FitSM-3 SUPPM roles: SUPPM Manager, Supplier Relationship Manager"
+    - framework_concept: "FitSM PR8 Supplier Relationship Management - KPIs"
+      best_practice_path: "best-practices/pr23-suppm/kpis.md"
+      notes: "Supplier evaluation adherence and contract compliance KPIs"
+
+    # ── PR24 CI ───────────────────────────────────────────────────────────
+    - framework_concept: "FitSM PR14 Continual Service Improvement - Definition"
+      best_practice_path: "best-practices/pr24-ci/definition.md"
+      notes: "Cover all three FitSM PR14 requirements: opportunity identification, evaluation, and implementation control"
+    - framework_concept: "FitSM PR14 Continual Service Improvement - Policy"
+      best_practice_path: "best-practices/pr24-ci/policy.md"
+      notes: "CSI policy aligned with FitSM GR7 general requirement"
+    - framework_concept: "FitSM PR14 Continual Service Improvement - Procedures"
+      best_practice_path: "best-practices/pr24-ci/procedures.md"
+      notes: "Improvement identification, evaluation, prioritization, and implementation tracking procedures"
+    - framework_concept: "FitSM PR14 Continual Service Improvement - RACI"
+      best_practice_path: "best-practices/pr24-ci/raci.md"
+      notes: "Map to FitSM-3 CSI roles: CSI Manager, Improvement Owner"
+    - framework_concept: "FitSM PR14 Continual Service Improvement - KPIs"
+      best_practice_path: "best-practices/pr24-ci/kpis.md"
+      notes: "Improvement implementation rate and identification rate KPIs"
+
+    # ── Cross-Cutting ─────────────────────────────────────────────────────
+    - framework_concept: "FitSM Role Model (FitSM-3)"
+      best_practice_path: "best-practices/cross-cutting/role-catalog.md"
+      notes: "Maps FitSM-3 role model to 3PA unified role catalog. Use governance and generic pattern sections for FitSM role model compliance."
+    - framework_concept: "FitSM Policy Patterns (GR1-GR7)"
+      best_practice_path: "best-practices/cross-cutting/policy-patterns.md"
+      notes: "Reusable policy statement patterns organized by FitSM general requirements GR1-GR7"
+    - framework_concept: "FitSM Maturity Model (FitSM-6)"
+      best_practice_path: "best-practices/cross-cutting/maturity-model.md"
+      notes: "Maps FitSM-6 capability assessment scheme to 3PA maturity indicators"
+    - framework_concept: "FitSM Process Interface Patterns"
+      best_practice_path: "best-practices/cross-cutting/interface-patterns.md"
+      notes: "Standardized interface patterns between FitSM processes"
+    - framework_concept: "FitSM Escalation Models"
+      best_practice_path: "best-practices/cross-cutting/escalation-models.md"
+      notes: "Functional and hierarchical escalation models referenced by FitSM PR9 ISRM"
+    - framework_concept: "FitSM Priority Models"
+      best_practice_path: "best-practices/cross-cutting/priority-models.md"
+      notes: "Priority classification models for incidents, service requests, problems, and changes"

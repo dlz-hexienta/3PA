@@ -15,3 +15,6 @@ docs/superpowers/
 
 # Claude Code memory/config
 .claude/
+
+# Git worktrees
+.worktrees/

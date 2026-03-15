@@ -179,28 +179,28 @@ Content is organized by template section with maturity annotations:
 
 | ID | Process | Status | Last Crawled |
 |:--:|---------|:------:|-------------|
-| PR01 | Service Portfolio Management | stub | — |
-| PR02 | Service Level Management | stub | — |
-| PR03 | Service Financial Management | stub | — |
-| PR04 | Service Design | stub | — |
-| PR05 | Service Catalogue Management | stub | — |
-| PR06 | Availability Management | stub | — |
-| PR07 | Service Continuity Management | stub | — |
-| PR08 | Capacity & Performance Mgmt | stub | — |
-| PR09 | Information Security Mgmt | stub | — |
-| PR10 | Service Desk | stub | — |
-| PR11 | Incident Management | stub | — |
-| PR12 | Service Request Management | stub | — |
-| PR13 | Problem Management | stub | — |
-| PR14 | Monitoring & Event Mgmt | stub | — |
-| PR15 | Change Management | stub | — |
-| PR16 | Release & Deployment Mgmt | stub | — |
-| PR17 | Service Configuration Mgmt | stub | — |
-| PR18 | IT Asset Management | stub | — |
-| PR19 | Knowledge Management | stub | — |
-| PR20 | Measurement & Reporting | stub | — |
-| PR21 | Risk Management | stub | — |
-| PR22 | Relationship Management | stub | — |
-| PR23 | Supplier Management | stub | — |
-| PR24 | Continual Improvement | stub | — |
-| — | Cross-cutting | stub | — |
+| PR01 | Service Portfolio Management | **draft** | 2026-03-13 |
+| PR02 | Service Level Management | **draft** | 2026-03-13 |
+| PR03 | Service Financial Management | **draft** | 2026-03-14 |
+| PR04 | Service Design | **draft** | 2026-03-14 |
+| PR05 | Service Catalogue Management | **draft** | 2026-03-14 |
+| PR06 | Availability Management | **draft** | 2026-03-13 |
+| PR07 | Service Continuity Management | **draft** | 2026-03-14 |
+| PR08 | Capacity & Performance Mgmt | **draft** | 2026-03-14 |
+| PR09 | Information Security Mgmt | **draft** | 2026-03-13 |
+| PR10 | Service Desk | **draft** | 2026-03-14 |
+| PR11 | Incident Management | **draft** | 2026-03-13 |
+| PR12 | Service Request Management | **draft** | 2026-03-14 |
+| PR13 | Problem Management | **draft** | 2026-03-13 |
+| PR14 | Monitoring & Event Mgmt | **draft** | 2026-03-14 |
+| PR15 | Change Management | **draft** | 2026-03-13 |
+| PR16 | Release & Deployment Mgmt | **draft** | 2026-03-13 |
+| PR17 | Service Configuration Mgmt | **draft** | 2026-03-13 |
+| PR18 | IT Asset Management | **draft** | 2026-03-14 |
+| PR19 | Knowledge Management | **draft** | 2026-03-14 |
+| PR20 | Measurement & Reporting | **draft** | 2026-03-14 |
+| PR21 | Risk Management | **draft** | 2026-03-14 |
+| PR22 | Relationship Management | **draft** | 2026-03-13 |
+| PR23 | Supplier Management | **draft** | 2026-03-13 |
+| PR24 | Continual Improvement | **draft** | 2026-03-14 |
+| — | Cross-cutting | **draft** | 2026-03-14 |
